@@ -16,18 +16,51 @@
 
 (function () {
   // ---------- 1. Вкладки задач ----------
+  // Одна задача — один чат: вкладка переключает и рабочую зону,
+  // и всё в чате, что помечено data-thread (шапку, переписку, подсказки)
+  function openTask(tabs, tab) {
+    var id = tab.getAttribute("data-task");
+
+    tabs.querySelectorAll(".task-tab").forEach(function (t) {
+      t.classList.toggle("is-active", t === tab);
+    });
+    document.querySelectorAll(".task[data-task-id]").forEach(function (task) {
+      task.hidden = task.getAttribute("data-task-id") !== id;
+    });
+    document.querySelectorAll("[data-thread]").forEach(function (el) {
+      el.hidden = el.getAttribute("data-thread") !== id;
+    });
+
+    // Открыли чат — новое сообщение прочитано
+    var dot = tab.querySelector(".task-tab__dot");
+    if (dot) dot.remove();
+
+    // Переписка задачи — сразу на последнем сообщении
+    var thread = document.querySelector('.chat__messages[data-thread="' + id + '"]');
+    if (thread) thread.scrollTop = thread.scrollHeight;
+
+    // Чипсы в только что показанном чате — пересчитать ширину
+    if (window.cfSnapChips) window.cfSnapChips();
+  }
+
   document.querySelectorAll(".task-tabs").forEach(function (tabs) {
     tabs.addEventListener("click", function (event) {
       var tab = event.target.closest(".task-tab[data-task]");
-      if (!tab) return;
-
-      tabs.querySelectorAll(".task-tab").forEach(function (t) {
-        t.classList.toggle("is-active", t === tab);
-      });
-      document.querySelectorAll(".task[data-task-id]").forEach(function (task) {
-        task.hidden = task.getAttribute("data-task-id") !== tab.getAttribute("data-task");
-      });
+      if (tab) openTask(tabs, tab);
     });
+
+    // Ссылка сразу на задачу: marketer.html#veranda
+    var fromHash = location.hash && tabs.querySelector('.task-tab[data-task="' + location.hash.slice(1) + '"]');
+    var start = fromHash || tabs.querySelector(".task-tab.is-active");
+    if (start) openTask(tabs, start);
+  });
+
+  // Кнопки внутри страницы, которые открывают задачу: data-open-task="new"
+  document.addEventListener("click", function (event) {
+    var link = event.target.closest("[data-open-task]");
+    if (!link) return;
+    var tab = document.querySelector('.task-tab[data-task="' + link.getAttribute("data-open-task") + '"]');
+    if (tab) tab.click();
   });
 
   // ---------- 2. Путь задачи ----------
@@ -213,6 +246,17 @@
         v.classList.toggle("is-selected", v === variant);
       });
     }
+  });
+
+  // ---------- Подставить готовую формулировку в поле ввода чата ----------
+  document.addEventListener("click", function (event) {
+    var btn = event.target.closest("[data-fill]");
+    if (!btn) return;
+    var input = document.querySelector(".chat__input");
+    if (!input) return;
+    input.value = btn.getAttribute("data-fill");
+    input.dispatchEvent(new Event("input", { bubbles: true }));
+    input.focus();
   });
 
   // ---------- 8. Вопросы «в один клик» (Память, недостающие данные) ----------

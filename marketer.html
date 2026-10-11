@@ -17,34 +17,77 @@
     <!-- Главное меню: содержимое рисует js/sidebar.js (одно на все страницы) -->
     <nav class="sidebar" aria-label="Главное меню"></nav>
 
-    <!-- Чат с маркетологом -->
+    <!-- Чат с маркетологом. Одна задача — один чат: у каждой задачи своя
+         шапка, выжимка «Кратко о задаче», переписка и подсказки (data-thread).
+         Переключаются вкладками задач в рабочей зоне (js/workspace.js) -->
     <aside class="chat" aria-label="Чат с маркетологом">
-      <!-- Сообщения: своя прокрутка -->
-      <div class="chat__messages">
-        <!-- Отметка времени: начало фрагмента переписки и его краткое содержание -->
+
+      <!-- ===== Шапки чатов ===== -->
+      <header class="chat__head" data-thread="plan">
+        <span class="chat__task-label">Чат задачи</span>
+        <h2 class="chat__task-title">Контент-план на&nbsp;ноябрь</h2>
+        <p class="chat__task-meta">Этап 4 из&nbsp;6 · Тексты постов</p>
+        <details class="brief">
+          <summary class="brief__toggle">Кратко о&nbsp;задаче <span class="brief__count">4 решения</span></summary>
+          <div class="brief__body">
+            <div class="brief__row">
+              <span class="brief__label">Цель</span>
+              <p class="brief__text">Больше гостей в&nbsp;будни и&nbsp;чтобы кофейню узнали в&nbsp;районе</p>
+            </div>
+            <div class="brief__row">
+              <span class="brief__label">Что&nbsp;решили</span>
+              <ul class="brief__decisions">
+                <li><time>14:47</time>Публикуем во&nbsp;ВКонтакте и&nbsp;Telegram</li>
+                <li><time>14:52</time>3 поста в&nbsp;неделю и&nbsp;сторис по&nbsp;выходным</li>
+                <li><time>15:05</time>План из&nbsp;12 постов одобрен</li>
+                <li><time>15:12</time>Посты «Новое меню» и&nbsp;«4 ноября» одобрены</li>
+              </ul>
+            </div>
+            <div class="brief__row">
+              <span class="brief__label">Сейчас</span>
+              <p class="brief__text">Эльвира дописывает 4 поста и&nbsp;ждёт вашего ответа по&nbsp;двум</p>
+            </div>
+          </div>
+        </details>
+      </header>
+
+      <header class="chat__head" data-thread="veranda" hidden>
+        <span class="chat__task-label">Чат задачи</span>
+        <h2 class="chat__task-title">Посты к&nbsp;открытию веранды</h2>
+        <p class="chat__task-meta">Этап 2 из&nbsp;5 · Выбор идеи</p>
+        <details class="brief">
+          <summary class="brief__toggle">Кратко о&nbsp;задаче <span class="brief__count">2 решения</span></summary>
+          <div class="brief__body">
+            <div class="brief__row">
+              <span class="brief__label">Цель</span>
+              <p class="brief__text">Чтобы веранда была полной уже в&nbsp;первые выходные</p>
+            </div>
+            <div class="brief__row">
+              <span class="brief__label">Что&nbsp;решили</span>
+              <ul class="brief__decisions">
+                <li><time>вчера</time>Открытие в&nbsp;субботу, 14 ноября</li>
+                <li><time>9:40</time>Бюджет на&nbsp;продвижение до&nbsp;30 000 ₽&nbsp;— от&nbsp;Тимура</li>
+              </ul>
+            </div>
+            <div class="brief__row">
+              <span class="brief__label">Сейчас</span>
+              <p class="brief__text">Ждём, какую из&nbsp;трёх идей вы&nbsp;выберете</p>
+            </div>
+          </div>
+        </details>
+      </header>
+
+      <header class="chat__head" data-thread="new" hidden>
+        <span class="chat__task-label">Новый чат</span>
+        <h2 class="chat__task-title">Новая задача</h2>
+        <p class="chat__task-meta">Опишите задачу своими словами или&nbsp;выберите вариант</p>
+      </header>
+
+      <!-- ===== Переписка: контент-план ===== -->
+      <div class="chat__messages" data-thread="plan">
         <div class="chat__divider">
           <time class="chat__time" datetime="14:43">Сегодня в&nbsp;14:43</time>
-          <p class="chat__summary">Знакомство и&nbsp;первые шаги.</p>
-        </div>
-
-        <!-- Сообщение ассистента -->
-        <div class="message message--marketer">
-          <div class="message__avatar assistant assistant--marketer">
-            <img src="assets/avatars/marketer.png" width="40" height="40" alt="">
-          </div>
-          <div class="message__body">
-            <p class="message__author"><span class="message__name">Эльвира</span>&nbsp;— Маркетолог</p>
-            <p class="message__text">Привет! Я&nbsp;Эльвира, ваш маркетолог. Помогу понять аудиторию, придумать идеи для&nbsp;постов и&nbsp;собрать контент-план. Расскажите, чем занимается ваша компания, или&nbsp;выберите подсказку ниже&nbsp;— начнём вместе.</p>
-            <time class="message__time" datetime="14:43">14:43</time>
-          </div>
-        </div>
-
-        <!-- Сообщение пользователя -->
-        <div class="message message--user">
-          <div class="message__bubble">
-            <p class="message__text">Привет! У&nbsp;нас небольшая кофейня в&nbsp;центре города, хотим активнее вести соцсети.</p>
-            <time class="message__time" datetime="14:45">14:45</time>
-          </div>
+          <p class="chat__summary">Начало задачи: цели и&nbsp;каналы.</p>
         </div>
 
         <div class="message message--marketer">
@@ -53,20 +96,38 @@
           </div>
           <div class="message__body">
             <p class="message__author"><span class="message__name">Эльвира</span>&nbsp;— Маркетолог</p>
-            <p class="message__text">Отлично! Для&nbsp;начала главное: что&nbsp;важнее в&nbsp;ближайший месяц? Можно выбрать несколько.</p>
+            <p class="message__text">Начинаем контент-план на&nbsp;ноябрь! Сначала главное: что&nbsp;важнее в&nbsp;ближайший месяц? Можно выбрать несколько.</p>
             <div class="chips chips--wrap">
               <button class="chip" type="button">Больше гостей в&nbsp;будни</button>
               <button class="chip" type="button">Чтобы нас узнали в&nbsp;районе</button>
               <button class="chip" type="button">Продвинуть веранду</button>
               <button class="chip" type="button">Не&nbsp;знаю, решите за&nbsp;меня</button>
             </div>
+            <time class="message__time" datetime="14:43">14:43</time>
+          </div>
+        </div>
+
+        <div class="message message--user">
+          <div class="message__bubble">
+            <p class="message__text">Больше гостей в&nbsp;будни и&nbsp;чтобы нас узнали в&nbsp;районе</p>
             <time class="message__time" datetime="14:46">14:46</time>
+          </div>
+        </div>
+
+        <div class="message message--marketer">
+          <div class="message__avatar assistant assistant--marketer">
+            <img src="assets/avatars/marketer.png" width="40" height="40" alt="">
+          </div>
+          <div class="message__body">
+            <p class="message__author"><span class="message__name">Эльвира</span>&nbsp;— Маркетолог</p>
+            <p class="message__text">Записала цель в&nbsp;«Кратко о&nbsp;задаче» наверху&nbsp;— туда же&nbsp;буду складывать всё, о&nbsp;чём договоримся. Предлагаю 3 поста в&nbsp;неделю во&nbsp;ВКонтакте и&nbsp;Telegram и&nbsp;сторис по&nbsp;выходным. План уже справа.</p>
+            <time class="message__time" datetime="14:52">14:52</time>
           </div>
         </div>
 
         <div class="chat__divider">
           <time class="chat__time" datetime="15:10">Сегодня в&nbsp;15:10</time>
-          <p class="chat__summary">Контент-план на&nbsp;ноябрь: тексты постов.</p>
+          <p class="chat__summary">Тексты постов.</p>
         </div>
 
         <div class="message message--marketer">
@@ -81,7 +142,74 @@
         </div>
       </div>
 
-      <!-- Поле ввода сообщения -->
+      <!-- ===== Переписка: веранда ===== -->
+      <div class="chat__messages" data-thread="veranda" hidden>
+        <div class="chat__divider">
+          <time class="chat__time" datetime="18:20">Вчера в&nbsp;18:20</time>
+          <p class="chat__summary">Начало задачи: повод и&nbsp;сроки.</p>
+        </div>
+
+        <div class="message message--user">
+          <div class="message__bubble">
+            <p class="message__text">В&nbsp;субботу 14 ноября открываем тёплую веранду. Хочу, чтобы о&nbsp;ней узнали заранее.</p>
+            <time class="message__time" datetime="18:20">18:20</time>
+          </div>
+        </div>
+
+        <div class="message message--marketer">
+          <div class="message__avatar assistant assistant--marketer">
+            <img src="assets/avatars/marketer.png" width="40" height="40" alt="">
+          </div>
+          <div class="message__body">
+            <p class="message__author"><span class="message__name">Эльвира</span>&nbsp;— Маркетолог</p>
+            <p class="message__text">Отличный повод! Предложила три идеи для&nbsp;серии постов&nbsp;— они справа. Какая ближе?</p>
+            <div class="chips chips--wrap">
+              <button class="chip" type="button">Самое тёплое место во&nbsp;дворе</button>
+              <button class="chip" type="button">Плед и&nbsp;раф</button>
+              <button class="chip" type="button">Назовите веранду</button>
+              <button class="chip" type="button">Предложи ещё</button>
+            </div>
+            <time class="message__time" datetime="18:22">18:22</time>
+          </div>
+        </div>
+
+        <div class="chat__divider">
+          <time class="chat__time" datetime="09:40">Сегодня в&nbsp;9:40</time>
+          <p class="chat__summary">Задача стала частью общего проекта.</p>
+        </div>
+
+        <div class="message message--marketer">
+          <div class="message__avatar assistant assistant--marketer">
+            <img src="assets/avatars/marketer.png" width="40" height="40" alt="">
+          </div>
+          <div class="message__body">
+            <p class="message__author"><span class="message__name">Эльвира</span>&nbsp;— Маркетолог</p>
+            <p class="message__text">Тимур собрал открытие веранды в&nbsp;общий проект: Лев уже рисует картинки, а&nbsp;бюджет&nbsp;— до&nbsp;30 000 ₽. Осталось выбрать идею, и&nbsp;я&nbsp;сразу сяду за&nbsp;тексты.</p>
+            <time class="message__time" datetime="09:40">9:40</time>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== Переписка: новая задача ===== -->
+      <div class="chat__messages" data-thread="new" hidden>
+        <div class="message message--marketer">
+          <div class="message__avatar assistant assistant--marketer">
+            <img src="assets/avatars/marketer.png" width="40" height="40" alt="">
+          </div>
+          <div class="message__body">
+            <p class="message__author"><span class="message__name">Эльвира</span>&nbsp;— Маркетолог</p>
+            <p class="message__text">Для&nbsp;каждой задачи у&nbsp;нас отдельный чат, чтобы ничего не&nbsp;перепуталось. Что&nbsp;сделаем на&nbsp;этот раз? Напишите своими словами или&nbsp;выберите вариант.</p>
+            <div class="chips chips--wrap">
+              <button class="chip" type="button">Пост к&nbsp;празднику</button>
+              <button class="chip" type="button">Акция на&nbsp;тихий день</button>
+              <button class="chip" type="button">Анализ конкурентов</button>
+              <button class="chip" type="button">Не&nbsp;знаю&nbsp;— предложи сама</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== Поле ввода: общее, подсказки — свои у каждой задачи ===== -->
       <div class="chat__composer">
         <div class="chat__field">
           <button class="chat__attach" type="button" title="Добавить файл" aria-label="Добавить файл">
@@ -95,14 +223,26 @@
           </button>
         </div>
 
-        <!-- Подсказки под текущий этап: «Тексты постов» -->
-        <div class="chips" aria-label="Подсказки">
+        <div class="chips" aria-label="Подсказки" data-thread="plan">
           <button class="chip" type="button">Сделай тексты короче</button>
           <button class="chip" type="button">Больше про&nbsp;веранду</button>
           <button class="chip" type="button">Тон повеселее</button>
           <button class="chip" type="button">Добавь призыв зайти</button>
           <button class="chip" type="button">Допиши оставшиеся 4</button>
           <button class="chip" type="button">Перейти к&nbsp;картинкам</button>
+        </div>
+        <div class="chips" aria-label="Подсказки" data-thread="veranda" hidden>
+          <button class="chip" type="button">Беру первую идею</button>
+          <button class="chip" type="button">Смешай первую и&nbsp;вторую</button>
+          <button class="chip" type="button">Что&nbsp;выберут гости?</button>
+          <button class="chip" type="button">Предложи ещё</button>
+        </div>
+        <div class="chips" aria-label="Подсказки" data-thread="new" hidden>
+          <button class="chip" type="button">Пост к&nbsp;празднику</button>
+          <button class="chip" type="button">Акция на&nbsp;вторник</button>
+          <button class="chip" type="button">Ответ на&nbsp;комментарий</button>
+          <button class="chip" type="button">Портрет аудитории</button>
+          <button class="chip" type="button">Слоган</button>
         </div>
       </div>
     </aside>
@@ -123,8 +263,8 @@
         <!-- Задачи Эльвиры -->
         <div class="task-tabs" role="tablist" aria-label="Задачи">
           <button class="task-tab is-active" type="button" data-task="plan">Контент-план на&nbsp;ноябрь <span class="task-tab__meta">4/6</span></button>
-          <button class="task-tab" type="button" data-task="veranda">Посты к&nbsp;открытию веранды <span class="task-tab__meta">2/5</span></button>
-          <button class="task-tab task-tab--new" type="button">+ Новая задача</button>
+          <button class="task-tab" type="button" data-task="veranda">Посты к&nbsp;открытию веранды <span class="task-tab__meta">2/5</span><span class="task-tab__dot" aria-label="новое сообщение"></span></button>
+          <button class="task-tab task-tab--new" type="button" data-task="new">+ Новая задача</button>
         </div>
 
         <!-- ===== Задача 1: контент-план ===== -->
@@ -346,6 +486,54 @@
               <button class="btn btn--primary" type="button">Писать тексты по&nbsp;этой идее</button>
               <button class="btn btn--secondary" type="button">Предложи ещё</button>
             </div>
+          </div>
+        </section>
+
+        <!-- ===== Новая задача: чистый чат + варианты, с чего начать ===== -->
+        <section class="task" data-task-id="new" hidden>
+          <div class="next-step" style="margin:0 0 24px">
+            <span class="avatar avatar--48 assistant--financier"><img src="assets/avatars/financier.png" alt=""></span>
+            <div class="next-step__body">
+              <span class="next-step__label">Подсказка от&nbsp;Ольги</span>
+              <p class="next-step__text">Вторник&nbsp;— самый тихий день: выручка на&nbsp;35% ниже средней. Хорошая тема для&nbsp;новой задачи&nbsp;— акция по&nbsp;вторникам.</p>
+            </div>
+            <div class="next-step__actions">
+              <button class="btn btn--primary" type="button" data-fill="Придумай акцию на вторник">Начать с&nbsp;этого</button>
+            </div>
+          </div>
+
+          <h2 class="section-title">Или&nbsp;выберите, с&nbsp;чего начать <span class="section-title__hint">у&nbsp;каждой задачи будет свой чат</span></h2>
+          <div class="grid grid--3">
+            <button class="scenario" type="button" data-fill="Напиши пост к празднику" style="text-align:left;font:inherit">
+              <p class="scenario__title">Пост к&nbsp;празднику</p>
+              <p class="scenario__text">Эльвира подскажет ближайшие поводы и&nbsp;напишет текст.</p>
+              <span class="scenario__time">около 5 минут</span>
+            </button>
+            <button class="scenario" type="button" data-fill="Придумай акцию на тихий день" style="text-align:left;font:inherit">
+              <p class="scenario__title">Акция на&nbsp;тихий день</p>
+              <p class="scenario__text">Чтобы в&nbsp;будни приходило больше гостей.</p>
+              <span class="scenario__time">около 5 минут</span>
+            </button>
+            <button class="scenario" type="button" data-fill="Сделай анализ конкурентов" style="text-align:left;font:inherit">
+              <p class="scenario__title">Анализ конкурентов</p>
+              <p class="scenario__text">Что&nbsp;делают кофейни рядом и&nbsp;чем вы&nbsp;можете выделиться.</p>
+              <span class="scenario__time">около 10 минут</span>
+            </button>
+            <button class="scenario" type="button" data-fill="Опиши портрет нашей аудитории" style="text-align:left;font:inherit">
+              <p class="scenario__title">Портрет аудитории</p>
+              <p class="scenario__text">Кто ваши гости и&nbsp;что&nbsp;им важно&nbsp;— на&nbsp;основе отзывов и&nbsp;Памяти.</p>
+              <span class="scenario__time">около 3 минут</span>
+            </button>
+            <button class="scenario" type="button" data-fill="Ответь на комментарий" style="text-align:left;font:inherit">
+              <p class="scenario__title">Ответ на&nbsp;комментарий</p>
+              <p class="scenario__text">Вежливо и&nbsp;в&nbsp;тоне кофейни, даже если комментарий неприятный.</p>
+              <span class="scenario__time">около минуты</span>
+            </button>
+            <button class="scenario" type="button" data-fill="Придумай слоган" style="text-align:left;font:inherit">
+              <p class="scenario__title">Слоган</p>
+              <p class="scenario__text">Короткая фраза для&nbsp;вывески, стаканов или&nbsp;рекламы.</p>
+              <span class="scenario__time">около 2 минут</span>
+            </button>
           </div>
         </section>
       </div>

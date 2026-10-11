@@ -41,9 +41,14 @@
   function snapChipWidths() {
     document.querySelectorAll(".chip").forEach(function (chip) {
       chip.style.width = "";
-      chip.style.width = Math.ceil(chip.getBoundingClientRect().width) + "px";
+      var width = chip.getBoundingClientRect().width;
+      // Чипса в скрытом чате имеет ширину 0 — её посчитаем, когда чат откроют
+      if (width > 0) chip.style.width = Math.ceil(width) + "px";
     });
   }
+
+  // Вызывается при переключении чатов задач (js/workspace.js)
+  window.cfSnapChips = snapChipWidths;
 
   snapChipWidths();
   if (document.fonts && document.fonts.ready) {

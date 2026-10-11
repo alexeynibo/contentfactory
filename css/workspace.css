@@ -226,6 +226,15 @@ a.chip {
   animation: badge-spin 0.9s linear infinite;
 }
 
+/* В чате этой задачи есть непрочитанное сообщение */
+.task-tab__dot {
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-red);
+}
+
 /* «+ Новая задача» — в стиле чипсов-подсказок */
 .task-tab--new {
   border: 1px dashed var(--color-periwinkle);

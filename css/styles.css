@@ -31,6 +31,11 @@ body {
   font-family: var(--font-main);
 }
 
+/* Скрытые элементы скрыты всегда, даже если у них свой display */
+[hidden] {
+  display: none !important;
+}
+
 /* ===== Каркас приложения ===== */
 .app {
   min-height: 100vh;
@@ -233,6 +238,139 @@ body {
   flex-direction: column;
 }
 
+/* ===== Шапка чата задачи: одна задача — один чат =====
+   Показывает, к какой задаче относится переписка, и её этап */
+.chat__head {
+  flex: none;
+  padding: 16px var(--message-pad-right) 12px var(--message-pad-left);
+  border-bottom: 1px solid #E4E4E4;
+}
+
+.chat__task-label {
+  display: block;
+  font: 500 11px/1.3 var(--font-main);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-gray);
+}
+
+.chat__task-title {
+  margin: 2px 0 0;
+  font: 700 15px/1.3 var(--font-main);
+  color: var(--color-ink);
+}
+
+.chat__task-meta {
+  margin: 2px 0 0;
+  font: 400 12px/1.4 var(--font-main);
+  color: var(--color-gray);
+}
+
+/* «Кратко о задаче»: цель, решения и что сейчас — чтобы не искать в переписке.
+   Нативный <details>: раскрывается и сворачивается без скриптов */
+.brief {
+  margin-top: 10px;
+  border-radius: 12px;
+  background: var(--color-white);
+}
+
+.brief__toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px 12px;
+  font: 600 12px/1.3 var(--font-main);
+  color: var(--color-cobalt);
+  list-style: none;
+  cursor: pointer;
+}
+
+.brief__toggle::-webkit-details-marker {
+  display: none;
+}
+
+/* Стрелка-шеврон */
+.brief__toggle::after {
+  content: "";
+  flex: none;
+  width: 6px;
+  height: 6px;
+  margin-top: -3px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg);
+  transition: transform 0.15s ease;
+}
+
+.brief[open] .brief__toggle::after {
+  margin-top: 3px;
+  transform: rotate(-135deg);
+}
+
+.brief__count {
+  margin-left: auto;
+  font-weight: 400;
+  color: var(--color-gray);
+}
+
+.brief__body {
+  max-height: 260px;
+  padding: 0 12px 12px;
+  overflow-y: auto;
+}
+
+.brief__row + .brief__row {
+  margin-top: 10px;
+}
+
+.brief__label {
+  display: block;
+  margin-bottom: 2px;
+  font: 500 11px/1.3 var(--font-main);
+  color: var(--color-gray);
+}
+
+.brief__text {
+  margin: 0;
+  font: 400 13px/1.4 var(--font-main);
+  color: var(--color-ink);
+}
+
+/* Список решений с датами */
+.brief__decisions {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.brief__decisions li {
+  position: relative;
+  padding-left: 14px;
+  font: 400 13px/1.4 var(--font-main);
+  color: var(--color-ink);
+}
+
+.brief__decisions li + li {
+  margin-top: 4px;
+}
+
+.brief__decisions li::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 6px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-success);
+}
+
+.brief__decisions time {
+  margin-right: 4px;
+  color: var(--color-gray);
+}
+
 /* Сообщения прижаты к низу (над полем ввода).
    margin-top: auto у первого сообщения выталкивает их вниз,
    а при длинной переписке область прокручивается как обычно */
@@ -242,6 +380,8 @@ body {
   flex-direction: column;
   overflow-y: auto;
   padding: 20px 0;
+  scrollbar-width: thin; /* тонкая неброская полоса прокрутки */
+  scrollbar-color: #D3D6DD transparent;
 }
 
 .chat__messages > :first-child {
