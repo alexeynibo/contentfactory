@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Вера, клиентский менеджер&nbsp;— ContentFactory</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/workspace.css">
+</head>
+<body data-page="clients">
+  <div class="app app--chat">
+    <nav class="sidebar" aria-label="Главное меню"></nav>
+
+    <!-- Чат с клиентским менеджером -->
+    <aside class="chat" aria-label="Чат с клиентским менеджером">
+      <div class="chat__messages">
+        <div class="chat__divider">
+          <time class="chat__time" datetime="11:30">Сегодня в&nbsp;11:30</time>
+          <p class="chat__summary">Новые отзывы и&nbsp;ответы на&nbsp;них.</p>
+        </div>
+
+        <div class="message message--clients">
+          <!-- Временная заглушка аватара: буква, пока нет картинки -->
+          <div class="message__avatar assistant assistant--clients"><span class="assistant__initials">В</span></div>
+          <div class="message__body">
+            <p class="message__author"><span class="message__name">Вера</span>&nbsp;— Клиентский менеджер</p>
+            <p class="message__text">Пришло 2&nbsp;новых отзыва: один восторженный, второй с&nbsp;жалобой на&nbsp;долгое ожидание. Я&nbsp;подготовила ответы&nbsp;— проверьте и&nbsp;отправьте одним нажатием.</p>
+            <div class="chips chips--wrap">
+              <button class="chip" type="button">Ответь мягче</button>
+              <button class="chip" type="button">Предложи компенсацию</button>
+              <button class="chip" type="button">Отправь как&nbsp;есть</button>
+            </div>
+            <time class="message__time" datetime="11:30">11:30</time>
+          </div>
+        </div>
+      </div>
+
+      <div class="chat__composer">
+        <div class="chat__field">
+          <button class="chat__attach" type="button" title="Добавить файл" aria-label="Добавить файл">
+            <img src="assets/icons/plus.svg" width="40" height="40" alt="">
+          </button>
+          <input class="chat__input" type="text" placeholder="Напишите сообщение…" aria-label="Сообщение клиентскому менеджеру">
+          <button class="chat__send" type="button" title="Отправить" aria-label="Отправить сообщение">
+            <span class="chat__send-circle">
+              <img src="assets/icons/send.svg" width="40" height="40" alt="">
+            </span>
+          </button>
+        </div>
+
+        <div class="chips" aria-label="Подсказки">
+          <button class="chip" type="button">Ответить на&nbsp;все</button>
+          <button class="chip" type="button">Что&nbsp;чаще хвалят?</button>
+          <button class="chip" type="button">На&nbsp;что&nbsp;жалуются?</button>
+          <button class="chip" type="button">Акция для&nbsp;постоянных</button>
+          <button class="chip" type="button">Подключить 2ГИС</button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Рабочая зона -->
+    <main class="main">
+      <div class="workspace">
+        <header class="page-head">
+          <div>
+            <h1 class="page-head__title">Вера, клиентский менеджер</h1>
+            <p class="page-head__subtitle">Отзывы на&nbsp;картах, ответы гостям и&nbsp;забота о&nbsp;постоянных</p>
+          </div>
+          <div class="page-head__actions">
+            <a class="btn btn--secondary" href="settings.html">Настроить Веру</a>
+          </div>
+        </header>
+
+        <div class="task-tabs" role="tablist" aria-label="Задачи">
+          <button class="task-tab is-active" type="button" data-task="reviews">Отзывы за&nbsp;неделю <span class="task-tab__meta">2/4</span></button>
+          <button class="task-tab" type="button" data-task="loyal">Акция для&nbsp;постоянных гостей <span class="task-tab__meta">1/4</span></button>
+          <button class="task-tab task-tab--new" type="button">+ Новая задача</button>
+        </div>
+
+        <!-- ===== Задача 1 ===== -->
+        <section class="task" data-task-id="reviews" data-current="replies">
+          <ol class="steps">
+            <li class="steps__item is-done"><button class="step" type="button" data-step="collect"><span class="step__dot">1</span><span class="step__label">Сбор отзывов</span></button></li>
+            <li class="steps__item is-current"><button class="step" type="button" data-step="replies"><span class="step__dot">2</span><span class="step__label">Ответы</span></button></li>
+            <li class="steps__item"><button class="step" type="button"><span class="step__dot">3</span><span class="step__label">Публикация</span></button></li>
+            <li class="steps__item"><button class="step" type="button"><span class="step__dot">4</span><span class="step__label">Выводы</span></button></li>
+          </ol>
+
+          <div class="step-note" hidden>
+            <span>Вы&nbsp;смотрите пройденный этап «<span data-step-name>…</span>».</span>
+            <button class="btn btn--small btn--secondary" type="button" data-go-step="">Вернуться к&nbsp;ответам</button>
+          </div>
+
+          <div class="step-panel" data-panel="collect">
+            <div class="grid grid--3">
+              <div class="card"><span class="kpi__label">Яндекс Карты</span><span class="kpi__value">4,8 ★</span><span class="kpi__delta">↑ 0,1 за&nbsp;месяц</span></div>
+              <div class="card"><span class="kpi__label">2ГИС</span><span class="kpi__value">4,7 ★</span><span class="kpi__delta">без&nbsp;изменений</span></div>
+              <div class="card"><span class="kpi__label">Отзывов за&nbsp;неделю</span><span class="kpi__value">12</span><span class="kpi__delta">10 ответов отправлено</span></div>
+            </div>
+          </div>
+
+          <!-- Текущий этап -->
+          <div class="step-panel" data-panel="replies" hidden>
+            <h2 class="section-title">Ждут ответа <span class="section-title__hint">2 отзыва</span></h2>
+            <div class="stack">
+              <article class="review">
+                <div>
+                  <div class="review__author">Мария <span class="stars">★★★★★</span></div>
+                  <p class="card__meta" style="margin:0 0 10px">Яндекс Карты · вчера</p>
+                  <p class="review__text">Лучшие сырники в&nbsp;районе! И&nbsp;бариста запомнила, что&nbsp;я&nbsp;пью капучино без&nbsp;сахара. Приятно, когда тебя узнают.</p>
+                </div>
+                <div class="review__reply">
+                  <span class="review__reply-label"><span class="avatar avatar--24 assistant--clients"><span class="assistant__initials" style="font-size:10px">В</span></span>Черновик ответа</span>
+                  <p class="review__text" contenteditable="true">Мария, спасибо! Передадим Ане&nbsp;— она очень обрадуется. Сырники ждут вас, а&nbsp;капучино без&nbsp;сахара мы&nbsp;уже знаем наизусть.</p>
+                  <div class="card__actions">
+                    <button class="btn btn--primary btn--small" type="button">Отправить</button>
+                    <button class="chip" type="button">Теплее</button>
+                    <button class="chip" type="button">Короче</button>
+                  </div>
+                </div>
+              </article>
+
+              <article class="review">
+                <div>
+                  <div class="review__author">Игорь <span class="stars stars--low">★★★☆☆</span><span class="pill pill--wait">Жалоба</span></div>
+                  <p class="card__meta" style="margin:0 0 10px">2ГИС · 2 дня назад</p>
+                  <p class="review__text">Кофе вкусный, но&nbsp;в&nbsp;субботу ждал заказ 20&nbsp;минут. Персонал не&nbsp;справлялся.</p>
+                </div>
+                <div class="review__reply">
+                  <span class="review__reply-label"><span class="avatar avatar--24 assistant--clients"><span class="assistant__initials" style="font-size:10px">В</span></span>Черновик ответа</span>
+                  <p class="review__text" contenteditable="true">Игорь, простите за&nbsp;ожидание&nbsp;— в&nbsp;субботу у&nbsp;нас был аншлаг, и&nbsp;мы&nbsp;не&nbsp;успели. Уже добавили третьего бариста на&nbsp;выходные. Приходите снова&nbsp;— первый кофе за&nbsp;наш счёт.</p>
+                  <div class="card__actions">
+                    <button class="btn btn--primary btn--small" type="button">Отправить</button>
+                    <button class="chip" type="button">Мягче</button>
+                    <button class="chip" type="button">Без&nbsp;компенсации</button>
+                  </div>
+                </div>
+              </article>
+            </div>
+
+            <div class="next-step">
+              <span class="avatar avatar--48 assistant--clients"><span class="assistant__initials" style="font-size:18px">В</span></span>
+              <div class="next-step__body">
+                <span class="next-step__label">Вера заметила</span>
+                <p class="next-step__text">За&nbsp;неделю трое гостей отдельно похвалили сырники. Сделаем для&nbsp;постоянных гостей акцию «сырники + кофе»?</p>
+              </div>
+              <div class="next-step__actions">
+                <button class="btn btn--primary" type="button" onclick="document.querySelector('.task-tab[data-task=loyal]').click()">Придумать акцию</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===== Задача 2 ===== -->
+        <section class="task" data-task-id="loyal" data-current="who" hidden>
+          <ol class="steps">
+            <li class="steps__item is-current"><button class="step" type="button" data-step="who"><span class="step__dot">1</span><span class="step__label">Кому</span></button></li>
+            <li class="steps__item"><button class="step" type="button"><span class="step__dot">2</span><span class="step__label">Предложение</span></button></li>
+            <li class="steps__item"><button class="step" type="button"><span class="step__dot">3</span><span class="step__label">Текст</span></button></li>
+            <li class="steps__item"><button class="step" type="button"><span class="step__dot">4</span><span class="step__label">Рассылка</span></button></li>
+          </ol>
+          <div class="step-note" hidden><span></span></div>
+
+          <div class="step-panel" data-panel="who">
+            <h2 class="section-title">Кого порадуем? <span class="section-title__hint">по&nbsp;данным программы лояльности</span></h2>
+            <div class="grid grid--3">
+              <button class="variant is-selected" type="button"><span class="card" style="display:block;text-align:left"><span class="kpi__value" style="margin:0">184</span><span class="card__title" style="display:block;margin-top:8px">Постоянные</span><span class="card__text" style="display:block;margin-top:4px;font-size:13px">Приходят чаще раза в&nbsp;неделю</span></span></button>
+              <button class="variant" type="button"><span class="card" style="display:block;text-align:left"><span class="kpi__value" style="margin:0">96</span><span class="card__title" style="display:block;margin-top:8px">Пропали</span><span class="card__text" style="display:block;margin-top:4px;font-size:13px">Не&nbsp;заходили больше месяца</span></span></button>
+              <button class="variant" type="button"><span class="card" style="display:block;text-align:left"><span class="kpi__value" style="margin:0">41</span><span class="card__title" style="display:block;margin-top:8px">Любители сырников</span><span class="card__text" style="display:block;margin-top:4px;font-size:13px">Заказывали их&nbsp;3 и&nbsp;более раз</span></span></button>
+            </div>
+            <div class="card__actions">
+              <button class="btn btn--primary" type="button">Дальше: предложение</button>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/sidebar.js"></script>
+  <script src="js/chips.js"></script>
+  <script src="js/workspace.js"></script>
+</body>
+</html>

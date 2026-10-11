@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Аналитика&nbsp;— ContentFactory</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/workspace.css">
+</head>
+<body data-page="analytics">
+  <div class="app">
+    <nav class="sidebar" aria-label="Главное меню"></nav>
+
+    <!-- Аналитика: цифры + что с ними сделать -->
+    <main class="main">
+      <div class="workspace">
+        <header class="page-head">
+          <div>
+            <h1 class="page-head__title">Аналитика</h1>
+            <p class="page-head__subtitle">Как&nbsp;работают соцсети и&nbsp;что&nbsp;из&nbsp;этого следует · последние 30 дней</p>
+          </div>
+          <div class="page-head__actions">
+            <button class="btn btn--secondary" type="button">За&nbsp;30 дней</button>
+          </div>
+        </header>
+
+        <div class="grid grid--4">
+          <div class="card"><span class="kpi__label">Охват постов</span><span class="kpi__value">18&nbsp;400</span><span class="kpi__delta">↑ 24%</span><p class="kpi__tip">Чаще всего смотрят посты в&nbsp;8–9 утра.</p></div>
+          <div class="card"><span class="kpi__label">Новые подписчики</span><span class="kpi__value">+312</span><span class="kpi__delta">↑ 41%</span><p class="kpi__tip">Почти половина пришла после поста про&nbsp;тыквенный раф.</p></div>
+          <div class="card"><span class="kpi__label">Вовлечённость</span><span class="kpi__value">6,2%</span><span class="kpi__delta">выше, чем у&nbsp;кофеен района</span><p class="kpi__tip">Средняя у&nbsp;кофеен&nbsp;— около 4%.</p></div>
+          <div class="card"><span class="kpi__label">Гости по&nbsp;промокоду</span><span class="kpi__value">57</span><span class="kpi__delta kpi__delta--down">↓ 9%</span><p class="kpi__tip">Промокод из&nbsp;постов вводят реже&nbsp;— возможно, его плохо видно.</p></div>
+        </div>
+
+        <div class="grid" style="grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);margin-top:16px">
+          <div class="card">
+            <div class="card__head"><h2 class="card__title">Охват по&nbsp;неделям</h2></div>
+            <div class="chart">
+              <div class="chart__col"><span class="chart__bar" style="height:42%"></span>1–7 сен</div>
+              <div class="chart__col"><span class="chart__bar" style="height:48%"></span>8–14</div>
+              <div class="chart__col"><span class="chart__bar" style="height:45%"></span>15–21</div>
+              <div class="chart__col"><span class="chart__bar chart__bar--hot" style="height:100%"></span>22–28</div>
+              <div class="chart__col"><span class="chart__bar" style="height:63%"></span>29 сен–5 окт</div>
+              <div class="chart__col"><span class="chart__bar" style="height:58%"></span>6–12 окт</div>
+            </div>
+            <p class="kpi__tip">Пик&nbsp;— неделя с&nbsp;постом про&nbsp;тыквенный раф.</p>
+          </div>
+
+          <div class="stack">
+            <div class="insight">
+              <span class="insight__icon insight__icon--up">↑</span>
+              <div class="insight__body">
+                <p class="insight__text"><b>Пост про&nbsp;тыквенный раф</b> собрал в&nbsp;3&nbsp;раза больше охвата, чем обычно. Гостям нравятся сезонные напитки.</p>
+                <div class="card__actions"><a class="btn btn--primary btn--small" href="marketer.html">Повторить успех</a></div>
+              </div>
+            </div>
+            <div class="insight">
+              <span class="insight__icon insight__icon--warn">!</span>
+              <div class="insight__body">
+                <p class="insight__text"><b>Промокод вводят реже.</b> Лев может сделать его заметнее прямо на&nbsp;картинке.</p>
+                <div class="card__actions"><a class="btn btn--secondary btn--small" href="designer.html">Попросить Льва</a></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <h2 class="section-title">Лучшие посты <span class="section-title__hint">и&nbsp;что&nbsp;с&nbsp;ними сделать</span></h2>
+        <div class="card">
+          <table class="table">
+            <thead>
+              <tr><th>Пост</th><th class="num">Охват</th><th class="num">Реакции</th><th class="num">Гостей</th><th></th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="table__thumb"><span class="art art--3"></span>Тыквенный раф вернулся</span></td>
+                <td class="num">6&nbsp;120</td><td class="num">418</td><td class="num">23</td>
+                <td class="num"><a class="btn btn--primary btn--small" href="marketer.html">Повторить успех</a></td>
+              </tr>
+              <tr>
+                <td><span class="table__thumb"><span class="art art--1"></span>Бариста Аня</span></td>
+                <td class="num">3&nbsp;480</td><td class="num">302</td><td class="num">9</td>
+                <td class="num"><a class="btn btn--secondary btn--small" href="marketer.html">Ещё про&nbsp;команду</a></td>
+              </tr>
+              <tr>
+                <td><span class="table__thumb"><span class="art art--6"></span>Зёрна для&nbsp;дома</span></td>
+                <td class="num">2&nbsp;150</td><td class="num">96</td><td class="num">14</td>
+                <td class="num"><a class="btn btn--secondary btn--small" href="designer.html">Добавить картинку</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/sidebar.js"></script>
+  <script src="js/workspace.js"></script>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Тексты&nbsp;— ContentFactory</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/workspace.css">
+</head>
+<body data-page="text">
+  <div class="app">
+    <nav class="sidebar" aria-label="Главное меню"></nav>
+
+    <!-- Хранилище текстов: без чата, из любого текста — к нужному помощнику -->
+    <main class="main">
+      <div class="workspace">
+        <header class="page-head">
+          <div>
+            <h1 class="page-head__title">Тексты</h1>
+            <p class="page-head__subtitle">Посты, ответы гостям, отчёты&nbsp;— всё, что&nbsp;написали помощники</p>
+          </div>
+          <div class="page-head__actions">
+            <a class="btn btn--primary" href="marketer.html">Написать новый</a>
+          </div>
+        </header>
+
+        <div class="filters" data-scope="#texts">
+          <button class="filter filter--text is-active" type="button" data-filter="all">Все</button>
+          <button class="filter" type="button" data-filter="marketer"><span class="avatar avatar--24 assistant--marketer"><img src="assets/avatars/marketer.png" alt=""></span>Посты</button>
+          <button class="filter" type="button" data-filter="clients"><span class="avatar avatar--24 assistant--clients"><span class="assistant__initials" style="font-size:10px">В</span></span>Ответы гостям</button>
+          <button class="filter" type="button" data-filter="financier"><span class="avatar avatar--24 assistant--financier"><img src="assets/avatars/financier.png" alt=""></span>Отчёты</button>
+          <button class="filter filter--text" type="button" data-filter="noimage">Без&nbsp;картинки</button>
+        </div>
+
+        <div class="stack" id="texts">
+          <article class="post" data-owner="marketer noimage">
+            <div class="post__date">6 ноября<span>Telegram</span></div>
+            <div>
+              <h3 class="post__title">Как&nbsp;мы&nbsp;обжариваем зерно</h3>
+              <p class="post__text">Каждый четверг в&nbsp;7 утра у&nbsp;нас пахнет как&nbsp;на&nbsp;кофейной плантации&nbsp;— это Дима обжаривает новую партию…</p>
+              <div class="post__tools">
+                <a class="chip" href="designer.html">Попросить картинку у&nbsp;Льва</a>
+                <a class="chip" href="marketer.html">Открыть у&nbsp;Эльвиры</a>
+              </div>
+            </div>
+            <div class="post__side"><span class="pill pill--wait">Ждёт вашего ответа</span></div>
+          </article>
+
+          <article class="post" data-owner="marketer">
+            <div class="post__date">2 ноября<span>ВКонтакте</span></div>
+            <div>
+              <h3 class="post__title">Новое меню на&nbsp;осень</h3>
+              <p class="post__text">Осень пришла&nbsp;— и&nbsp;мы&nbsp;её&nbsp;встретили по-своему: тыквенный раф, глинтвейн без&nbsp;алкоголя и&nbsp;пирог с&nbsp;яблоком…</p>
+              <div class="post__tools">
+                <a class="chip" href="marketer.html">Открыть у&nbsp;Эльвиры</a>
+                <a class="chip" href="images.html">Картинка: обложка меню</a>
+              </div>
+            </div>
+            <div class="post__side"><span class="pill pill--ok">Одобрено</span></div>
+          </article>
+
+          <article class="post" data-owner="clients">
+            <div class="post__date">Сегодня<span>Яндекс Карты</span></div>
+            <div>
+              <h3 class="post__title">Ответ Марии</h3>
+              <p class="post__text">Мария, спасибо! Передадим Ане&nbsp;— она очень обрадуется. Сырники ждут вас, а&nbsp;капучино без&nbsp;сахара мы&nbsp;уже знаем наизусть.</p>
+              <div class="post__tools">
+                <a class="chip" href="clients.html">Открыть у&nbsp;Веры</a>
+              </div>
+            </div>
+            <div class="post__side"><span class="pill pill--wait">Не&nbsp;отправлен</span></div>
+          </article>
+
+          <article class="post" data-owner="financier">
+            <div class="post__date">1 октября<span>Отчёт</span></div>
+            <div>
+              <h3 class="post__title">Итоги сентября простыми словами</h3>
+              <p class="post__text">Выручка выросла на&nbsp;8%, но&nbsp;расходы&nbsp;— на&nbsp;12%, в&nbsp;основном из-за&nbsp;молока. Прибыль 260&nbsp;000&nbsp;₽. Три совета, как&nbsp;вернуть около 25&nbsp;000&nbsp;₽ в&nbsp;месяц…</p>
+              <div class="post__tools">
+                <a class="chip" href="financier.html">Открыть у&nbsp;Ольги</a>
+              </div>
+            </div>
+            <div class="post__side"><span class="pill pill--ok">Готово</span></div>
+          </article>
+
+          <article class="post" data-owner="marketer noimage">
+            <div class="post__date">28 сентября<span>ВКонтакте</span></div>
+            <div>
+              <h3 class="post__title">Зёрна для&nbsp;дома</h3>
+              <p class="post__text">Понравился наш эспрессо? Теперь его можно забрать домой: свежая обжарка в&nbsp;пачках по&nbsp;250&nbsp;г, помолем под вашу кофеварку…</p>
+              <div class="post__tools">
+                <a class="chip" href="designer.html">Попросить картинку у&nbsp;Льва</a>
+                <a class="chip" href="analytics.html">Как&nbsp;сработал пост</a>
+              </div>
+            </div>
+            <div class="post__side"><span class="pill pill--ok">Опубликован</span></div>
+          </article>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/sidebar.js"></script>
+  <script src="js/chips.js"></script>
+  <script src="js/workspace.js"></script>
+</body>
+</html>

@@ -175,7 +175,8 @@ body {
   background: var(--gradient-moss);
 }
 
-.assistant--hr {
+.assistant--hr,
+.assistant--clients {
   background: var(--gradient-violet);
 }
 
@@ -302,6 +303,69 @@ body {
 /* Цвет имени — по роли ассистента */
 .message--marketer .message__name {
   color: var(--color-blue-text);
+}
+
+.message--designer .message__name {
+  color: var(--color-green-text);
+}
+
+.message--financier .message__name {
+  color: var(--color-orange-text);
+}
+
+.message--assistant .message__name {
+  color: var(--color-moss-text);
+}
+
+.message--clients .message__name {
+  color: var(--color-violet-text);
+}
+
+/* Новый фрагмент переписки отделяется от предыдущего */
+.message + .chat__divider {
+  margin-top: 32px;
+}
+
+/* Между сообщениями одного фрагмента */
+.message + .message:not(.message--user) {
+  margin-top: 20px;
+}
+
+/* Варианты ответа прямо в сообщении — для тех, кто не знает, что написать.
+   Это те же чипсы, только переносятся на новую строку */
+.chips.chips--wrap {
+  flex-wrap: wrap;
+  margin: 8px 0 0;
+  padding: 0;
+  overflow: visible;
+}
+
+/* «Печатает…» — три точки */
+.typing {
+  display: inline-flex;
+  gap: 4px;
+  padding: 4px 0;
+}
+
+.typing span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-gray);
+  animation: typing 1.2s ease-in-out infinite;
+}
+
+.typing span:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.typing span:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+@keyframes typing {
+  0%, 60%, 100% { opacity: 0.3; transform: translateY(0); }
+  30% { opacity: 1; transform: translateY(-3px); }
 }
 
 .message__text {

@@ -3,23 +3,143 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ContentFactory</title>
+  <title>Сегодня&nbsp;— ContentFactory</title>
   <!-- Шрифт Inter с Google Fonts: все толщины 100–900, прямой и курсив -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap">
   <link rel="stylesheet" href="css/tokens.css">
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/workspace.css">
 </head>
 <body data-page="home">
   <div class="app">
     <!-- Главное меню: содержимое рисует js/sidebar.js (одно на все страницы) -->
     <nav class="sidebar" aria-label="Главное меню"></nav>
 
-    <!-- Основная рабочая область -->
-    <main class="main"></main>
+    <!-- Главная без чата: сводка от всех помощников -->
+    <main class="main">
+      <div class="workspace">
+        <header class="page-head">
+          <div>
+            <h1 class="page-head__title">Добрый день!</h1>
+            <p class="page-head__subtitle">Понедельник, 12 октября. Пока вас не&nbsp;было, помощники кое-что&nbsp;подготовили.</p>
+          </div>
+        </header>
+
+        <!-- Инициативные предложения -->
+        <h2 class="section-title">Помощники предлагают <span class="section-title__hint">можно отложить&nbsp;— напомним завтра</span></h2>
+        <div class="grid grid--3">
+          <div class="proposal">
+            <div class="proposal__who">
+              <span class="avatar assistant--marketer"><img src="assets/avatars/marketer.png" alt=""></span>
+              <span><b>Эльвира</b>маркетолог</span>
+            </div>
+            <p class="proposal__text">Через 2&nbsp;недели Хэллоуин. Сделаем «тыквенную неделю»?</p>
+            <p class="proposal__why">В&nbsp;прошлом году посты про&nbsp;тыквенный раф собрали в&nbsp;3&nbsp;раза больше лайков, чем обычно.</p>
+            <div class="proposal__actions">
+              <a class="btn btn--primary btn--small" href="marketer.html">Давай</a>
+              <button class="btn btn--secondary btn--small" type="button" data-dismiss>Позже</button>
+            </div>
+          </div>
+
+          <div class="proposal">
+            <div class="proposal__who">
+              <span class="avatar assistant--financier"><img src="assets/avatars/financier.png" alt=""></span>
+              <span><b>Ольга</b>финансист</span>
+            </div>
+            <p class="proposal__text">До&nbsp;28 октября нужно заплатить налог за&nbsp;3&nbsp;квартал. Посчитать сумму?</p>
+            <p class="proposal__why">Займёт минуту: выписка за&nbsp;сентябрь уже загружена.</p>
+            <div class="proposal__actions">
+              <a class="btn btn--primary btn--small" href="financier.html">Посчитать</a>
+              <button class="btn btn--secondary btn--small" type="button" data-dismiss>Позже</button>
+            </div>
+          </div>
+
+          <div class="proposal">
+            <div class="proposal__who">
+              <span class="avatar assistant--clients"><span class="assistant__initials">В</span></span>
+              <span><b>Вера</b>клиентский менеджер</span>
+            </div>
+            <p class="proposal__text">Трое гостей за&nbsp;неделю похвалили сырники. Порадуем постоянных акцией?</p>
+            <p class="proposal__why">Такие акции возвращают в&nbsp;среднем каждого пятого гостя, который давно не&nbsp;заходил.</p>
+            <div class="proposal__actions">
+              <a class="btn btn--primary btn--small" href="clients.html">Придумать</a>
+              <button class="btn btn--secondary btn--small" type="button" data-dismiss>Позже</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Задачи в работе у всех помощников -->
+        <h2 class="section-title">В&nbsp;работе <span class="section-title__hint">ждут вас: 2</span></h2>
+        <div class="rows">
+          <a class="row" href="clients.html">
+            <span class="avatar assistant--clients"><span class="assistant__initials">В</span></span>
+            <div class="row__body"><p class="row__title">Ответы на&nbsp;отзывы</p><p class="row__sub">Вера · Ответы готовы, осталось отправить</p></div>
+            <div class="row__side"><span class="progress"><span class="progress__bar" style="width:50%"></span></span><span class="pill pill--wait">Ждёт вас</span></div>
+          </a>
+          <a class="row" href="marketer.html">
+            <span class="avatar assistant--marketer"><img src="assets/avatars/marketer.png" alt=""></span>
+            <div class="row__body"><p class="row__title">Контент-план на&nbsp;ноябрь</p><p class="row__sub">Эльвира · Тексты: 2 поста ждут вашего ответа</p></div>
+            <div class="row__side"><span class="progress"><span class="progress__bar" style="width:66%"></span></span><span class="pill pill--wait">Ждёт вас</span></div>
+          </a>
+          <a class="row" href="designer.html">
+            <span class="avatar assistant--designer"><img src="assets/avatars/designer.png" alt=""></span>
+            <div class="row__body"><p class="row__title">Креативы для&nbsp;веранды</p><p class="row__sub">Лев · Рисует варианты, готово 2 из&nbsp;4</p></div>
+            <div class="row__side"><span class="progress progress--live"><span class="progress__bar" style="width:55%"></span></span><span class="pill pill--work"><span class="spinner"></span>Рисует</span></div>
+          </a>
+          <a class="row" href="financier.html">
+            <span class="avatar assistant--financier"><img src="assets/avatars/financier.png" alt=""></span>
+            <div class="row__body"><p class="row__title">Куда уходят деньги: сентябрь</p><p class="row__sub">Ольга · Итоги готовы, 3 новых совета</p></div>
+            <div class="row__side"><span class="progress"><span class="progress__bar" style="width:75%"></span></span><span class="pill pill--new">3 новых</span></div>
+          </a>
+        </div>
+
+        <!-- Быстрые старты для тех, кто не знает, с чего начать -->
+        <h2 class="section-title">С&nbsp;чего начать <span class="section-title__hint">популярное у&nbsp;кофеен</span></h2>
+        <div class="grid grid--3">
+          <a class="scenario" href="marketer.html">
+            <span class="avatar assistant--marketer"><img src="assets/avatars/marketer.png" alt=""></span>
+            <p class="scenario__title">Контент-план на&nbsp;месяц</p>
+            <p class="scenario__text">Темы, даты и&nbsp;тексты постов&nbsp;— Эльвира задаст пару вопросов и&nbsp;сделает остальное.</p>
+            <span class="scenario__time">около 10 минут</span>
+          </a>
+          <a class="scenario" href="designer.html">
+            <span class="avatar assistant--designer"><img src="assets/avatars/designer.png" alt=""></span>
+            <p class="scenario__title">Картинка для&nbsp;поста</p>
+            <p class="scenario__text">Опишите идею словами или&nbsp;выберите готовый стиль&nbsp;— Лев нарисует 4 варианта.</p>
+            <span class="scenario__time">около 2 минут</span>
+          </a>
+          <a class="scenario" href="clients.html">
+            <span class="avatar assistant--clients"><span class="assistant__initials">В</span></span>
+            <p class="scenario__title">Ответить на&nbsp;отзывы</p>
+            <p class="scenario__text">Вера соберёт отзывы с&nbsp;Яндекс Карт и&nbsp;2ГИС и&nbsp;подготовит вежливые ответы.</p>
+            <span class="scenario__time">около минуты</span>
+          </a>
+          <a class="scenario" href="financier.html">
+            <span class="avatar assistant--financier"><img src="assets/avatars/financier.png" alt=""></span>
+            <p class="scenario__title">Куда уходят деньги</p>
+            <p class="scenario__text">Загрузите выписку из&nbsp;банка&nbsp;— Ольга разложит расходы и&nbsp;подскажет, где сэкономить.</p>
+            <span class="scenario__time">около 3 минут</span>
+          </a>
+          <a class="scenario" href="marketer.html">
+            <span class="avatar assistant--marketer"><img src="assets/avatars/marketer.png" alt=""></span>
+            <p class="scenario__title">Пост к&nbsp;празднику</p>
+            <p class="scenario__text">Эльвира подскажет ближайшие поводы и&nbsp;напишет текст, Лев сделает картинку.</p>
+            <span class="scenario__time">около 5 минут</span>
+          </a>
+          <a class="scenario" href="assistant.html">
+            <span class="avatar assistant--assistant"><img src="assets/avatars/assistant.png" alt=""></span>
+            <p class="scenario__title">Разобрать мой день</p>
+            <p class="scenario__text">Тимур соберёт дела от&nbsp;всех помощников и&nbsp;расставит их&nbsp;по&nbsp;важности.</p>
+            <span class="scenario__time">около минуты</span>
+          </a>
+        </div>
+      </div>
+    </main>
   </div>
 
   <script src="js/sidebar.js"></script>
+  <script src="js/workspace.js"></script>
 </body>
 </html>

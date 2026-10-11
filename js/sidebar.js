@@ -18,10 +18,10 @@
   // id — имя раздела (его пишем в data-page), icon — файл в assets/icons/
   var NAV = [
     { id: "home",      title: "Главная",     icon: "assets/icons/home.svg",      href: "index.html" },
-    { id: "images",    title: "Изображения", icon: "assets/icons/images.svg",    href: "#" },
-    { id: "text",      title: "Тексты",      icon: "assets/icons/text.svg",      href: "#" },
-    { id: "analytics", title: "Аналитика",   icon: "assets/icons/analytics.svg", href: "#" },
-    { id: "memory",    title: "Память",      icon: "assets/icons/memory.svg",    href: "#" }
+    { id: "images",    title: "Изображения", icon: "assets/icons/images.svg",    href: "images.html" },
+    { id: "text",      title: "Тексты",      icon: "assets/icons/text.svg",      href: "texts.html" },
+    { id: "analytics", title: "Аналитика",   icon: "assets/icons/analytics.svg", href: "analytics.html" },
+    { id: "memory",    title: "Память",      icon: "assets/icons/memory.svg",    href: "memory.html" }
   ];
 
   // ===== Помощники: кружки сверху вниз =====
@@ -29,16 +29,18 @@
   // Список ролей с описаниями — docs/assistants.md
   // badge (необязательно): число — красный бейдж с количеством уведомлений,
   //                        "progress" — бейдж «идёт работа» с крутящейся дугой
+  // initial (вместо avatar) — временная заглушка-буква, пока нет картинки
   var ASSISTANTS = [
-    { id: "marketer",  title: "Маркетолог",      avatar: "assets/avatars/marketer.png",  href: "marketer.html" },
-    { id: "designer",  title: "Дизайнер",        avatar: "assets/avatars/designer.png",  href: "#", badge: "progress" },
-    { id: "financier", title: "Финансист",       avatar: "assets/avatars/financier.png", href: "#", badge: 3 },
-    { id: "assistant", title: "Личный помощник", avatar: "assets/avatars/assistant.png", href: "#" }
+    { id: "marketer",  title: "Эльвира, маркетолог",           avatar: "assets/avatars/marketer.png",  href: "marketer.html" },
+    { id: "designer",  title: "Лев, дизайнер",                 avatar: "assets/avatars/designer.png",  href: "designer.html",  badge: "progress" },
+    { id: "financier", title: "Ольга, финансист",              avatar: "assets/avatars/financier.png", href: "financier.html", badge: 3 },
+    { id: "assistant", title: "Тимур, личный помощник",        avatar: "assets/avatars/assistant.png", href: "assistant.html" },
+    { id: "clients",   title: "Вера, клиентский менеджер",     initial: "В",                           href: "clients.html",   badge: 2 }
   ];
 
   // ===== Низ меню =====
-  var SETTINGS = { id: "settings", title: "Настройки", icon: "assets/icons/settings.svg", href: "#" };
-  var ACCOUNT  = { id: "account",  title: "Аккаунт",   initial: "N",                      href: "#" };
+  var SETTINGS = { id: "settings", title: "Настройки", icon: "assets/icons/settings.svg", href: "settings.html" };
+  var ACCOUNT  = { id: "account",  title: "Аккаунт",   initial: "N",                      href: "account.html" };
 
   // ---------------------------------------------------------
   // Ниже — техническая часть, для правки меню её трогать не нужно
@@ -97,7 +99,9 @@
     var title = item.title + (b.label ? " — " + b.label : "");
     return (
       '<a class="assistant assistant--' + item.id + activeAttrs(item.id) + '" href="' + url(item.href) + '" title="' + title + '">' +
-        '<img src="' + url(item.avatar) + '" width="40" height="40" alt="' + title + '">' +
+        (item.avatar
+          ? '<img src="' + url(item.avatar) + '" width="40" height="40" alt="' + title + '">'
+          : '<span class="assistant__initials" aria-hidden="true">' + item.initial + "</span>") +
         b.html +
       "</a>"
     );

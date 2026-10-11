@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Тимур, личный помощник&nbsp;— ContentFactory</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/workspace.css">
+</head>
+<body data-page="assistant">
+  <div class="app app--chat">
+    <nav class="sidebar" aria-label="Главное меню"></nav>
+
+    <!-- Чат с личным помощником -->
+    <aside class="chat" aria-label="Чат с личным помощником">
+      <div class="chat__messages">
+        <div class="chat__divider">
+          <time class="chat__time" datetime="08:30">Сегодня в&nbsp;8:30</time>
+          <p class="chat__summary">План на&nbsp;день.</p>
+        </div>
+
+        <div class="message message--assistant">
+          <div class="message__avatar assistant assistant--assistant">
+            <img src="assets/avatars/assistant.png" width="40" height="40" alt="">
+          </div>
+          <div class="message__body">
+            <p class="message__author"><span class="message__name">Тимур</span>&nbsp;— Личный помощник</p>
+            <p class="message__text">Доброе утро! На&nbsp;сегодня 4&nbsp;дела, самое срочное&nbsp;— ответить на&nbsp;жалобу в&nbsp;2ГИС, Вера уже подготовила ответ. Остальное спокойно подождёт до&nbsp;вечера.</p>
+            <div class="chips chips--wrap">
+              <button class="chip" type="button">Начнём с&nbsp;жалобы</button>
+              <button class="chip" type="button">Покажи весь день</button>
+              <button class="chip" type="button">Перенеси всё на&nbsp;завтра</button>
+            </div>
+            <time class="message__time" datetime="08:30">8:30</time>
+          </div>
+        </div>
+      </div>
+
+      <div class="chat__composer">
+        <div class="chat__field">
+          <button class="chat__attach" type="button" title="Добавить файл" aria-label="Добавить файл">
+            <img src="assets/icons/plus.svg" width="40" height="40" alt="">
+          </button>
+          <input class="chat__input" type="text" placeholder="Напишите сообщение…" aria-label="Сообщение личному помощнику">
+          <button class="chat__send" type="button" title="Отправить" aria-label="Отправить сообщение">
+            <span class="chat__send-circle">
+              <img src="assets/icons/send.svg" width="40" height="40" alt="">
+            </span>
+          </button>
+        </div>
+
+        <div class="chips" aria-label="Подсказки">
+          <button class="chip" type="button">Что&nbsp;у&nbsp;меня сегодня?</button>
+          <button class="chip" type="button">Кто чем занят?</button>
+          <button class="chip" type="button">Напомни завтра</button>
+          <button class="chip" type="button">Собери новый проект</button>
+          <button class="chip" type="button">Освободи выходной</button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Рабочая зона -->
+    <main class="main">
+      <div class="workspace">
+        <header class="page-head">
+          <div>
+            <h1 class="page-head__title">Тимур, личный помощник</h1>
+            <p class="page-head__subtitle">Держит в&nbsp;голове ваши дела и&nbsp;то, чем заняты остальные помощники</p>
+          </div>
+          <div class="page-head__actions">
+            <a class="btn btn--secondary" href="settings.html">Настроить Тимура</a>
+          </div>
+        </header>
+
+        <div class="task-tabs" role="tablist" aria-label="Задачи">
+          <button class="task-tab is-active" type="button" data-task="day">Мой день</button>
+          <button class="task-tab" type="button" data-task="veranda">Проект: открытие веранды <span class="task-tab__meta">2/5</span></button>
+          <button class="task-tab task-tab--new" type="button">+ Новый проект</button>
+        </div>
+
+        <!-- ===== Мой день ===== -->
+        <section class="task" data-task-id="day">
+          <h2 class="section-title">Сначала это <span class="section-title__hint">5 минут</span></h2>
+          <div class="rows">
+            <a class="row" href="clients.html">
+              <span class="avatar assistant--clients"><span class="assistant__initials">В</span></span>
+              <div class="row__body"><p class="row__title">Ответить на&nbsp;жалобу в&nbsp;2ГИС</p><p class="row__sub">Игорь ждал заказ 20&nbsp;минут. Вера подготовила ответ с&nbsp;извинением&nbsp;— осталось нажать «Отправить».</p></div>
+              <div class="row__side"><span class="pill pill--new">Срочно</span></div>
+            </a>
+          </div>
+
+          <h2 class="section-title">Сегодня <span class="section-title__hint">ещё 3 дела, около 15 минут</span></h2>
+          <div class="rows">
+            <a class="row" href="marketer.html">
+              <span class="avatar assistant--marketer"><img src="assets/avatars/marketer.png" alt=""></span>
+              <div class="row__body"><p class="row__title">Одобрить 2 поста на&nbsp;ноябрь</p><p class="row__sub">Эльвира ждёт ответа по&nbsp;постам про&nbsp;обжарку и&nbsp;бариста месяца</p></div>
+              <div class="row__side"><span class="pill pill--wait">Ждёт вас</span></div>
+            </a>
+            <a class="row" href="designer.html">
+              <span class="avatar assistant--designer"><img src="assets/avatars/designer.png" alt=""></span>
+              <div class="row__body"><p class="row__title">Выбрать картинку для&nbsp;поста о&nbsp;веранде</p><p class="row__sub">Лев дорисовывает варианты</p></div>
+              <div class="row__side"><span class="progress progress--live"><span class="progress__bar" style="width:55%"></span></span><span class="pill pill--work"><span class="spinner"></span>Рисует</span></div>
+            </a>
+            <a class="row" href="financier.html">
+              <span class="avatar assistant--financier"><img src="assets/avatars/financier.png" alt=""></span>
+              <div class="row__body"><p class="row__title">Посмотреть 3 совета по&nbsp;расходам</p><p class="row__sub">Ольга нашла, как&nbsp;вернуть около 25&nbsp;000&nbsp;₽ в&nbsp;месяц</p></div>
+              <div class="row__side"><span class="pill pill--new">3 новых</span></div>
+            </a>
+          </div>
+
+          <h2 class="section-title">Скоро</h2>
+          <div class="grid grid--3">
+            <div class="card card--flat"><span class="kpi__label">Ср, 28 октября</span><p class="card__title" style="margin-top:6px">Налог за&nbsp;3 квартал</p><p class="card__meta" style="margin-top:4px">Ольга посчитает сумму и&nbsp;напомнит за&nbsp;3 дня</p></div>
+            <div class="card card--flat"><span class="kpi__label">Сб, 14 ноября</span><p class="card__title" style="margin-top:6px">Открытие веранды</p><p class="card__meta" style="margin-top:4px">Проект в&nbsp;работе: 2 из&nbsp;5 этапов</p></div>
+            <div class="card card--flat"><span class="kpi__label">Пт, 27 ноября</span><p class="card__title" style="margin-top:6px">Чёрная пятница</p><p class="card__meta" style="margin-top:4px">Эльвира готовит акцию</p></div>
+          </div>
+
+          <div class="next-step">
+            <span class="avatar avatar--48 assistant--assistant"><img src="assets/avatars/assistant.png" alt=""></span>
+            <div class="next-step__body">
+              <span class="next-step__label">Тимур заметил</span>
+              <p class="next-step__text">Вы&nbsp;заходите в&nbsp;сервис каждый день уже три недели подряд. Давайте я&nbsp;разложу дела так, чтобы воскресенье было свободным?</p>
+            </div>
+            <div class="next-step__actions">
+              <button class="btn btn--primary" type="button">Давай</button>
+              <button class="btn btn--secondary" type="button">Не&nbsp;сейчас</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===== Проект, где работают несколько помощников ===== -->
+        <section class="task" data-task-id="veranda" data-current="posts" hidden>
+          <ol class="steps">
+            <li class="steps__item is-done"><button class="step" type="button" data-step="idea"><span class="step__dot">1</span><span><span class="step__label">Идея</span><span class="step__who">Тимур</span></span></button></li>
+            <li class="steps__item is-current"><button class="step" type="button" data-step="posts"><span class="step__dot">2</span><span><span class="step__label">Посты</span><span class="step__who">Эльвира</span></span></button></li>
+            <li class="steps__item"><button class="step" type="button"><span class="step__dot">3</span><span><span class="step__label">Картинки</span><span class="step__who">Лев</span></span></button></li>
+            <li class="steps__item"><button class="step" type="button"><span class="step__dot">4</span><span><span class="step__label">Приглашения</span><span class="step__who">Вера</span></span></button></li>
+            <li class="steps__item"><button class="step" type="button"><span class="step__dot">5</span><span><span class="step__label">Бюджет</span><span class="step__who">Ольга</span></span></button></li>
+          </ol>
+
+          <div class="step-note" hidden>
+            <span>Вы&nbsp;смотрите пройденный этап «<span data-step-name>…</span>».</span>
+            <button class="btn btn--small btn--secondary" type="button" data-go-step="">Вернуться к&nbsp;текущему этапу</button>
+          </div>
+
+          <div class="step-panel" data-panel="idea">
+            <div class="facts">
+              <div class="fact"><span class="fact__label">Что</span><p class="fact__value">Открытие тёплой веранды с&nbsp;пледами и&nbsp;обогревателями</p></div>
+              <div class="fact"><span class="fact__label">Когда</span><p class="fact__value">Суббота, 14 ноября</p></div>
+              <div class="fact"><span class="fact__label">Цель</span><p class="fact__value">Чтобы веранда была полной уже в&nbsp;первые выходные</p></div>
+              <div class="fact"><span class="fact__label">Бюджет</span><p class="fact__value">До&nbsp;30&nbsp;000&nbsp;₽ на&nbsp;продвижение</p></div>
+            </div>
+          </div>
+
+          <div class="step-panel" data-panel="posts" hidden>
+            <h2 class="section-title">Кто чем занят</h2>
+            <div class="rows">
+              <a class="row" href="marketer.html">
+                <span class="avatar assistant--marketer"><img src="assets/avatars/marketer.png" alt=""></span>
+                <div class="row__body"><p class="row__title">Эльвира: серия из&nbsp;3 постов</p><p class="row__sub">Выбрана идея «Самое тёплое место во&nbsp;дворе», пишет тексты</p></div>
+                <div class="row__side"><span class="progress"><span class="progress__bar" style="width:40%"></span></span><span class="pill pill--work">В&nbsp;работе</span></div>
+              </a>
+              <a class="row" href="designer.html">
+                <span class="avatar assistant--designer"><img src="assets/avatars/designer.png" alt=""></span>
+                <div class="row__body"><p class="row__title">Лев: картинки и&nbsp;сторис</p><p class="row__sub">Уже рисует первые варианты, не&nbsp;дожидаясь текстов</p></div>
+                <div class="row__side"><span class="progress progress--live"><span class="progress__bar" style="width:55%"></span></span><span class="pill pill--work"><span class="spinner"></span>Рисует</span></div>
+              </a>
+              <div class="row">
+                <span class="avatar assistant--clients"><span class="assistant__initials">В</span></span>
+                <div class="row__body"><p class="row__title">Вера: приглашения постоянным гостям</p><p class="row__sub">Начнёт после постов</p></div>
+                <div class="row__side"><span class="pill">Ждёт</span></div>
+              </div>
+              <div class="row">
+                <span class="avatar assistant--financier"><img src="assets/avatars/financier.png" alt=""></span>
+                <div class="row__body"><p class="row__title">Ольга: бюджет и&nbsp;окупаемость</p><p class="row__sub">Посчитает, сколько гостей нужно, чтобы веранда окупилась за&nbsp;зиму</p></div>
+                <div class="row__side"><span class="pill">Ждёт</span></div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/sidebar.js"></script>
+  <script src="js/chips.js"></script>
+  <script src="js/workspace.js"></script>
+</body>
+</html>

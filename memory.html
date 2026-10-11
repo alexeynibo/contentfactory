@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Память&nbsp;— ContentFactory</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/workspace.css">
+</head>
+<body data-page="memory">
+  <div class="app">
+    <nav class="sidebar" aria-label="Главное меню"></nav>
+
+    <!-- Память: всё, на что опираются помощники. Можно поправить любой факт -->
+    <main class="main">
+      <div class="workspace">
+        <header class="page-head">
+          <div>
+            <h1 class="page-head__title">Что&nbsp;помощники знают о&nbsp;вас</h1>
+            <p class="page-head__subtitle">Помощники запоминают факты из&nbsp;чатов, файлов и&nbsp;подключённых сервисов. Чем точнее здесь, тем лучше результаты&nbsp;— поправьте, если что-то не&nbsp;так.</p>
+          </div>
+          <div class="page-head__actions">
+            <button class="btn btn--secondary" type="button">Загрузить файл</button>
+          </div>
+        </header>
+
+        <!-- Короткие вопросы вместо длинной анкеты -->
+        <h2 class="section-title">Помощники хотят уточнить <span class="section-title__hint">ответ в&nbsp;один клик</span></h2>
+        <div class="grid grid--2">
+          <div class="question">
+            <p class="question__text"><span class="avatar avatar--24 assistant--marketer"><img src="assets/avatars/marketer.png" alt=""></span>Есть ли&nbsp;у&nbsp;вас программа лояльности?</p>
+            <div class="chips">
+              <button class="chip" type="button">Да, карта гостя</button>
+              <button class="chip" type="button">Каждый 6-й кофе бесплатно</button>
+              <button class="chip" type="button">Пока нет</button>
+            </div>
+          </div>
+          <div class="question">
+            <p class="question__text"><span class="avatar avatar--24 assistant--financier"><img src="assets/avatars/financier.png" alt=""></span>Сколько стоит чашка капучино для&nbsp;вас?</p>
+            <div class="chips">
+              <button class="chip" type="button">Около 60&nbsp;₽</button>
+              <button class="chip" type="button">Около 90&nbsp;₽</button>
+              <button class="chip" type="button">Не&nbsp;знаю&nbsp;— посчитай</button>
+            </div>
+          </div>
+        </div>
+
+        <h2 class="section-title">О&nbsp;компании</h2>
+        <div class="facts">
+          <div class="fact"><span class="fact__label">Название и&nbsp;формат</span><p class="fact__value" contenteditable="true">Кофейня «Зерно» на&nbsp;30 мест, своя обжарка</p><span class="fact__source">Из&nbsp;чата с&nbsp;Эльвирой, 12 октября</span></div>
+          <div class="fact"><span class="fact__label">Адрес и&nbsp;часы</span><p class="fact__value" contenteditable="true">Центр города, ул. Садовая, 14 · ежедневно 8:00–22:00</p><span class="fact__source">Из&nbsp;Яндекс Карт</span></div>
+          <div class="fact"><span class="fact__label">Чем гордитесь</span><p class="fact__value" contenteditable="true">Своя обжарка, домашние десерты, тёплая веранда во&nbsp;дворе</p><span class="fact__source">Из&nbsp;сайта кофейни</span></div>
+          <div class="fact"><span class="fact__label">Команда</span><p class="fact__value" contenteditable="true">5 человек: бариста Аня и&nbsp;Дима (он&nbsp;же&nbsp;обжарщик), повар, два администратора</p><span class="fact__source">Из&nbsp;чата с&nbsp;Тимуром, 9 октября</span></div>
+        </div>
+
+        <h2 class="section-title">Гости</h2>
+        <div class="facts">
+          <div class="fact"><span class="fact__label">Кто приходит</span><p class="fact__value" contenteditable="true">В&nbsp;будни&nbsp;— офисные сотрудники и&nbsp;студенты, в&nbsp;выходные&nbsp;— семьи с&nbsp;детьми</p><span class="fact__source">Из&nbsp;отзывов и&nbsp;чата с&nbsp;Эльвирой</span></div>
+          <div class="fact"><span class="fact__label">Что&nbsp;любят</span><p class="fact__value" contenteditable="true">Сырники, тыквенный раф, капучино на&nbsp;овсяном</p><span class="fact__source">Из&nbsp;отзывов на&nbsp;картах · обновлено сегодня</span></div>
+        </div>
+
+        <h2 class="section-title">Фирменный стиль</h2>
+        <div class="grid grid--2">
+          <div class="card">
+            <span class="fact__label">Цвета</span>
+            <div class="swatches" style="margin-top:8px">
+              <span class="swatch" style="background:#5A3A28" title="Тёмная обжарка"></span>
+              <span class="swatch" style="background:#C98B5E" title="Карамель"></span>
+              <span class="swatch" style="background:#F6D9B5" title="Молочная пенка"></span>
+              <span class="swatch" style="background:#5E8C3A" title="Зелень веранды"></span>
+            </div>
+            <span class="fact__source">Лев определил по&nbsp;логотипу и&nbsp;фото зала</span>
+          </div>
+          <div class="card">
+            <span class="fact__label">Как&nbsp;общаетесь с&nbsp;гостями</span>
+            <p class="fact__value" contenteditable="true" style="margin-top:8px">Тепло и&nbsp;по-дружески, на&nbsp;«вы», с&nbsp;лёгким юмором, без&nbsp;канцелярита</p>
+            <span class="fact__source">Эльвира определила по&nbsp;вашим прошлым постам</span>
+          </div>
+        </div>
+
+        <div class="grid grid--2" style="margin-top:0">
+          <div>
+            <h2 class="section-title">Файлы</h2>
+            <div class="rows">
+              <div class="row file"><span class="file__ext">pdf</span><div class="row__body"><p class="row__title">Меню, осень 2026</p><p class="row__sub">Используют: Эльвира, Лев</p></div></div>
+              <div class="row file"><span class="file__ext">png</span><div class="row__body"><p class="row__title">Логотип «Зерно»</p><p class="row__sub">Используют: Лев</p></div></div>
+              <div class="row file"><span class="file__ext">pdf</span><div class="row__body"><p class="row__title">Выписка, сентябрь 2026</p><p class="row__sub">Используют: Ольга</p></div></div>
+            </div>
+          </div>
+          <div>
+            <h2 class="section-title">Подключения</h2>
+            <div class="rows">
+              <div class="row"><div class="row__body"><p class="row__title">ВКонтакте</p><p class="row__sub">Эльвира публикует посты и&nbsp;смотрит статистику</p></div><span class="pill pill--ok">Подключено</span></div>
+              <div class="row"><div class="row__body"><p class="row__title">Яндекс Карты</p><p class="row__sub">Вера читает отзывы и&nbsp;отвечает на&nbsp;них</p></div><span class="pill pill--ok">Подключено</span></div>
+              <div class="row"><div class="row__body"><p class="row__title">Банк</p><p class="row__sub">Ольга сама заберёт выписку&nbsp;— не&nbsp;нужно загружать</p></div><button class="btn btn--primary btn--small" type="button">Подключить</button></div>
+              <div class="row"><div class="row__body"><p class="row__title">2ГИС</p><p class="row__sub">Вера будет видеть отзывы и&nbsp;оттуда</p></div><button class="btn btn--secondary btn--small" type="button">Подключить</button></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/sidebar.js"></script>
+  <script src="js/chips.js"></script>
+  <script src="js/workspace.js"></script>
+</body>
+</html>

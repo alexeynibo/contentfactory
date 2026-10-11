@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Настройки помощников&nbsp;— ContentFactory</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/workspace.css">
+</head>
+<body data-page="settings">
+  <div class="app">
+    <nav class="sidebar" aria-label="Главное меню"></nav>
+
+    <main class="main">
+      <div class="workspace">
+        <header class="page-head">
+          <div>
+            <h1 class="page-head__title">Ваши помощники</h1>
+            <p class="page-head__subtitle">Настройте каждого под себя: имя, манеру общения, навыки и&nbsp;то, насколько он&nbsp;инициативен</p>
+          </div>
+        </header>
+
+        <div class="stack" style="gap:16px">
+          <!-- Эльвира -->
+          <section class="persona">
+            <span class="avatar avatar--64 assistant--marketer"><img src="assets/avatars/marketer.png" alt=""></span>
+            <div>
+              <h2 class="persona__name">Эльвира</h2>
+              <p class="persona__role">Маркетолог · ведёт соцсети, контент-планы и&nbsp;акции</p>
+              <div class="grid grid--2">
+                <label class="field"><span class="field__label">Имя</span><input class="field__input" type="text" value="Эльвира"></label>
+                <label class="field"><span class="field__label">Манера общения</span>
+                  <select class="field__select"><option>Дружелюбная</option><option>Деловая</option><option>С&nbsp;юмором</option><option>Коротко и&nbsp;по&nbsp;делу</option></select>
+                </label>
+              </div>
+              <div class="field" style="margin-top:16px">
+                <span class="field__label">Навыки</span>
+                <div class="skills">
+                  <button class="skill is-on" type="button">Контент-планы</button>
+                  <button class="skill is-on" type="button">Посты</button>
+                  <button class="skill is-on" type="button">Акции</button>
+                  <button class="skill" type="button">Реклама во&nbsp;ВКонтакте</button>
+                  <button class="skill" type="button">Рассылки</button>
+                  <button class="skill skill--add" type="button">+ Научить новому</button>
+                </div>
+              </div>
+              <div class="initiative">
+                <div class="initiative__head"><span>Инициативность</span><span class="initiative__level"></span></div>
+                <input type="range" min="0" max="100" value="72" data-initiative aria-label="Инициативность Эльвиры">
+                <div class="initiative__scale"><span>Только по&nbsp;просьбе</span><span>Сама предлагает идеи</span></div>
+                <p class="initiative__desc"></p>
+              </div>
+            </div>
+          </section>
+
+          <!-- Лев -->
+          <section class="persona">
+            <span class="avatar avatar--64 assistant--designer"><img src="assets/avatars/designer.png" alt=""></span>
+            <div>
+              <h2 class="persona__name">Лев</h2>
+              <p class="persona__role">Дизайнер · картинки, сторис, обложки и&nbsp;баннеры</p>
+              <div class="grid grid--2">
+                <label class="field"><span class="field__label">Имя</span><input class="field__input" type="text" value="Лев"></label>
+                <label class="field"><span class="field__label">Манера общения</span>
+                  <select class="field__select"><option>Коротко и&nbsp;по&nbsp;делу</option><option>Дружелюбная</option><option>Деловая</option><option>С&nbsp;юмором</option></select>
+                </label>
+              </div>
+              <div class="field" style="margin-top:16px">
+                <span class="field__label">Навыки</span>
+                <div class="skills">
+                  <button class="skill is-on" type="button">Картинки к&nbsp;постам</button>
+                  <button class="skill is-on" type="button">Сторис</button>
+                  <button class="skill" type="button">Меню и&nbsp;печать</button>
+                  <button class="skill" type="button">Видео до&nbsp;15 секунд</button>
+                  <button class="skill skill--add" type="button">+ Научить новому</button>
+                </div>
+              </div>
+              <div class="initiative">
+                <div class="initiative__head"><span>Инициативность</span><span class="initiative__level"></span></div>
+                <input type="range" min="0" max="100" value="40" data-initiative aria-label="Инициативность Льва">
+                <div class="initiative__scale"><span>Только по&nbsp;просьбе</span><span>Сам предлагает идеи</span></div>
+                <p class="initiative__desc"></p>
+              </div>
+            </div>
+          </section>
+
+          <!-- Ольга -->
+          <section class="persona">
+            <span class="avatar avatar--64 assistant--financier"><img src="assets/avatars/financier.png" alt=""></span>
+            <div>
+              <h2 class="persona__name">Ольга</h2>
+              <p class="persona__role">Финансист · расходы, прибыль, налоги и&nbsp;прогнозы</p>
+              <div class="grid grid--2">
+                <label class="field"><span class="field__label">Имя</span><input class="field__input" type="text" value="Ольга"></label>
+                <label class="field"><span class="field__label">Манера общения</span>
+                  <select class="field__select"><option>Деловая</option><option>Дружелюбная</option><option>Коротко и&nbsp;по&nbsp;делу</option></select>
+                </label>
+              </div>
+              <div class="field" style="margin-top:16px">
+                <span class="field__label">Навыки</span>
+                <div class="skills">
+                  <button class="skill is-on" type="button">Разбор выписки</button>
+                  <button class="skill is-on" type="button">Налоги УСН</button>
+                  <button class="skill" type="button">Себестоимость меню</button>
+                  <button class="skill skill--add" type="button">+ Научить новому</button>
+                </div>
+              </div>
+              <div class="initiative">
+                <div class="initiative__head"><span>Инициативность</span><span class="initiative__level"></span></div>
+                <input type="range" min="0" max="100" value="60" data-initiative aria-label="Инициативность Ольги">
+                <div class="initiative__scale"><span>Только по&nbsp;просьбе</span><span>Сама предлагает идеи</span></div>
+                <p class="initiative__desc"></p>
+              </div>
+            </div>
+          </section>
+
+          <!-- Тимур -->
+          <section class="persona">
+            <span class="avatar avatar--64 assistant--assistant"><img src="assets/avatars/assistant.png" alt=""></span>
+            <div>
+              <h2 class="persona__name">Тимур</h2>
+              <p class="persona__role">Личный помощник · дела, напоминания и&nbsp;общие проекты</p>
+              <div class="grid grid--2">
+                <label class="field"><span class="field__label">Имя</span><input class="field__input" type="text" value="Тимур"></label>
+                <label class="field"><span class="field__label">Манера общения</span>
+                  <select class="field__select"><option>Дружелюбная</option><option>Коротко и&nbsp;по&nbsp;делу</option><option>С&nbsp;юмором</option></select>
+                </label>
+              </div>
+              <div class="initiative">
+                <div class="initiative__head"><span>Инициативность</span><span class="initiative__level"></span></div>
+                <input type="range" min="0" max="100" value="88" data-initiative aria-label="Инициативность Тимура">
+                <div class="initiative__scale"><span>Только по&nbsp;просьбе</span><span>Сам предлагает идеи</span></div>
+                <p class="initiative__desc"></p>
+              </div>
+            </div>
+          </section>
+
+          <!-- Вера -->
+          <section class="persona">
+            <span class="avatar avatar--64 assistant--clients"><span class="assistant__initials">В</span></span>
+            <div>
+              <h2 class="persona__name">Вера</h2>
+              <p class="persona__role">Клиентский менеджер · отзывы, ответы гостям и&nbsp;постоянные клиенты</p>
+              <div class="grid grid--2">
+                <label class="field"><span class="field__label">Имя</span><input class="field__input" type="text" value="Вера"></label>
+                <label class="field"><span class="field__label">Манера общения</span>
+                  <select class="field__select"><option>Тёплая и&nbsp;заботливая</option><option>Деловая</option><option>Коротко и&nbsp;по&nbsp;делу</option></select>
+                </label>
+              </div>
+              <div class="field" style="margin-top:16px">
+                <span class="field__label">Навыки</span>
+                <div class="skills">
+                  <button class="skill is-on" type="button">Ответы на&nbsp;отзывы</button>
+                  <button class="skill is-on" type="button">Акции для&nbsp;постоянных</button>
+                  <button class="skill" type="button">Ответы в&nbsp;мессенджерах</button>
+                  <button class="skill skill--add" type="button">+ Научить новому</button>
+                </div>
+              </div>
+              <div class="initiative">
+                <div class="initiative__head"><span>Инициативность</span><span class="initiative__level"></span></div>
+                <input type="range" min="0" max="100" value="55" data-initiative aria-label="Инициативность Веры">
+                <div class="initiative__scale"><span>Только по&nbsp;просьбе</span><span>Сама предлагает идеи</span></div>
+                <p class="initiative__desc"></p>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/sidebar.js"></script>
+  <script src="js/workspace.js"></script>
+</body>
+</html>

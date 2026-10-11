@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Лев, дизайнер&nbsp;— ContentFactory</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/workspace.css">
+</head>
+<body data-page="designer">
+  <div class="app app--chat">
+    <nav class="sidebar" aria-label="Главное меню"></nav>
+
+    <!-- Чат с дизайнером -->
+    <aside class="chat" aria-label="Чат с дизайнером">
+      <div class="chat__messages">
+        <div class="chat__divider">
+          <time class="chat__time" datetime="15:20">Сегодня в&nbsp;15:20</time>
+          <p class="chat__summary">Креативы к&nbsp;открытию веранды.</p>
+        </div>
+
+        <div class="message message--designer">
+          <div class="message__avatar assistant assistant--designer">
+            <img src="assets/avatars/designer.png" width="40" height="40" alt="">
+          </div>
+          <div class="message__body">
+            <p class="message__author"><span class="message__name">Лев</span>&nbsp;— Дизайнер</p>
+            <p class="message__text">Начал рисовать 4 варианта для&nbsp;поста про&nbsp;веранду, это займёт около минуты. Пока жду&nbsp;— какое настроение вам ближе?</p>
+            <div class="chips chips--wrap">
+              <button class="chip" type="button">Тёплое и&nbsp;уютное</button>
+              <button class="chip" type="button">Светлое, минимализм</button>
+              <button class="chip" type="button">С&nbsp;людьми</button>
+              <button class="chip" type="button">Без&nbsp;людей</button>
+            </div>
+            <time class="message__time" datetime="15:20">15:20</time>
+          </div>
+        </div>
+
+        <div class="message message--user">
+          <div class="message__bubble">
+            <p class="message__text">Тёплое, с&nbsp;пледами и&nbsp;гирляндами</p>
+            <time class="message__time" datetime="15:21">15:21</time>
+          </div>
+        </div>
+
+        <div class="message message--designer">
+          <div class="message__avatar assistant assistant--designer">
+            <img src="assets/avatars/designer.png" width="40" height="40" alt="">
+          </div>
+          <div class="message__body">
+            <p class="message__author"><span class="message__name">Лев</span>&nbsp;— Дизайнер</p>
+            <p class="message__text">Понял, добавлю гирлянды в&nbsp;оставшиеся два варианта. Можете пока заняться другим&nbsp;— я&nbsp;напишу, когда закончу.</p>
+            <div class="typing" aria-label="Лев рисует"><span></span><span></span><span></span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="chat__composer">
+        <div class="chat__field">
+          <button class="chat__attach" type="button" title="Добавить файл" aria-label="Добавить файл">
+            <img src="assets/icons/plus.svg" width="40" height="40" alt="">
+          </button>
+          <input class="chat__input" type="text" placeholder="Напишите сообщение…" aria-label="Сообщение дизайнеру">
+          <button class="chat__send" type="button" title="Отправить" aria-label="Отправить сообщение">
+            <span class="chat__send-circle">
+              <img src="assets/icons/send.svg" width="40" height="40" alt="">
+            </span>
+          </button>
+        </div>
+
+        <div class="chips" aria-label="Подсказки">
+          <button class="chip" type="button">Сделай светлее</button>
+          <button class="chip" type="button">Добавь логотип</button>
+          <button class="chip" type="button">Формат для&nbsp;сторис</button>
+          <button class="chip" type="button">Другой ракурс</button>
+          <button class="chip" type="button">Как&nbsp;в&nbsp;прошлый раз</button>
+          <button class="chip" type="button">Ещё варианты</button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Рабочая зона -->
+    <main class="main">
+      <div class="workspace">
+        <header class="page-head">
+          <div>
+            <h1 class="page-head__title">Лев, дизайнер</h1>
+            <p class="page-head__subtitle">Картинки, креативы и&nbsp;сторис в&nbsp;фирменном стиле «Зерна»</p>
+          </div>
+          <div class="page-head__actions">
+            <a class="btn btn--secondary" href="images.html">Все картинки</a>
+            <a class="btn btn--secondary" href="settings.html">Настроить Льва</a>
+          </div>
+        </header>
+
+        <div class="task-tabs" role="tablist" aria-label="Задачи">
+          <button class="task-tab is-active" type="button" data-task="veranda"><span class="spinner" aria-label="в работе"></span>Креативы для&nbsp;веранды <span class="task-tab__meta">3/6</span></button>
+          <button class="task-tab" type="button" data-task="cover">Обложка меню <span class="task-tab__meta">4/6</span></button>
+          <button class="task-tab" type="button" data-task="plan">Картинки к&nbsp;контент-плану <span class="task-tab__meta">2/4</span></button>
+          <button class="task-tab task-tab--new" type="button">+ Новая задача</button>
+        </div>
+
+        <!-- ===== Задача 1: идёт генерация ===== -->
+        <section class="task" data-task-id="veranda" data-current="variants">
+          <ol class="steps">
+            <li class="steps__item is-done"><button class="step" type="button" data-step="brief"><span class="step__dot">1</span><span class="step__label">Задача</span></button></li>
+            <li class="steps__item is-done"><button class="step" type="button" data-step="style"><span class="step__dot">2</span><span class="step__label">Стиль</span></button></li>
+            <li class="steps__item is-current is-working"><button class="step" type="button" data-step="variants"><span class="step__dot">3</span><span class="step__label">Варианты</span></button></li>
+            <li class="steps__item"><button class="step" type="button"><span class="step__dot">4</span><span class="step__label">Доработка</span></button></li>
+            <li class="steps__item"><button class="step" type="button"><span class="step__dot">5</span><span class="step__label">Форматы</span></button></li>
+            <li class="steps__item"><button class="step" type="button"><span class="step__dot">6</span><span class="step__label">Скачать</span></button></li>
+          </ol>
+
+          <div class="step-note" hidden>
+            <span>Вы&nbsp;смотрите пройденный этап «<span data-step-name>…</span>». Лев тем временем продолжает рисовать.</span>
+            <button class="btn btn--small btn--secondary" type="button" data-go-step="">Вернуться к&nbsp;вариантам</button>
+          </div>
+
+          <div class="step-panel" data-panel="brief">
+            <div class="facts">
+              <div class="fact"><span class="fact__label">Что&nbsp;нужно</span><p class="fact__value">Картинка для&nbsp;поста об&nbsp;открытии тёплой веранды 14 ноября</p></div>
+              <div class="fact"><span class="fact__label">Куда</span><p class="fact__value">Пост ВКонтакте (квадрат) и&nbsp;сторис</p></div>
+              <div class="fact"><span class="fact__label">Текст поста</span><p class="fact__value">«Самое тёплое место во&nbsp;дворе»&nbsp;— от&nbsp;Эльвиры</p><span class="fact__source"><a class="btn btn--ghost" href="marketer.html">Открыть у&nbsp;Эльвиры</a></span></div>
+              <div class="fact"><span class="fact__label">Обязательно</span><p class="fact__value">Логотип «Зерна» в&nbsp;углу, без&nbsp;текста на&nbsp;картинке</p></div>
+            </div>
+          </div>
+
+          <div class="step-panel" data-panel="style" hidden>
+            <h2 class="section-title">Фирменные цвета <span class="section-title__hint">из&nbsp;Памяти</span></h2>
+            <div class="swatches">
+              <span class="swatch" style="background:#5A3A28"></span>
+              <span class="swatch" style="background:#C98B5E"></span>
+              <span class="swatch" style="background:#F6D9B5"></span>
+              <span class="swatch" style="background:#5E8C3A"></span>
+            </div>
+            <h2 class="section-title">Настроение</h2>
+            <div class="choice-list">
+              <button class="choice is-selected" type="button">Тёплое, уютное</button>
+              <button class="choice is-selected" type="button">Вечерний свет</button>
+              <button class="choice" type="button">Минимализм</button>
+              <button class="choice" type="button">Яркое</button>
+            </div>
+          </div>
+
+          <!-- Текущий этап: ИИ работает -->
+          <div class="step-panel" data-panel="variants" hidden>
+            <div class="working">
+              <div class="working__head">
+                <span class="avatar assistant--designer"><img src="assets/avatars/designer.png" alt=""></span>
+                <h2 class="working__title">Лев рисует 4 варианта</h2>
+                <span class="working__time">готово 2 из&nbsp;4 · ещё около минуты</span>
+              </div>
+              <div class="progress progress--live"><span class="progress__bar" style="width:55%"></span></div>
+
+              <div class="grid grid--4" style="margin-top:20px">
+                <div class="tile"><span class="art art--2"><span class="art__label">Вариант 1</span></span></div>
+                <div class="tile"><span class="art art--4"><span class="art__label">Вариант 2</span></span></div>
+                <div class="tile"><span class="skeleton" style="aspect-ratio:1"></span></div>
+                <div class="tile"><span class="skeleton" style="aspect-ratio:1"></span></div>
+              </div>
+
+              <div class="meanwhile">
+                <h3 class="meanwhile__title">Пока ждёте</h3>
+                <div class="meanwhile__list">
+                  <div class="meanwhile__item"><b>Уточните настроение</b>Ответ в&nbsp;чате слева сделает оставшиеся варианты точнее.</div>
+                  <a class="meanwhile__item" href="marketer.html"><b>2 поста ждут вашего ответа</b>Эльвира дописала тексты к&nbsp;контент-плану на&nbsp;ноябрь.</a>
+                  <a class="meanwhile__item" href="clients.html"><b>2 новых отзыва</b>Вера уже подготовила черновики ответов.</a>
+                </div>
+              </div>
+            </div>
+            <p class="card__text muted" style="margin-top:12px;font-size:13px">Можно уйти с&nbsp;этой страницы&nbsp;— Лев продолжит работу, а&nbsp;значок на&nbsp;его аватаре в&nbsp;меню подскажет, когда всё будет готово.</p>
+          </div>
+        </section>
+
+        <!-- ===== Задача 2: доработка точечными промптами ===== -->
+        <section class="task" data-task-id="cover" data-current="refine" hidden>
+          <ol class="steps">
+            <li class="steps__item is-done"><button class="step" type="button" data-step="brief"><span class="step__dot">1</span><span class="step__label">Задача</span></button></li>
+            <li class="steps__item is-done"><button class="step" type="button" data-step="style"><span class="step__dot">2</span><span class="step__label">Стиль</span></button></li>
+            <li class="steps__item is-done"><button class="step" type="button" data-step="variants"><span class="step__dot">3</span><span class="step__label">Варианты</span></button></li>
+            <li class="steps__item is-current"><button class="step" type="button" data-step="refine"><span class="step__dot">4</span><span class="step__label">Доработка</span></button></li>
+            <li class="steps__item"><button class="step" type="button"><span class="step__dot">5</span><span class="step__label">Форматы</span></button></li>
+            <li class="steps__item"><button class="step" type="button"><span class="step__dot">6</span><span class="step__label">Скачать</span></button></li>
+          </ol>
+
+          <div class="step-note" hidden>
+            <span>Вы&nbsp;смотрите пройденный этап «<span data-step-name>…</span>». Можно выбрать другой вариант&nbsp;— правки к&nbsp;текущему сохранятся.</span>
+            <button class="btn btn--small btn--secondary" type="button" data-go-step="">Вернуться к&nbsp;доработке</button>
+          </div>
+
+          <div class="step-panel" data-panel="brief">
+            <div class="facts">
+              <div class="fact"><span class="fact__label">Что&nbsp;нужно</span><p class="fact__value">Обложка для&nbsp;нового осеннего меню</p></div>
+              <div class="fact"><span class="fact__label">Формат</span><p class="fact__value">А4 для&nbsp;печати и&nbsp;картинка для&nbsp;сайта</p></div>
+            </div>
+          </div>
+
+          <div class="step-panel" data-panel="style" hidden>
+            <div class="choice-list">
+              <button class="choice is-selected" type="button">Осенние цвета</button>
+              <button class="choice is-selected" type="button">Крупный план напитка</button>
+              <button class="choice" type="button">Иллюстрация</button>
+            </div>
+          </div>
+
+          <div class="step-panel" data-panel="variants" hidden>
+            <h2 class="section-title">Выбранный вариант <span class="section-title__hint">можно передумать</span></h2>
+            <div class="grid grid--3">
+              <button class="variant is-selected" type="button"><span class="art art--3"><span class="art__label">Тыквенный раф</span></span></button>
+              <button class="variant" type="button"><span class="art art--1"><span class="art__label">Латте-арт</span></span></button>
+              <button class="variant" type="button"><span class="art art--6"><span class="art__label">Эспрессо</span></span></button>
+            </div>
+          </div>
+
+          <!-- Текущий этап: точечные правки -->
+          <div class="step-panel" data-panel="refine" hidden>
+            <div class="grid" style="grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);align-items:start">
+              <div class="spot" data-edits="#edits-cover">
+                <span class="art art--3" style="border-radius:16px"></span>
+                <span class="spot__hint">Нажмите на&nbsp;место, которое нужно изменить</span>
+                <span class="spot__marker spot__marker--done" style="left:58%;top:30%">1</span>
+              </div>
+              <div class="card">
+                <h2 class="card__title">Правки по&nbsp;точкам</h2>
+                <p class="card__text muted" style="margin:6px 0 16px;font-size:13px">Отметьте на&nbsp;картинке, что&nbsp;поправить,&nbsp;— не&nbsp;нужно описывать, где это находится.</p>
+                <div class="edits" id="edits-cover">
+                  <div class="edit">
+                    <span class="spot__marker spot__marker--done">1</span>
+                    <div><b>Сделать пар над чашкой гуще</b><br><span class="pill pill--ok">Готово</span></div>
+                  </div>
+                </div>
+                <div class="card__actions">
+                  <button class="btn btn--primary" type="button">Всё нравится, дальше</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="next-step">
+              <span class="avatar avatar--48 assistant--marketer"><img src="assets/avatars/marketer.png" alt=""></span>
+              <div class="next-step__body">
+                <span class="next-step__label">Что&nbsp;дальше</span>
+                <p class="next-step__text">Обложка почти готова. Эльвира предлагает сделать из&nbsp;неё анонс нового меню&nbsp;— пост и&nbsp;сторис на&nbsp;2 ноября.</p>
+              </div>
+              <div class="next-step__actions">
+                <a class="btn btn--secondary" href="marketer.html">Позвать Эльвиру</a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===== Задача 3: передана от Эльвиры ===== -->
+        <section class="task" data-task-id="plan" data-current="style" hidden>
+          <ol class="steps">
+            <li class="steps__item is-done"><button class="step" type="button" data-step="texts"><span class="step__dot">1</span><span><span class="step__label">Тексты</span><span class="step__who">от&nbsp;Эльвиры</span></span></button></li>
+            <li class="steps__item is-current"><button class="step" type="button" data-step="style"><span class="step__dot">2</span><span class="step__label">Стиль</span></button></li>
+            <li class="steps__item"><button class="step" type="button"><span class="step__dot">3</span><span class="step__label">Картинки</span></button></li>
+            <li class="steps__item"><button class="step" type="button"><span class="step__dot">4</span><span class="step__label">Готово</span></button></li>
+          </ol>
+
+          <div class="step-note" hidden>
+            <span>Вы&nbsp;смотрите пройденный этап «<span data-step-name>…</span>».</span>
+            <button class="btn btn--small btn--secondary" type="button" data-go-step="">Вернуться к&nbsp;стилю</button>
+          </div>
+
+          <div class="step-panel" data-panel="texts">
+            <div class="rows">
+              <a class="row" href="marketer.html"><span class="avatar avatar--24 assistant--marketer"><img src="assets/avatars/marketer.png" alt=""></span><div class="row__body"><p class="row__title">Новое меню на&nbsp;осень</p><p class="row__sub">Осень пришла&nbsp;— и&nbsp;мы&nbsp;её&nbsp;встретили по-своему: тыквенный раф…</p></div><span class="pill pill--ok">Одобрено</span></a>
+              <a class="row" href="marketer.html"><span class="avatar avatar--24 assistant--marketer"><img src="assets/avatars/marketer.png" alt=""></span><div class="row__body"><p class="row__title">День народного единства: −15%</p><p class="row__sub">4 ноября отдыхаем вместе! Весь день&nbsp;— скидка 15%…</p></div><span class="pill pill--ok">Одобрено</span></a>
+            </div>
+          </div>
+
+          <div class="step-panel" data-panel="style" hidden>
+            <h2 class="section-title">Как&nbsp;оформить картинки к&nbsp;постам?</h2>
+            <div class="grid grid--3">
+              <button class="variant is-selected" type="button"><span class="card" style="display:block;text-align:left"><span class="art art--wide art--1" style="border-radius:10px"></span><span class="card__title" style="display:block;margin-top:12px">Как&nbsp;в&nbsp;прошлом месяце</span><span class="card__text" style="display:block;margin-top:4px;font-size:13px">Тёплые фото напитков крупным планом&nbsp;— гостям понравилось</span></span></button>
+              <button class="variant" type="button"><span class="card" style="display:block;text-align:left"><span class="art art--wide art--5" style="border-radius:10px"></span><span class="card__title" style="display:block;margin-top:12px">Иллюстрации</span><span class="card__text" style="display:block;margin-top:4px;font-size:13px">Нарисованные, в&nbsp;фирменных цветах</span></span></button>
+              <button class="variant" type="button"><span class="card" style="display:block;text-align:left"><span class="art art--wide art--4" style="border-radius:10px"></span><span class="card__title" style="display:block;margin-top:12px">Предложи сам</span><span class="card__text" style="display:block;margin-top:4px;font-size:13px">Лев покажет три новых направления</span></span></button>
+            </div>
+            <div class="card__actions">
+              <button class="btn btn--primary" type="button">Нарисовать картинки</button>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/sidebar.js"></script>
+  <script src="js/chips.js"></script>
+  <script src="js/workspace.js"></script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Аккаунт&nbsp;— ContentFactory</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/workspace.css">
+</head>
+<body data-page="account">
+  <div class="app">
+    <nav class="sidebar" aria-label="Главное меню"></nav>
+
+    <main class="main">
+      <div class="workspace" style="max-width:760px">
+        <header class="page-head">
+          <div>
+            <h1 class="page-head__title">Аккаунт</h1>
+            <p class="page-head__subtitle">Ваши данные, компания и&nbsp;тариф</p>
+          </div>
+        </header>
+
+        <div class="card">
+          <h2 class="card__title">Вы</h2>
+          <div class="grid grid--2" style="margin-top:16px">
+            <label class="field"><span class="field__label">Как&nbsp;к&nbsp;вам обращаться</span><input class="field__input" type="text" value="Николай"></label>
+            <label class="field"><span class="field__label">Почта</span><input class="field__input" type="email" value="hello@zerno.example"></label>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:16px">
+          <h2 class="card__title">Компания</h2>
+          <div class="grid grid--2" style="margin-top:16px">
+            <label class="field"><span class="field__label">Название</span><input class="field__input" type="text" value="Кофейня «Зерно»"></label>
+            <label class="field"><span class="field__label">Сфера</span><input class="field__input" type="text" value="Кофейня, общепит"></label>
+          </div>
+          <p class="card__text muted" style="margin-top:12px;font-size:13px">Подробности о&nbsp;компании помощники берут из&nbsp;раздела <a class="btn btn--ghost" href="memory.html">Память</a>.</p>
+        </div>
+
+        <div class="card" style="margin-top:16px">
+          <div class="card__head" style="justify-content:space-between;margin:0">
+            <div>
+              <h2 class="card__title">Тариф «Команда»</h2>
+              <p class="card__meta" style="margin-top:4px">5 помощников · следующее списание 12 ноября</p>
+            </div>
+            <button class="btn btn--secondary" type="button">Сменить тариф</button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/sidebar.js"></script>
+  <script src="js/workspace.js"></script>
+</body>
+</html>

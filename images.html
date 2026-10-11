@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Изображения&nbsp;— ContentFactory</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/workspace.css">
+</head>
+<body data-page="images">
+  <div class="app">
+    <nav class="sidebar" aria-label="Главное меню"></nav>
+
+    <!-- Хранилище картинок: без чата, из любой картинки — к нужному помощнику -->
+    <main class="main">
+      <div class="workspace">
+        <header class="page-head">
+          <div>
+            <h1 class="page-head__title">Изображения</h1>
+            <p class="page-head__subtitle">Всё, что&nbsp;нарисовали помощники и&nbsp;что&nbsp;загрузили вы,&nbsp;— в&nbsp;одном месте</p>
+          </div>
+          <div class="page-head__actions">
+            <button class="btn btn--secondary" type="button">Загрузить свои</button>
+            <a class="btn btn--primary" href="designer.html">Нарисовать новую</a>
+          </div>
+        </header>
+
+        <div class="filters" data-scope="#gallery">
+          <button class="filter filter--text is-active" type="button" data-filter="all">Все</button>
+          <button class="filter" type="button" data-filter="designer"><span class="avatar avatar--24 assistant--designer"><img src="assets/avatars/designer.png" alt=""></span>Лев</button>
+          <button class="filter filter--text" type="button" data-filter="you">Загружены вами</button>
+          <button class="filter filter--text" type="button" data-filter="unused">Ещё не&nbsp;в&nbsp;постах</button>
+        </div>
+
+        <!-- Подсказка: что сделать с тем, что уже есть -->
+        <div class="next-step" style="margin:0 0 24px">
+          <span class="avatar avatar--48 assistant--marketer"><img src="assets/avatars/marketer.png" alt=""></span>
+          <div class="next-step__body">
+            <span class="next-step__label">Эльвира заметила</span>
+            <p class="next-step__text">3&nbsp;картинки ещё ни&nbsp;разу не&nbsp;публиковались. Напишу к&nbsp;ним посты, чтобы они не&nbsp;пропадали?</p>
+          </div>
+          <div class="next-step__actions">
+            <a class="btn btn--primary" href="marketer.html">Написать посты</a>
+          </div>
+        </div>
+
+        <div class="grid grid--4" id="gallery">
+          <div class="tile" data-owner="designer">
+            <span class="art art--3"><span class="art__label">Обложка меню</span></span>
+            <p class="tile__caption">Тыквенный раф, обложка осеннего меню</p>
+            <span class="tile__meta"><span class="avatar avatar--24 assistant--designer"><img src="assets/avatars/designer.png" alt=""></span>Лев · сегодня</span>
+            <div class="tile__actions"><a class="chip" href="designer.html">Доработать с&nbsp;Львом</a></div>
+          </div>
+          <div class="tile" data-owner="designer">
+            <span class="art art--2"><span class="art__label">Веранда · вариант 1</span></span>
+            <p class="tile__caption">Тёплая веранда с&nbsp;пледами</p>
+            <span class="tile__meta"><span class="avatar avatar--24 assistant--designer"><img src="assets/avatars/designer.png" alt=""></span>Лев · сегодня</span>
+            <div class="tile__actions"><a class="chip" href="designer.html">Доработать с&nbsp;Львом</a></div>
+          </div>
+          <div class="tile" data-owner="designer unused">
+            <span class="art art--1"><span class="art__label">Пост</span></span>
+            <p class="tile__caption">Латте-арт крупным планом</p>
+            <span class="tile__meta"><span class="avatar avatar--24 assistant--designer"><img src="assets/avatars/designer.png" alt=""></span>Лев · 8 октября</span>
+            <div class="tile__actions"><a class="chip" href="marketer.html">Сделать пост</a><a class="chip" href="designer.html">Доработать</a></div>
+          </div>
+          <div class="tile" data-owner="designer unused">
+            <span class="art art--5"><span class="art__label">Сторис</span></span>
+            <p class="tile__caption">Десерт недели: чизкейк</p>
+            <span class="tile__meta"><span class="avatar avatar--24 assistant--designer"><img src="assets/avatars/designer.png" alt=""></span>Лев · 5 октября</span>
+            <div class="tile__actions"><a class="chip" href="marketer.html">Сделать пост</a><a class="chip" href="designer.html">Доработать</a></div>
+          </div>
+          <div class="tile" data-owner="you unused">
+            <span class="art art--4"><span class="art__label">Ваше фото</span></span>
+            <p class="tile__caption">Вечерний зал, фото с&nbsp;телефона</p>
+            <span class="tile__meta">Загружено вами · 3 октября</span>
+            <div class="tile__actions"><a class="chip" href="designer.html">Улучшить качество</a><a class="chip" href="marketer.html">Сделать пост</a></div>
+          </div>
+          <div class="tile" data-owner="designer">
+            <span class="art art--6"><span class="art__label">Пост</span></span>
+            <p class="tile__caption">Эспрессо из&nbsp;новой обжарки</p>
+            <span class="tile__meta"><span class="avatar avatar--24 assistant--designer"><img src="assets/avatars/designer.png" alt=""></span>Лев · 1 октября</span>
+            <div class="tile__actions"><a class="chip" href="designer.html">Доработать с&nbsp;Львом</a></div>
+          </div>
+          <div class="tile" data-owner="you">
+            <span class="art art--1"><span class="art__label">Ваше фото</span></span>
+            <p class="tile__caption">Логотип «Зерно»</p>
+            <span class="tile__meta">Загружено вами · хранится в&nbsp;Памяти</span>
+            <div class="tile__actions"><a class="chip" href="memory.html">Открыть в&nbsp;Памяти</a></div>
+          </div>
+          <div class="tile" data-owner="designer">
+            <span class="art art--2"><span class="art__label">Сторис</span></span>
+            <p class="tile__caption">Утро в&nbsp;«Зерне»</p>
+            <span class="tile__meta"><span class="avatar avatar--24 assistant--designer"><img src="assets/avatars/designer.png" alt=""></span>Лев · 28 сентября</span>
+            <div class="tile__actions"><a class="chip" href="designer.html">Доработать с&nbsp;Львом</a></div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/sidebar.js"></script>
+  <script src="js/chips.js"></script>
+  <script src="js/workspace.js"></script>
+</body>
+</html>

@@ -20,15 +20,17 @@
       event.preventDefault(); // не прокручивать при этом чат
     }, { passive: false });
 
-    // 2. Подстановка текста в поле ввода
-    var composer = row.closest(".chat__composer");
-    var input = composer && composer.querySelector(".chat__input");
+    // 2. Подстановка текста в поле ввода (и для чипсов под полем,
+    //    и для вариантов ответа внутри сообщений)
+    var chat = row.closest(".chat");
+    var input = chat && chat.querySelector(".chat__input");
 
     row.addEventListener("click", function (event) {
       var chip = event.target.closest(".chip");
       if (!chip || !input) return;
 
       input.value = chip.textContent.trim();
+      input.dispatchEvent(new Event("input", { bubbles: true }));
       input.focus();
       // курсор — в конец текста, чтобы можно было сразу дописать
       input.setSelectionRange(input.value.length, input.value.length);

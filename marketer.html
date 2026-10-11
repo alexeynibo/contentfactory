@@ -3,13 +3,14 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Маркетолог — ContentFactory</title>
+  <title>Эльвира, маркетолог&nbsp;— ContentFactory</title>
   <!-- Шрифт Inter с Google Fonts: все толщины 100–900, прямой и курсив -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap">
   <link rel="stylesheet" href="css/tokens.css">
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/workspace.css">
 </head>
 <body data-page="marketer">
   <div class="app app--chat">
@@ -33,7 +34,7 @@
           </div>
           <div class="message__body">
             <p class="message__author"><span class="message__name">Эльвира</span>&nbsp;— Маркетолог</p>
-            <p class="message__text">Привет! Я Эльвира, ваш маркетолог. Помогу понять аудиторию, придумать идеи для постов и собрать контент-план. Расскажите, чем занимается ваша компания, или выберите подсказку ниже&nbsp;— начнём вместе.</p>
+            <p class="message__text">Привет! Я&nbsp;Эльвира, ваш маркетолог. Помогу понять аудиторию, придумать идеи для&nbsp;постов и&nbsp;собрать контент-план. Расскажите, чем занимается ваша компания, или&nbsp;выберите подсказку ниже&nbsp;— начнём вместе.</p>
             <time class="message__time" datetime="14:43">14:43</time>
           </div>
         </div>
@@ -43,6 +44,39 @@
           <div class="message__bubble">
             <p class="message__text">Привет! У&nbsp;нас небольшая кофейня в&nbsp;центре города, хотим активнее вести соцсети.</p>
             <time class="message__time" datetime="14:45">14:45</time>
+          </div>
+        </div>
+
+        <div class="message message--marketer">
+          <div class="message__avatar assistant assistant--marketer">
+            <img src="assets/avatars/marketer.png" width="40" height="40" alt="">
+          </div>
+          <div class="message__body">
+            <p class="message__author"><span class="message__name">Эльвира</span>&nbsp;— Маркетолог</p>
+            <p class="message__text">Отлично! Для&nbsp;начала главное: что&nbsp;важнее в&nbsp;ближайший месяц? Можно выбрать несколько.</p>
+            <div class="chips chips--wrap">
+              <button class="chip" type="button">Больше гостей в&nbsp;будни</button>
+              <button class="chip" type="button">Чтобы нас узнали в&nbsp;районе</button>
+              <button class="chip" type="button">Продвинуть веранду</button>
+              <button class="chip" type="button">Не&nbsp;знаю, решите за&nbsp;меня</button>
+            </div>
+            <time class="message__time" datetime="14:46">14:46</time>
+          </div>
+        </div>
+
+        <div class="chat__divider">
+          <time class="chat__time" datetime="15:10">Сегодня в&nbsp;15:10</time>
+          <p class="chat__summary">Контент-план на&nbsp;ноябрь: тексты постов.</p>
+        </div>
+
+        <div class="message message--marketer">
+          <div class="message__avatar assistant assistant--marketer">
+            <img src="assets/avatars/marketer.png" width="40" height="40" alt="">
+          </div>
+          <div class="message__body">
+            <p class="message__author"><span class="message__name">Эльвира</span>&nbsp;— Маркетолог</p>
+            <p class="message__text">Готовы тексты для&nbsp;8 из&nbsp;12 постов&nbsp;— они справа. Отметьте, что&nbsp;нравится, а&nbsp;что&nbsp;переписать. Если не&nbsp;знаете, что&nbsp;сказать,&nbsp;— просто нажмите «Переписать», я&nbsp;предложу другой вариант.</p>
+            <time class="message__time" datetime="15:10">15:10</time>
           </div>
         </div>
       </div>
@@ -61,27 +95,265 @@
           </button>
         </div>
 
-        <!-- Подсказки, с чего начать чат с маркетологом -->
+        <!-- Подсказки под текущий этап: «Тексты постов» -->
         <div class="chips" aria-label="Подсказки">
-          <button class="chip" type="button">Контент-план</button>
-          <button class="chip" type="button">Идеи постов</button>
-          <button class="chip" type="button">Анализ конкурентов</button>
-          <button class="chip" type="button">Портрет аудитории</button>
-          <button class="chip" type="button">Стратегия продвижения</button>
-          <button class="chip" type="button">Текст для рекламы</button>
-          <button class="chip" type="button">Слоган</button>
-          <button class="chip" type="button">Отчёт по Метрике</button>
-          <button class="chip" type="button">Календарь акций</button>
-          <button class="chip" type="button">Голос бренда</button>
+          <button class="chip" type="button">Сделай тексты короче</button>
+          <button class="chip" type="button">Больше про&nbsp;веранду</button>
+          <button class="chip" type="button">Тон повеселее</button>
+          <button class="chip" type="button">Добавь призыв зайти</button>
+          <button class="chip" type="button">Допиши оставшиеся 4</button>
+          <button class="chip" type="button">Перейти к&nbsp;картинкам</button>
         </div>
       </div>
     </aside>
 
-    <!-- Основная рабочая область -->
-    <main class="main"></main>
+    <!-- Рабочая зона -->
+    <main class="main">
+      <div class="workspace">
+        <header class="page-head">
+          <div>
+            <h1 class="page-head__title">Эльвира, маркетолог</h1>
+            <p class="page-head__subtitle">Соцсети кофейни «Зерно»: контент-планы, посты и&nbsp;идеи</p>
+          </div>
+          <div class="page-head__actions">
+            <a class="btn btn--secondary" href="settings.html">Настроить Эльвиру</a>
+          </div>
+        </header>
+
+        <!-- Задачи Эльвиры -->
+        <div class="task-tabs" role="tablist" aria-label="Задачи">
+          <button class="task-tab is-active" type="button" data-task="plan">Контент-план на&nbsp;ноябрь <span class="task-tab__meta">4/6</span></button>
+          <button class="task-tab" type="button" data-task="veranda">Посты к&nbsp;открытию веранды <span class="task-tab__meta">2/5</span></button>
+          <button class="task-tab task-tab--new" type="button">+ Новая задача</button>
+        </div>
+
+        <!-- ===== Задача 1: контент-план ===== -->
+        <section class="task" data-task-id="plan" data-current="texts">
+          <ol class="steps">
+            <li class="steps__item is-done"><button class="step" type="button" data-step="about"><span class="step__dot">1</span><span class="step__label">О&nbsp;компании</span></button></li>
+            <li class="steps__item is-done"><button class="step" type="button" data-step="goals"><span class="step__dot">2</span><span class="step__label">Цели</span></button></li>
+            <li class="steps__item is-done"><button class="step" type="button" data-step="plan"><span class="step__dot">3</span><span class="step__label">План</span></button></li>
+            <li class="steps__item is-current"><button class="step" type="button" data-step="texts"><span class="step__dot">4</span><span class="step__label">Тексты</span></button></li>
+            <li class="steps__item"><button class="step" type="button" title="Откроется после текстов"><span class="step__dot">5</span><span class="step__label">Картинки</span></button></li>
+            <li class="steps__item"><button class="step" type="button" title="Откроется после картинок"><span class="step__dot">6</span><span class="step__label">Публикация</span></button></li>
+          </ol>
+
+          <div class="step-note" hidden>
+            <span>Вы&nbsp;смотрите пройденный этап «<span data-step-name>…</span>». Если что-то поменяете, Эльвира обновит следующие этапы, а&nbsp;прежние версии сохранятся.</span>
+            <button class="btn btn--small btn--secondary" type="button" data-go-step="">Вернуться к&nbsp;текстам</button>
+          </div>
+
+          <!-- Этап 1 -->
+          <div class="step-panel" data-panel="about">
+            <h2 class="section-title">Что&nbsp;Эльвира знает о&nbsp;кофейне <span class="section-title__hint">из&nbsp;раздела «Память»</span></h2>
+            <div class="facts">
+              <div class="fact"><span class="fact__label">Кто вы</span><p class="fact__value">Кофейня «Зерно» на&nbsp;30 мест в&nbsp;центре города, своя обжарка</p><span class="fact__source">Из&nbsp;чата, 12 октября</span></div>
+              <div class="fact"><span class="fact__label">Гости</span><p class="fact__value">Офисные сотрудники рядом, студенты, по&nbsp;выходным&nbsp;— семьи</p><span class="fact__source">Из&nbsp;чата, 12 октября</span></div>
+              <div class="fact"><span class="fact__label">Чем гордитесь</span><p class="fact__value">Своя обжарка, домашние десерты, веранда во&nbsp;дворе</p><span class="fact__source">Из&nbsp;сайта кофейни</span></div>
+              <div class="fact"><span class="fact__label">Как&nbsp;общаетесь</span><p class="fact__value">Тепло и&nbsp;по-дружески, на&nbsp;«вы», без&nbsp;канцелярита</p><span class="fact__source">Из&nbsp;ваших прошлых постов</span></div>
+            </div>
+            <div class="card__actions">
+              <a class="btn btn--secondary btn--small" href="memory.html">Изменить в&nbsp;Памяти</a>
+            </div>
+          </div>
+
+          <!-- Этап 2 -->
+          <div class="step-panel" data-panel="goals" hidden>
+            <h2 class="section-title">Цели на&nbsp;ноябрь</h2>
+            <div class="choice-list">
+              <button class="choice is-selected" type="button">Больше гостей в&nbsp;будни</button>
+              <button class="choice is-selected" type="button">Чтобы нас узнали в&nbsp;районе</button>
+              <button class="choice" type="button">Продвинуть веранду</button>
+              <button class="choice" type="button">Продавать зёрна на&nbsp;вынос</button>
+            </div>
+            <h2 class="section-title">Где публикуем</h2>
+            <div class="choice-list">
+              <button class="choice is-selected" type="button">ВКонтакте</button>
+              <button class="choice is-selected" type="button">Telegram-канал</button>
+              <button class="choice" type="button">Яндекс Карты</button>
+            </div>
+            <p class="card__text muted" style="margin-top:16px">Частота: 3&nbsp;поста в&nbsp;неделю и&nbsp;сторис по&nbsp;выходным&nbsp;— Эльвира советует это для&nbsp;кофейни вашего размера.</p>
+          </div>
+
+          <!-- Этап 3 -->
+          <div class="step-panel" data-panel="plan" hidden>
+            <h2 class="section-title">Ноябрь 2026 <span class="section-title__hint">12 постов и&nbsp;4 сторис</span></h2>
+            <div class="card">
+              <div class="calendar">
+                <span class="calendar__dow">Пн</span><span class="calendar__dow">Вт</span><span class="calendar__dow">Ср</span><span class="calendar__dow">Чт</span><span class="calendar__dow">Пт</span><span class="calendar__dow">Сб</span><span class="calendar__dow">Вс</span>
+                <div class="calendar__day calendar__day--empty"></div><div class="calendar__day calendar__day--empty"></div><div class="calendar__day calendar__day--empty"></div><div class="calendar__day calendar__day--empty"></div><div class="calendar__day calendar__day--empty"></div><div class="calendar__day calendar__day--empty"></div>
+                <div class="calendar__day">1<span class="calendar__post calendar__post--story">Сторис: утро в&nbsp;«Зерне»</span></div>
+                <div class="calendar__day">2<span class="calendar__post">Новое меню на&nbsp;осень</span></div>
+                <div class="calendar__day">3</div>
+                <div class="calendar__day">4<span class="calendar__post calendar__post--promo">День народного единства: −15%</span></div>
+                <div class="calendar__day">5</div>
+                <div class="calendar__day">6<span class="calendar__post">Как&nbsp;мы&nbsp;обжариваем зерно</span></div>
+                <div class="calendar__day">7</div>
+                <div class="calendar__day">8<span class="calendar__post calendar__post--story">Сторис: десерт недели</span></div>
+                <div class="calendar__day">9<span class="calendar__post">Бариста месяца</span></div>
+                <div class="calendar__day">10</div>
+                <div class="calendar__day">11<span class="calendar__post">Тыквенный раф</span></div>
+                <div class="calendar__day">12</div>
+                <div class="calendar__day">13<span class="calendar__post calendar__post--promo">Кофе с&nbsp;собой −10% до&nbsp;9:00</span></div>
+                <div class="calendar__day">14</div>
+                <div class="calendar__day">15<span class="calendar__post calendar__post--story">Сторис: гости</span></div>
+                <div class="calendar__day">16<span class="calendar__post">Зёрна для&nbsp;дома</span></div>
+                <div class="calendar__day">17</div>
+                <div class="calendar__day">18<span class="calendar__post">Опрос: какой десерт вернуть?</span></div>
+                <div class="calendar__day">19</div>
+                <div class="calendar__day">20<span class="calendar__post">Итоги опроса</span></div>
+                <div class="calendar__day">21</div>
+                <div class="calendar__day">22<span class="calendar__post calendar__post--story">Сторис: вечер</span></div>
+                <div class="calendar__day">23<span class="calendar__post">Рабочее место у&nbsp;окна</span></div>
+                <div class="calendar__day">24</div>
+                <div class="calendar__day">25<span class="calendar__post">Подарочные сертификаты</span></div>
+                <div class="calendar__day">26</div>
+                <div class="calendar__day">27<span class="calendar__post calendar__post--promo">Чёрная пятница: 2&nbsp;кофе по&nbsp;цене&nbsp;1</span></div>
+                <div class="calendar__day">28</div>
+                <div class="calendar__day">29</div>
+                <div class="calendar__day">30<span class="calendar__post">Анонс декабря</span></div>
+              </div>
+              <div class="legend">
+                <span><span class="legend__dot"></span>Пост</span>
+                <span><span class="legend__dot" style="background:var(--color-green)"></span>Сторис</span>
+                <span><span class="legend__dot" style="background:var(--color-orange)"></span>Акция</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Этап 4 — текущий -->
+          <div class="step-panel" data-panel="texts" hidden>
+            <h2 class="section-title">Тексты постов <span class="section-title__hint">готово 8 из&nbsp;12 · 3&nbsp;одобрены</span></h2>
+            <div class="stack">
+              <article class="post">
+                <div class="post__date">2 ноября<span>ВКонтакте</span></div>
+                <div>
+                  <h3 class="post__title">Новое меню на&nbsp;осень</h3>
+                  <p class="post__text" contenteditable="true">Осень пришла&nbsp;— и&nbsp;мы&nbsp;её&nbsp;встретили по-своему: тыквенный раф, глинтвейн без&nbsp;алкоголя и&nbsp;пирог с&nbsp;яблоком по&nbsp;бабушкиному рецепту. Заходите погреться&nbsp;— первый раф для&nbsp;вас со&nbsp;скидкой 20% до&nbsp;конца недели.</p>
+                  <div class="post__tools">
+                    <button class="chip" type="button">Переписать</button>
+                    <button class="chip" type="button">Короче</button>
+                    <button class="chip" type="button">Добавить картинку</button>
+                  </div>
+                </div>
+                <div class="post__side"><span class="pill pill--ok">Одобрено</span></div>
+              </article>
+
+              <article class="post">
+                <div class="post__date">4 ноября<span>ВКонтакте, Telegram</span></div>
+                <div>
+                  <h3 class="post__title">День народного единства: −15%</h3>
+                  <p class="post__text" contenteditable="true">4 ноября отдыхаем вместе! Весь день&nbsp;— скидка 15% на&nbsp;всё меню для&nbsp;тех, кто пришёл с&nbsp;друзьями. Чем больше компания, тем вкуснее.</p>
+                  <div class="post__tools">
+                    <button class="chip" type="button">Переписать</button>
+                    <button class="chip" type="button">Короче</button>
+                    <button class="chip" type="button">Добавить картинку</button>
+                  </div>
+                </div>
+                <div class="post__side"><span class="pill pill--ok">Одобрено</span></div>
+              </article>
+
+              <article class="post">
+                <div class="post__date">6 ноября<span>Telegram</span></div>
+                <div>
+                  <h3 class="post__title">Как&nbsp;мы&nbsp;обжариваем зерно</h3>
+                  <p class="post__text" contenteditable="true">Каждый четверг в&nbsp;7 утра у&nbsp;нас пахнет как&nbsp;на&nbsp;кофейной плантации&nbsp;— это Дима обжаривает новую партию. Рассказываем, почему свежая обжарка меняет вкус, и&nbsp;зовём на&nbsp;открытую обжарку в&nbsp;субботу.</p>
+                  <div class="post__tools">
+                    <button class="chip" type="button">Переписать</button>
+                    <button class="chip" type="button">Короче</button>
+                    <button class="chip" type="button">Добавить картинку</button>
+                  </div>
+                </div>
+                <div class="post__side"><span class="pill pill--wait">Ждёт вашего ответа</span></div>
+              </article>
+
+              <article class="post">
+                <div class="post__date">9 ноября<span>ВКонтакте</span></div>
+                <div>
+                  <h3 class="post__title">Бариста месяца</h3>
+                  <p class="post__text" contenteditable="true">Знакомьтесь: Аня. Знает, кто из&nbsp;гостей пьёт капучино без&nbsp;сахара, а&nbsp;кто&nbsp;— с&nbsp;двойной порцией. Расскажите в&nbsp;комментариях, какой напиток она готовит вам лучше всех.</p>
+                  <div class="post__tools">
+                    <button class="chip" type="button">Переписать</button>
+                    <button class="chip" type="button">Короче</button>
+                    <button class="chip" type="button">Добавить картинку</button>
+                  </div>
+                </div>
+                <div class="post__side"><span class="pill pill--wait">Ждёт вашего ответа</span></div>
+              </article>
+
+              <div class="skeleton" style="height:120px" aria-label="Эльвира дописывает остальные посты"></div>
+            </div>
+
+            <!-- Что дальше -->
+            <div class="next-step">
+              <span class="avatar avatar--48 assistant--designer"><img src="assets/avatars/designer.png" alt=""></span>
+              <div class="next-step__body">
+                <span class="next-step__label">Что&nbsp;дальше</span>
+                <p class="next-step__text">Как&nbsp;только одобрите тексты, Лев нарисует к&nbsp;ним картинки в&nbsp;стиле кофейни. Можно начать уже с&nbsp;трёх одобренных.</p>
+              </div>
+              <div class="next-step__actions">
+                <a class="btn btn--primary" href="designer.html">Передать Льву</a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===== Задача 2: веранда ===== -->
+        <section class="task" data-task-id="veranda" data-current="ideas" hidden>
+          <ol class="steps">
+            <li class="steps__item is-done"><button class="step" type="button" data-step="occasion"><span class="step__dot">1</span><span class="step__label">Повод</span></button></li>
+            <li class="steps__item is-current"><button class="step" type="button" data-step="ideas"><span class="step__dot">2</span><span class="step__label">Идеи</span></button></li>
+            <li class="steps__item"><button class="step" type="button"><span class="step__dot">3</span><span class="step__label">Тексты</span></button></li>
+            <li class="steps__item"><button class="step" type="button"><span class="step__dot">4</span><span class="step__label">Картинки</span></button></li>
+            <li class="steps__item"><button class="step" type="button"><span class="step__dot">5</span><span class="step__label">Публикация</span></button></li>
+          </ol>
+
+          <div class="step-note" hidden>
+            <span>Вы&nbsp;смотрите пройденный этап «<span data-step-name>…</span>».</span>
+            <button class="btn btn--small btn--secondary" type="button" data-go-step="">Вернуться к&nbsp;идеям</button>
+          </div>
+
+          <div class="step-panel" data-panel="occasion">
+            <div class="facts">
+              <div class="fact"><span class="fact__label">Повод</span><p class="fact__value">Открытие тёплой веранды с&nbsp;пледами и&nbsp;обогревателями</p></div>
+              <div class="fact"><span class="fact__label">Когда</span><p class="fact__value">14 ноября, суббота</p></div>
+            </div>
+          </div>
+
+          <div class="step-panel" data-panel="ideas" hidden>
+            <h2 class="section-title">Выберите идею для&nbsp;серии постов <span class="section-title__hint">Эльвира рекомендует первую</span></h2>
+            <div class="grid grid--3">
+              <button class="variant is-selected" type="button">
+                <span class="card" style="display:block;text-align:left">
+                  <span class="card__title" style="display:block">«Самое тёплое место во&nbsp;дворе»</span>
+                  <span class="card__text" style="display:block;margin-top:8px">3 поста: обратный отсчёт, закулисье подготовки и&nbsp;приглашение на&nbsp;открытие с&nbsp;горячим шоколадом в&nbsp;подарок.</span>
+                </span>
+              </button>
+              <button class="variant" type="button">
+                <span class="card" style="display:block;text-align:left">
+                  <span class="card__title" style="display:block">«Плед и&nbsp;раф»</span>
+                  <span class="card__text" style="display:block;margin-top:8px">Акция: в&nbsp;первую неделю каждому гостю веранды&nbsp;— плед с&nbsp;собой в&nbsp;подарок за&nbsp;отметку в&nbsp;соцсетях.</span>
+                </span>
+              </button>
+              <button class="variant" type="button">
+                <span class="card" style="display:block;text-align:left">
+                  <span class="card__title" style="display:block">«Назовите веранду»</span>
+                  <span class="card__text" style="display:block;margin-top:8px">Конкурс на&nbsp;название в&nbsp;комментариях. Автор лучшего&nbsp;— месяц кофе бесплатно.</span>
+                </span>
+              </button>
+            </div>
+            <div class="card__actions">
+              <button class="btn btn--primary" type="button">Писать тексты по&nbsp;этой идее</button>
+              <button class="btn btn--secondary" type="button">Предложи ещё</button>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
   </div>
 
   <script src="js/sidebar.js"></script>
   <script src="js/chips.js"></script>
+  <script src="js/workspace.js"></script>
 </body>
 </html>
