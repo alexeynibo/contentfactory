@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Маркетолог — ContentFactory</title>
+  <!-- Шрифт Inter с Google Fonts: все толщины 100–900, прямой и курсив -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body data-page="marketer">
+  <div class="app app--chat">
+    <!-- Главное меню: содержимое рисует js/sidebar.js (одно на все страницы) -->
+    <nav class="sidebar" aria-label="Главное меню"></nav>
+
+    <!-- Чат с маркетологом -->
+    <aside class="chat" aria-label="Чат с маркетологом">
+      <!-- Сообщения: своя прокрутка -->
+      <div class="chat__messages">
+        <!-- Отметка времени: начало фрагмента переписки и его краткое содержание -->
+        <div class="chat__divider">
+          <time class="chat__time" datetime="14:43">Сегодня в&nbsp;14:43</time>
+          <p class="chat__summary">Знакомство и&nbsp;первые шаги.</p>
+        </div>
+
+        <!-- Сообщение ассистента -->
+        <div class="message message--marketer">
+          <div class="message__avatar assistant assistant--marketer">
+            <img src="assets/avatars/marketer.png" width="40" height="40" alt="">
+          </div>
+          <div class="message__body">
+            <p class="message__author"><span class="message__name">Эльвира</span>&nbsp;— Маркетолог</p>
+            <p class="message__text">Привет! Я Эльвира, ваш маркетолог. Помогу понять аудиторию, придумать идеи для постов и собрать контент-план. Расскажите, чем занимается ваша компания, или выберите подсказку ниже&nbsp;— начнём вместе.</p>
+            <time class="message__time" datetime="14:43">14:43</time>
+          </div>
+        </div>
+
+        <!-- Сообщение пользователя -->
+        <div class="message message--user">
+          <div class="message__bubble">
+            <p class="message__text">Привет! У&nbsp;нас небольшая кофейня в&nbsp;центре города, хотим активнее вести соцсети.</p>
+            <time class="message__time" datetime="14:45">14:45</time>
+          </div>
+        </div>
+      </div>
+
+      <!-- Поле ввода сообщения -->
+      <div class="chat__composer">
+        <div class="chat__field">
+          <button class="chat__attach" type="button" title="Добавить файл" aria-label="Добавить файл">
+            <img src="assets/icons/plus.svg" width="40" height="40" alt="">
+          </button>
+          <input class="chat__input" type="text" placeholder="Напишите сообщение…" aria-label="Сообщение маркетологу">
+          <button class="chat__send" type="button" title="Отправить" aria-label="Отправить сообщение">
+            <span class="chat__send-circle">
+              <img src="assets/icons/send.svg" width="40" height="40" alt="">
+            </span>
+          </button>
+        </div>
+
+        <!-- Подсказки, с чего начать чат с маркетологом -->
+        <div class="chips" aria-label="Подсказки">
+          <button class="chip" type="button">Контент-план</button>
+          <button class="chip" type="button">Идеи постов</button>
+          <button class="chip" type="button">Анализ конкурентов</button>
+          <button class="chip" type="button">Портрет аудитории</button>
+          <button class="chip" type="button">Стратегия продвижения</button>
+          <button class="chip" type="button">Текст для рекламы</button>
+          <button class="chip" type="button">Слоган</button>
+          <button class="chip" type="button">Отчёт по Метрике</button>
+          <button class="chip" type="button">Календарь акций</button>
+          <button class="chip" type="button">Голос бренда</button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Основная рабочая область -->
+    <main class="main"></main>
+  </div>
+
+  <script src="js/sidebar.js"></script>
+  <script src="js/chips.js"></script>
+</body>
+</html>

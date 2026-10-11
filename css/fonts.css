@@ -1,0 +1,21 @@
+/* =========================================================
+   Шрифты проекта
+   Inter 4.1 (вариативный: все толщины 100–900 в одном файле).
+   Файлы: assets/fonts/, лицензия OFL — assets/fonts/Inter-LICENSE.txt
+   ========================================================= */
+
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("../assets/fonts/InterVariable.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Inter";
+  font-style: italic;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("../assets/fonts/InterVariable-Italic.woff2") format("woff2");
+}

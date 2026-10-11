@@ -1,0 +1,522 @@
+/* ===== Переменные: цвета и размеры в одном месте ===== */
+:root {
+  --sidebar-width: 60px;
+  --sidebar-bg: var(--color-darkblue);
+  --chat-width: 350px;
+  --chat-bg: var(--color-lightgray);
+
+  /* Геометрия сообщения: от них же считается отступ отметки времени */
+  --message-pad-left: 15px;
+  --message-pad-right: 20px;
+  --message-avatar: 40px;
+  --message-gap: 10px;
+  --page-bg: #ffffff;
+}
+
+/* ===== Базовый сброс ===== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+}
+
+body {
+  background: var(--page-bg);
+  font-family: var(--font-main);
+}
+
+/* ===== Каркас приложения ===== */
+.app {
+  min-height: 100vh;
+}
+
+/* ===== Боковое меню ===== */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: var(--sidebar-width);
+  background: var(--sidebar-bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.sidebar__item {
+  display: block;
+  width: 40px;
+  height: 40px;
+  opacity: 0.6;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+/* Ховер и фокус с клавиатуры: иконка ярче и чуть крупнее */
+.sidebar__item:hover,
+.sidebar__item:focus-visible {
+  opacity: 1;
+  transform: scale(1.12);
+}
+
+.sidebar__item img {
+  display: block;
+}
+
+/* Активный раздел (текущая страница): полная яркость, без увеличения.
+   Временный вариант — финальный стиль подсветки определим позже */
+.sidebar__item.is-active {
+  opacity: 1;
+}
+
+/* ===== Помощники в боковом меню ===== */
+.sidebar__assistants {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-top: 60px;
+}
+
+/* Круг аватара. Обрезка по кругу — у самой картинки (см. .assistant img),
+   чтобы бейдж мог выступать за край круга */
+.assistant {
+  position: relative;
+  display: block;
+  flex: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.2); /* заглушка, пока нет аватара */
+  transition: width 0.15s ease, height 0.15s ease;
+}
+
+/* На странице помощника: активный аватар 40px, остальные — 30px.
+   Класс sidebar--assistant-page ставит js/sidebar.js */
+.sidebar--assistant-page .assistant:not(.is-active) {
+  width: 30px;
+  height: 30px;
+}
+
+/* ===== Бейджи на аватарах (как в iOS) =====
+   16px + обводка 2px цветом меню = 20px; выступает вверх и вправо */
+.badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 4px;
+  border: 2px solid var(--sidebar-bg);
+  border-radius: var(--radius-round);
+  font: 700 11px/16px var(--font-main);
+  color: var(--color-white);
+  text-align: center;
+  pointer-events: none;
+}
+
+/* Красный — количество уведомлений */
+.badge--count {
+  background: var(--color-red);
+}
+
+/* «В работе» — внутри идёт процесс: крутящаяся дуга */
+.badge--progress {
+  width: 20px;
+  padding: 0;
+  background: var(--color-azure);
+}
+
+.badge--progress::after {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  border-top-color: var(--color-white);
+  border-radius: 50%;
+  animation: badge-spin 1s linear infinite;
+}
+
+@keyframes badge-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Если в системе включено «Уменьшение движения» — крутится медленнее */
+@media (prefers-reduced-motion: reduce) {
+  .badge--progress::after {
+    animation-duration: 3s;
+  }
+}
+
+/* Фон под аватаром: у каждой роли свой градиент */
+.assistant--marketer {
+  background: var(--gradient-blue);
+}
+
+.assistant--designer {
+  background: var(--gradient-green);
+}
+
+.assistant--financier {
+  background: var(--gradient-orange);
+}
+
+.assistant--assistant {
+  background: var(--gradient-moss);
+}
+
+.assistant--hr {
+  background: var(--gradient-violet);
+}
+
+/* Временная заглушка вместо аватара: инициалы роли */
+.assistant__initials {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  color: var(--color-white);
+  font: 600 13px/1 var(--font-main);
+}
+
+.assistant img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%; /* обрезка по кругу */
+  object-fit: cover;
+}
+
+/* ===== Низ меню: настройки + аватар пользователя ===== */
+/* Иконка настроек прижимается к низу и тянет за собой аватар */
+.sidebar__settings {
+  margin-top: auto;
+}
+
+.sidebar__user {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  margin-top: 10px; /* отступ от иконки настроек */
+  border-radius: 50%;
+  background: var(--color-darknavy);
+  color: var(--color-white);
+  font: 600 16px/1 var(--font-main);
+  text-decoration: none;
+}
+
+/* ===== Колонка чата с ассистентом =====
+   Закреплена справа от меню. Сверху — сообщения со своей прокруткой,
+   снизу — поле ввода, всегда на месте */
+.chat {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: var(--sidebar-width);
+  width: var(--chat-width);
+  background: var(--chat-bg);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Сообщения прижаты к низу (над полем ввода).
+   margin-top: auto у первого сообщения выталкивает их вниз,
+   а при длинной переписке область прокручивается как обычно */
+.chat__messages {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  padding: 20px 0;
+}
+
+.chat__messages > :first-child {
+  margin-top: auto;
+}
+
+/* ===== Отметка времени фрагмента переписки =====
+   Время + одно предложение о том, что обсуждали.
+   Отступ слева = отступ текста сообщения (15 + 40 + 10 = 65px) */
+.chat__divider {
+  margin-bottom: 20px;
+  padding: 0 var(--message-pad-right) 0
+    calc(var(--message-pad-left) + var(--message-avatar) + var(--message-gap));
+}
+
+.chat__time {
+  display: block;
+  font: 700 12px/1.4 var(--font-main);
+  color: var(--color-periwinkle);
+}
+
+.chat__summary {
+  margin: 2px 0 0;
+  font: 400 12px/14.8px var(--font-main);
+  color: var(--color-gray);
+}
+
+/* ===== Сообщение ассистента =====
+   Аватар 40px (отступ 15px слева) → 10px → текст (20px до правого края) */
+.message {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--message-gap);
+  padding: 0 var(--message-pad-right) 0 var(--message-pad-left);
+}
+
+.message__avatar {
+  flex: none;
+  width: var(--message-avatar);
+  height: var(--message-avatar);
+}
+
+.message__body {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Подпись: «Имя — Должность» */
+.message__author {
+  margin: 0 0 2px;
+  font: 400 12px/1.4 var(--font-main);
+  color: var(--color-gray);
+}
+
+.message__name {
+  font-weight: 700;
+}
+
+/* Цвет имени — по роли ассистента */
+.message--marketer .message__name {
+  color: var(--color-blue-text);
+}
+
+.message__text {
+  margin: 0;
+  font: 400 14px/18px var(--font-main);
+  color: var(--color-ink);
+}
+
+/* Время отправки под сообщением */
+.message__time {
+  display: block;
+  margin-top: 4px;
+  font: 400 10px/1.4 var(--font-main);
+  color: var(--color-gray);
+}
+
+/* ===== Сообщение пользователя: бабл как в iMessage =====
+   Без автора и аватара. Ширина по тексту, прижат вправо;
+   отступы от краёв колонки: 45px слева (максимум), 20px справа */
+.message--user {
+  display: block;
+  margin-top: 20px;
+  padding: 0 var(--message-pad-right) 0 45px;
+}
+
+.message__bubble {
+  width: fit-content;
+  margin-left: auto;
+  padding: 10px 15px;
+  border-radius: 18px 18px 4px 18px; /* острый правый нижний угол — «хвостик» */
+  background: var(--gradient-user);
+}
+
+.message--user .message__text {
+  color: var(--color-white);
+}
+
+.message--user .message__time {
+  color: var(--color-mist);
+}
+
+/* Поле ввода: отступы 15px по бокам и 20px снизу,
+   ширина подстраивается под ширину колонки */
+.chat__composer {
+  padding: 0 15px 20px;
+}
+
+/* Белая «пилюля»: кнопка «плюс» слева вплотную + поле ввода */
+.chat__field {
+  display: flex;
+  align-items: center;
+  height: 44px;
+  border-radius: var(--radius-round);
+  background: var(--color-white);
+}
+
+/* Кнопка «плюс»: добавить файл (позже — контекстное меню) */
+.chat__attach {
+  flex: none;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.chat__attach img {
+  display: block;
+}
+
+.chat__input {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  padding: 0;
+  border: none;
+  background: none;
+  font: 400 14px/1 var(--font-main);
+  color: var(--color-darkgray); /* вводимый текст */
+}
+
+/* Кнопка отправки: зона нажатия — квадрат по высоте поля (44×44),
+   видимая кнопка — круг 26px в 7px от правого края поля */
+.chat__send {
+  flex: none;
+  position: relative;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+/* Центр круга — в 20px от правого края поля (7px отступ + 13px радиус).
+   При изменении размера круг растёт от центра и не сдвигается */
+.chat__send-circle {
+  position: absolute;
+  top: 50%;
+  right: 7px;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  overflow: hidden; /* иконка 40×40 обрезается по кругу */
+  background: var(--gradient-user);
+  transform: translateY(-50%);
+  transition: width 0.15s ease, height 0.15s ease, right 0.15s ease, opacity 0.15s ease;
+}
+
+/* Иконка всегда 40×40 и по центру круга, какого бы размера он ни был */
+.chat__send-circle img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: block;
+  transform: translate(-50%, -50%);
+}
+
+/* Поле пустое (видна подсказка) — кнопка бледная */
+.chat__input:placeholder-shown + .chat__send {
+  cursor: default;
+}
+
+.chat__input:placeholder-shown + .chat__send .chat__send-circle {
+  opacity: 0.4;
+}
+
+/* Поле заполнено — при наведении круг растёт до 30px */
+.chat__input:not(:placeholder-shown) + .chat__send:hover .chat__send-circle,
+.chat__input:not(:placeholder-shown) + .chat__send:focus-visible .chat__send-circle {
+  right: 5px; /* центр остаётся на месте: 5 + 15 = 20px */
+  width: 30px;
+  height: 30px;
+}
+
+.chat__send:focus-visible {
+  outline: none;
+}
+
+/* Подсказка: серая, исчезает, когда в поле курсор,
+   и возвращается, если поле осталось пустым */
+.chat__input::placeholder {
+  color: var(--color-gray);
+}
+
+.chat__input:focus::placeholder {
+  color: transparent;
+}
+
+/* Активное поле никак не подсвечивается */
+.chat__input:focus {
+  outline: none;
+}
+
+/* ===== Чипсы-подсказки под полем ввода =====
+   Ряд прокручивается вбок (колесо мыши — через js/chips.js).
+   Ряд растянут до краёв колонки, а внутренний отступ 15px
+   выравнивает первую чипсу с краем поля ввода */
+.chips {
+  display: flex;
+  gap: 6px;
+  margin: 10px -15px 0;
+  padding: 0 15px;
+  overflow-x: auto;
+  scrollbar-width: none; /* скрыть полосу прокрутки (Firefox) */
+}
+
+.chips::-webkit-scrollbar {
+  display: none; /* скрыть полосу прокрутки (Chrome, Safari) */
+}
+
+.chip {
+  position: relative;
+  flex: none;
+  height: 26px;
+  padding: 0 10px;
+  border: none;
+  border-radius: var(--radius-round);
+  background: none;
+  font: 400 12px/1 var(--font-main);
+  color: var(--color-periwinkle);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+/* Ховер и фокус с клавиатуры: лёгкая заливка цветом обводки (8%) */
+.chip:hover,
+.chip:focus-visible {
+  background: color-mix(in srgb, var(--color-cobalt) 8%, transparent);
+  outline: none;
+}
+
+/* Пунктирная обводка 1px: штрих 2px, промежуток 2px.
+   Обычный CSS dashed не позволяет задать длину штрихов, поэтому
+   обводка — это слой цвета --color-cobalt, вырезанный SVG-трафаретом */
+.chip::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--color-cobalt);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25'%3E%3Crect width='100%25' height='100%25' rx='13' fill='none' stroke='black' stroke-width='2' stroke-dasharray='2 2'/%3E%3C/svg%3E") 0 0 / 100% 100% no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25'%3E%3Crect width='100%25' height='100%25' rx='13' fill='none' stroke='black' stroke-width='2' stroke-dasharray='2 2'/%3E%3C/svg%3E") 0 0 / 100% 100% no-repeat;
+  pointer-events: none;
+}
+
+/* ===== Основная область ===== */
+.main {
+  margin-left: var(--sidebar-width);
+  min-height: 100vh;
+}
+
+/* На страницах с чатом основная область начинается после колонки чата */
+.app--chat .main {
+  margin-left: calc(var(--sidebar-width) + var(--chat-width));
+}

@@ -1,0 +1,51 @@
+/* =========================================================
+   ContentFactory — UI kit: токены
+   Здесь хранятся базовые значения стиля (цвета, размеры, шрифты).
+   Меняешь значение здесь — оно меняется везде, где используется.
+   ========================================================= */
+
+:root {
+  /* ===== Цвета ===== */
+  --color-darkblue: #243F89; /* тёмно-синий: боковое меню (родственный баблу пользователя, но темнее) */
+  --color-red: #FF3B30; /* красный (как в iOS): бейдж уведомлений */
+  --color-darknavy: #222A39; /* очень тёмный синий: аватар пользователя */
+  --color-white: #FFFFFF;
+  --color-lightgray: #F2F2F2; /* светло-серый: фон колонки чата */
+  --color-gray: #999999; /* серый: подсказка в поле ввода */
+  --color-darkgray: #333333; /* тёмно-серый: вводимый текст */
+  --color-ink: #222222; /* почти чёрный: текст сообщений */
+  --color-midgray: #666666; /* средне-серый: описание фрагмента переписки */
+  --color-blue-text: #2F66CC; /* синий для текста: имя маркетолога (читается на #F2F2F2) */
+  --color-periwinkle: #7588CF; /* серо-голубой: текст чипсов-подсказок */
+  --color-cobalt: #3166B6; /* кобальтовый: обводка чипсов-подсказок */
+  --color-azure: #218FFD; /* лазурный: начало градиента сообщения пользователя */
+  --color-royal: #2954D7; /* насыщенный синий: конец градиента сообщения пользователя */
+  --color-mist: #A9CAE1; /* дымчато-голубой: время в сообщении пользователя */
+  --color-blue: #669EFF; /* синий: край градиента */
+  --color-lightblue: #97C9F2; /* светло-голубой: центр градиента */
+  --color-green: #00B67F; /* зелёный: край градиента */
+  --color-lightgreen: #45FFAB; /* светло-зелёный: центр градиента */
+  --color-orange: #FFA866; /* оранжевый: край градиента */
+  --color-lightorange: #F2C797; /* светло-оранжевый: центр градиента */
+  --color-moss: #5E8C3A; /* мох: край градиента */
+  --color-lightmoss: #B7D68C; /* светлый мох: центр градиента */
+  --color-violet: #8E6CF0; /* фиолетовый: край градиента */
+  --color-lightviolet: #C9B8F7; /* светло-фиолетовый: центр градиента */
+
+  /* ===== Скругления ===== */
+  --radius-round: 999px; /* полностью круглые углы (пилюля) */
+
+  /* ===== Шрифты ===== */
+  /* Если Inter не загрузился — системный шрифт */
+  --font-main: "Inter", system-ui, -apple-system, sans-serif;
+
+  /* ===== Градиенты ===== */
+  /* Радиальные: светлый центр в правом верхнем углу, к левому нижнему — темнее */
+  --gradient-blue: radial-gradient(circle farthest-corner at top right, var(--color-lightblue), var(--color-blue));
+  --gradient-green: radial-gradient(circle farthest-corner at top right, var(--color-lightgreen), var(--color-green));
+  --gradient-orange: radial-gradient(circle farthest-corner at top right, var(--color-lightorange), var(--color-orange));
+  --gradient-moss: radial-gradient(circle farthest-corner at top right, var(--color-lightmoss), var(--color-moss));
+  --gradient-violet: radial-gradient(circle farthest-corner at top right, var(--color-lightviolet), var(--color-violet));
+  /* Линейный: из левого верхнего угла в правый нижний */
+  --gradient-user: linear-gradient(to bottom right, var(--color-azure), var(--color-royal));
+}
