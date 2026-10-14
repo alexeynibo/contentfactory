@@ -21,7 +21,7 @@
    ```bash
    CF_TTS=yandex python3 -I video/tools/capture.py
    ```
-   Голос Алёна (Yandex SpeechKit), ключ берётся из `credentials.md`. Без `CF_TTS=yandex` — голос macOS Milena. `CF_REUSE_AUDIO=1` — переснять только кадры, не озвучивая заново.
+   Голос Алёна (Yandex SpeechKit), ключ берётся из `credentials.md`. `CF_TTS=elevenlabs` — клон Andrey в ElevenLabs (выразительность `CF_EL_STYLE`, стабильность `CF_EL_STABILITY`). Без `CF_TTS` — голос macOS Milena. `CF_REUSE_AUDIO=1` — переснять только кадры, не озвучивая заново.
 3. **Склеить:**
    ```bash
    cd video/tools && swiftc -O render.swift -o build/render && build/render build/scenes.json build/video-only.mp4 ../contentfactory-demo.mp4

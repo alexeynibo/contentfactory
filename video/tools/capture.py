@@ -15,10 +15,18 @@ W, H, AR = 1440, 900, 1440 / 900
 
 # ---------- Голос ----------
 # CF_TTS=yandex — Yandex SpeechKit (голос CF_VOICE, по умолчанию alena), ключ — из credentials.md
+# CF_TTS=elevenlabs — ElevenLabs (голос CF_VOICE_ID, по умолчанию клон Andrey), ключ — из credentials.md;
+#   выразительность: CF_EL_STYLE (0–1), стабильность: CF_EL_STABILITY (0–1)
 # CF_TTS=say (по умолчанию) — встроенный голос macOS Milena
 TTS = os.environ.get("CF_TTS", "say")
 VOICE = os.environ.get("CF_VOICE", "alena")
 CREDS = os.environ.get("CF_CREDENTIALS", os.path.join(os.path.dirname(os.path.abspath(__file__)), "../../../../credentials.md"))
+
+def creds_key(prefix):
+    for line in open(CREDS, encoding="utf-8"):
+        if "API key: " + prefix in line:
+            return line.split("API key:", 1)[1].strip()
+    raise SystemExit("Нет ключа " + prefix + "… в credentials.md")
 
 def yandex_key():
     for line in open(CREDS, encoding="utf-8"):
@@ -27,7 +35,22 @@ def yandex_key():
     raise SystemExit("Нет ключа Yandex SpeechKit в credentials.md")
 
 def speak(text, base, m4a):
-    if TTS == "yandex":
+    if TTS == "elevenlabs":
+        body = json.dumps({"text": text, "model_id": "eleven_multilingual_v2",
+                           "voice_settings": {"stability": float(os.environ.get("CF_EL_STABILITY", "0.4")),
+                                              "similarity_boost": 0.8,
+                                              "style": float(os.environ.get("CF_EL_STYLE", "0.5")),
+                                              "use_speaker_boost": True}}, ensure_ascii=False)
+        open(base + ".json", "w", encoding="utf-8").write(body)
+        voice_id = os.environ.get("CF_VOICE_ID", "3ObM5uISRchrn1Qj7KVQ")
+        r = subprocess.run(["curl", "-s", "--max-time", "120", "-o", base + ".mp3", "-w", "%{http_code}", "-X", "POST",
+                            "https://api.elevenlabs.io/v1/text-to-speech/" + voice_id + "?output_format=mp3_44100_128",
+                            "-H", "xi-api-key: " + creds_key("sk_"), "-H", "Content-Type: application/json",
+                            "--data-binary", "@" + base + ".json"], capture_output=True, text=True)
+        if r.stdout != "200":
+            raise SystemExit(f"ElevenLabs ответил {r.stdout}: " + open(base + ".mp3", errors="ignore").read()[:200])
+        src = base + ".mp3"
+    elif TTS == "yandex":
         r = subprocess.run(["curl", "-s", "--max-time", "90", "-o", base + ".mp3", "-w", "%{http_code}",
                             "-X", "POST", "https://tts.api.cloud.yandex.net/speech/v1/tts:synthesize",
                             "-H", "Authorization: Api-Key " + yandex_key(),
