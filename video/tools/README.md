@@ -6,7 +6,7 @@
 |---|---|
 | `director.html` | Режиссёрская страница: открывает нужный экран, выставляет состояние (вкладка, этап, выжимка), ставит курсор и сообщает область для наезда камеры |
 | `scenes.py` | Список сцен: подпись в кадре, движение камеры и **текст диктора** — править здесь |
-| `capture.py` | Снимает кадры сцен через Chrome (2880×1800) и озвучивает текст голосом Milena |
+| `capture.py` | Снимает кадры сцен через Chrome (2880×1800) и озвучивает текст: Yandex SpeechKit (Алёна) или голос macOS Milena |
 | `render.swift` | Склейка: наезды камеры, наплывы, подписи, голос → MP4 |
 | `probe.swift` | Проверка готового видео: длительность, дорожки, кадры на нужных секундах |
 
@@ -19,8 +19,9 @@
 1. **Запустить сайт** на `http://localhost:8080` (сервер `contentfactory` из `.claude/launch.json`) и положить `director.html` в папку `_video/` раздаваемой копии сайта — так, чтобы он открывался по адресу `http://localhost:8080/_video/director.html?s=home`.
 2. **Снять кадры и озвучить:**
    ```bash
-   python3 -I video/tools/capture.py
+   CF_TTS=yandex python3 -I video/tools/capture.py
    ```
+   Голос Алёна (Yandex SpeechKit), ключ берётся из `credentials.md`. Без `CF_TTS=yandex` — голос macOS Milena. `CF_REUSE_AUDIO=1` — переснять только кадры, не озвучивая заново.
 3. **Склеить:**
    ```bash
    cd video/tools && swiftc -O render.swift -o build/render && build/render build/scenes.json build/video-only.mp4 ../contentfactory-demo.mp4
@@ -34,4 +35,4 @@
 
 - Изменился текст или порядок сцен — правьте `scenes.py`.
 - Изменилась разметка страницы (классы, вкладки) — поправьте селекторы сцены в `director.html`.
-- Голос: `say -v Milena -r 172` в `capture.py`. Для живой озвучки — текст с таймкодами в `video/voiceover-script.md`.
+- Голос: `CF_VOICE=alena` (или `filipp`) для Яндекса; `say -v Milena` — встроенный. Для живой озвучки — текст с таймкодами в `video/voiceover-script.md`.

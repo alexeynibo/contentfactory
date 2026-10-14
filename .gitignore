@@ -4,3 +4,4 @@
 # Видео большое — хранится рядом, но не в git
 video/*.mp4
 video/tools/build/
+video/voice-samples/

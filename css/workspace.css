@@ -866,8 +866,9 @@ a.meanwhile__item:hover {
   gap: 8px;
 }
 
-/* ===== Картинки-заглушки (до генерации реальных) =====
-   Мягкие градиентные «пятна» вместо фотографий */
+/* ===== Картинки в макетах =====
+   Фото из assets/images (CC0, источники — assets/images/CREDITS.md).
+   Градиентные «пятна» под фото — запасной вариант, если фото не загрузится */
 .art {
   position: relative;
   display: block;
@@ -875,6 +876,7 @@ a.meanwhile__item:hover {
   border-radius: 14px;
   overflow: hidden;
   background:
+    var(--art-img, none) center / cover no-repeat,
     radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.55), transparent 40%),
     radial-gradient(circle at 75% 70%, var(--art-b, #F2C797), transparent 55%),
     var(--art-a, #C98B5E);
@@ -883,12 +885,12 @@ a.meanwhile__item:hover {
 .art--story { aspect-ratio: 9 / 16; }
 .art--wide { aspect-ratio: 16 / 9; }
 
-.art--1 { --art-a: #B9825A; --art-b: #F6D9B5; } /* латте */
-.art--2 { --art-a: #5E8C3A; --art-b: #E4F1C8; } /* веранда, зелень */
-.art--3 { --art-a: #E07A5F; --art-b: #FFE0B5; } /* тыквенный раф */
-.art--4 { --art-a: #3D4C7A; --art-b: #97C9F2; } /* вечер */
-.art--5 { --art-a: #8E6CF0; --art-b: #F4D3E6; } /* десерт */
-.art--6 { --art-a: #2F2A26; --art-b: #C98B5E; } /* эспрессо */
+.art--1 { --art-img: url("../assets/images/latte.jpg");    --art-a: #B9825A; --art-b: #F6D9B5; } /* латте */
+.art--2 { --art-img: url("../assets/images/veranda.jpg");  --art-a: #5E8C3A; --art-b: #E4F1C8; } /* веранда */
+.art--3 { --art-img: url("../assets/images/pumpkin.jpg");  --art-a: #E07A5F; --art-b: #FFE0B5; } /* тыквенный раф */
+.art--4 { --art-img: url("../assets/images/evening.jpg");  --art-a: #3D4C7A; --art-b: #97C9F2; } /* зал кофейни */
+.art--5 { --art-img: url("../assets/images/dessert.jpg");  --art-a: #8E6CF0; --art-b: #F4D3E6; } /* десерт */
+.art--6 { --art-img: url("../assets/images/espresso.jpg"); --art-a: #2F2A26; --art-b: #C98B5E; } /* эспрессо */
 
 .art__label {
   position: absolute;
@@ -1620,4 +1622,19 @@ a.row:hover {
 .toast a {
   color: var(--color-lightblue);
   font-weight: 600;
+}
+
+/* Логотип кофейни (плитка в «Изображениях»): фирменный знак вместо фото */
+.art--logo {
+  --art-a: #5A3A28;
+  --art-b: #8A5A3C;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.art__logo {
+  font: 600 34px/1 Georgia, "Times New Roman", serif;
+  letter-spacing: 0.04em;
+  color: #F6D9B5;
 }
