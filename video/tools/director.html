@@ -6,73 +6,182 @@
 <style>
   html, body { margin: 0; width: 1440px; height: 900px; overflow: hidden; background: #fff; }
   iframe { position: absolute; inset: 0; width: 1440px; height: 900px; border: 0; }
-  #overlay { position: absolute; inset: 0; pointer-events: none; }
-  .cursor { position: absolute; width: 26px; height: 26px; margin: -2px 0 0 -3px; filter: drop-shadow(0 2px 3px rgba(0,0,0,.35)); }
-  .ring { position: absolute; width: 44px; height: 44px; margin: -22px 0 0 -22px; border-radius: 50%;
-          background: rgba(33,143,253,.22); box-shadow: 0 0 0 3px rgba(33,143,253,.55); }
-  .hl { position: absolute; border: 3px solid #218FFD; border-radius: 12px;
-         box-shadow: 0 0 0 6px rgba(33,143,253,.18); }
   #out { display: none; }
 </style>
 </head>
 <body>
 <iframe id="f"></iframe>
-<div id="overlay"></div>
 <pre id="out">pending</pre>
 <script>
-// Сцены: страница, действия перед снимком, область для наезда камеры, курсор
+/* Режиссёрская страница демо-видео.
+   ?s=<сцена>&state=<k>&off=<прокрутка> — открывает экран, применяет состояния 1…k,
+   при необходимости прокручивает область (окно или элемент) и сообщает в #out:
+     page, focus (область наезда камеры), states (сколько состояний),
+     targets (координаты целей курсора в этом виде), timeline, scroll (что и куда прокручивается).
+   Курсор, клики, переключение состояний и прокрутку рисует render.swift.
+   timeline: { at: доля длительности сцены, to: селектор (+dx, dy), click, state: k, drag } */
+
+const RANGE = ".persona input[type=range]";
+// Путь ползунка инициативы: вниз до минимума, пауза, вверх до максимума — шагом в 3 деления.
+// Каждое значение — отдельный снимок, поэтому ползунок в видео едет плавно за курсором.
+const DOWN = [], UP = [];
+for (let v = 69; v > 5; v -= 3) DOWN.push(v); DOWN.push(5);
+for (let v = 8; v < 95; v += 3) UP.push(v); UP.push(95);
+const SLIDER = DOWN.concat(UP);
+const slideAt = i => i < DOWN.length ? .16 + .3 * (i + 1) / DOWN.length : .52 + .36 * (i - DOWN.length + 1) / UP.length;
+const SPOT = '[data-task-id="cover"] .spot';
+const CHAT = ".chat__messages:not([hidden])";
+const chatTop = d => { d.querySelector(CHAT).scrollTop = 0; };
+
 const SCENES = {
+  // ----- Главная -----
   home:        { page: "index.html" },
-  homeOffers:  { page: "index.html", focus: [".grid.grid--3"] },
-  homeWork:    { page: "index.html", focus: [".rows"] },
-  offerHalloween: { page: "index.html", focus: [".proposal:nth-child(1)"], hl: [".proposal:nth-child(1) .proposal__text"] },
-  offerTax:    { page: "index.html", focus: [".proposal:nth-child(2)"], hl: [".proposal:nth-child(2) .proposal__text"] },
-  offerCheese: { page: "index.html", focus: [".proposal:nth-child(3)"], hl: [".proposal:nth-child(3) .proposal__text"] },
-  hints:       { page: "marketer.html", act: d => { d.querySelector('.chat__messages:not([hidden])').scrollTop = 0; },
-                 hl: [".chat__messages:not([hidden]) .chips--wrap .chip:last-child", ".chat__composer .chips:not([hidden])"] },
+  homeOffers:  { page: "index.html", focus: [".grid.grid--3"],
+                 timeline: [{ at: .72, to: ".proposal:nth-child(1) [data-dismiss]" }] },
+  offerHalloween: { page: "index.html", focus: [".proposal:nth-child(1)"],
+                 timeline: [{ at: .45, to: ".proposal:nth-child(1) .btn--primary" }] },
+  offerTax:    { page: "index.html", focus: [".proposal:nth-child(2)"],
+                 timeline: [{ at: .5, to: ".proposal:nth-child(2) .btn--primary" }] },
+  offerCheese: { page: "index.html", focus: [".proposal:nth-child(3)"],
+                 timeline: [{ at: .5, to: ".proposal:nth-child(3) .btn--primary" }] },
+  homeWork:    { page: "index.html", focus: [".rows"],
+                 timeline: [{ at: .45, to: ".rows .row:nth-child(3)", dx: .3 }] },
+
+  // ----- Эльвира: чат прокручивается вверх, затем этапы, возврат, «Что дальше» -----
   mkt:         { page: "marketer.html" },
-  mktSteps:    { page: "marketer.html", focus: [".task:not([hidden]) .steps"], cursor: { sel: '.task:not([hidden]) .step[data-step="plan"]', dx: .5, dy: .5 } },
-  mktBack:     { page: "marketer.html", act: d => d.querySelector('.task:not([hidden]) .step[data-step="plan"]').click(),
+  hints:       { page: "marketer.html",
+                 scroll: { state: 0, el: CHAT, toTop: true, at0: .04, at1: .2 },
+                 timeline: [{ at: .26, to: CHAT + " .chips--wrap .chip:last-child" },
+                            { at: .58, to: ".chat__composer .chips:not([hidden]) .chip:first-child" },
+                            { at: .78, to: ".chat__composer .chips:not([hidden]) .chip:nth-child(2)" }] },
+  mktSteps:    { page: "marketer.html", act: chatTop, focus: [".task:not([hidden]) .steps"],
+                 timeline: [{ at: .3, to: '.task:not([hidden]) .step[data-step="texts"]' },
+                            { at: .7, to: ".task:not([hidden]) .steps__item:nth-child(5) .step" }] },
+  mktBack:     { page: "marketer.html", act: chatTop,
+                 states: [d => d.querySelector('.task:not([hidden]) .step[data-step="plan"]').click()],
                  focus: [".task:not([hidden]) .steps", ".task:not([hidden]) .step-note", '.step-panel[data-panel="plan"] .card'],
-                 cursor: { sel: ".task:not([hidden]) .step-note .btn", dx: .5, dy: .6 } },
-  mktNext:     { page: "marketer.html", scrollTo: '.step-panel[data-panel="texts"] .next-step', focus: ['.step-panel[data-panel="texts"] .next-step'], hl: ['.step-panel[data-panel="texts"] .next-step__text'],
-                 cursor: { sel: '.step-panel[data-panel="texts"] .next-step .btn', dx: .9, dy: .75, ring: true } },
-  dsgWork:     { page: "designer.html", focus: [".task:not([hidden]) .working"], hl: [".task:not([hidden]) .meanwhile"] },
-  dsgSpot:     { page: "designer.html", act: (d, w) => {
-                   d.querySelector('.task-tab[data-task="cover"]').click();
-                   // Та же разметка, что создаёт js/workspace.js по клику, но без фокуса в поле
-                   const spot = d.querySelector('[data-task-id="cover"] .spot');
-                   spot.insertAdjacentHTML("beforeend",
-                     '<span class="spot__marker" style="left:46%;top:77%">2</span>' +
-                     '<div class="spot__pop" style="left:46%;top:77%"><input type="text" value="Убрать палочку корицы">' +
-                     '<div class="chips"><button class="chip" type="button">Убрать</button><button class="chip" type="button">Светлее</button>' +
-                     '<button class="chip" type="button">Добавить пар</button></div></div>');
-                 },
-                 focus: ['[data-task-id="cover"] .spot', '[data-task-id="cover"] .card'],
-                 cursor: { sel: '[data-task-id="cover"] .spot__marker:last-of-type', dx: .5, dy: .5, ring: true } },
-  finDash:     { page: "financier.html", focus: [".task:not([hidden]) .grid--4", ".task:not([hidden]) .stack"], hl: [".task:not([hidden]) .insight"],
-                 cursor: { sel: ".task:not([hidden]) .insight .btn", dx: .5, dy: .6 } },
-  imagesNotice: { page: "images.html", focus: [".next-step"], hl: [".next-step__text"] },
-  assistantCare: { page: "assistant.html", scrollTo: ".task:not([hidden]) .next-step", focus: [".task:not([hidden]) .next-step"], hl: [".task:not([hidden]) .next-step__text"] },
-  oneChat:     { page: "designer.html", focus: [".chat"] },
-  taskChats:   { page: "marketer.html", act: d => d.querySelector('.task-tab[data-task="veranda"]').click(),
-                 focus: [".chat", ".task-tabs"], cursor: { sel: '.task-tab[data-task="veranda"]', dx: .94, dy: .75, ring: true } },
-  taskBrief:   { page: "marketer.html", act: d => { d.querySelector('.chat__head:not([hidden]) .brief').open = true; },
-                 focus: [".chat__head:not([hidden])"], cursor: { sel: ".chat__head:not([hidden]) .brief__toggle", dx: .3, dy: .5 } },
-  chatSummary: { page: "marketer.html", act: d => { d.querySelector('.chat__messages:not([hidden])').scrollTop = 0; },
-                 cursor: { sel: ".chat__messages:not([hidden]) .chat__divider .chat__summary", dx: .62, dy: .75 } },
-  settingsPersona: { page: "settings.html", focus: [".persona"], cursor: { sel: ".persona .skill--add", dx: .5, dy: .6 } },
-  settingsInit: { page: "settings.html", focus: [".persona .initiative"], cursor: { sel: ".persona input[type=range]", dx: .72, dy: .5 } },
-  settings:    { page: "settings.html", focus: [".persona"], cursor: { sel: ".persona input[type=range]", dx: .72, dy: .5 } },
-  final:       { page: "marketer.html" }
+                 timeline: [{ at: .14, to: '.task:not([hidden]) .step[data-step="plan"]' },
+                            { at: .26, click: true, state: 1 },
+                            { at: .66, to: ".task:not([hidden]) .step-note .btn" }] },
+  mktNext:     { page: "marketer.html",
+                 act: d => { chatTop(d); d.querySelector('.task:not([hidden]) .step[data-step="plan"]').click(); },
+                 states: [d => d.querySelector(".task:not([hidden]) .step-note .btn").click()],
+                 scroll: { state: 1, el: "window", toSel: '.step-panel[data-panel="texts"] .next-step', at0: .1, at1: .34 },
+                 focus: ['.step-panel[data-panel="texts"] .next-step'],
+                 timeline: [{ at: .04, to: ".task:not([hidden]) .step-note .btn" },
+                            { at: .06, click: true, state: 1 },
+                            { at: .62, to: '.step-panel[data-panel="texts"] .next-step .btn' }] },
+
+  // ----- Лев: ожидание, затем вкладка «Обложка меню» и точечная правка -----
+  dsgWork:     { page: "designer.html", focus: [".task-tabs", ".task:not([hidden]) .working"],
+                 timeline: [{ at: .4, to: ".task:not([hidden]) .meanwhile__item:nth-child(1)" },
+                            { at: .62, to: ".task:not([hidden]) .meanwhile__item:nth-child(2)" }] },
+  dsgSpot:     { page: "designer.html",
+                 states: [d => d.querySelector('.task-tab[data-task="cover"]').click(),
+                          d => {
+                            // Та же разметка, что создаёт js/workspace.js по клику, но без фокуса в поле
+                            d.querySelector(SPOT).insertAdjacentHTML("beforeend",
+                              '<span class="spot__marker" style="left:46%;top:77%">2</span>' +
+                              '<div class="spot__pop" style="left:46%;top:77%"><input type="text" value="Убрать палочку корицы">' +
+                              '<div class="chips"><button class="chip" type="button">Убрать</button><button class="chip" type="button">Светлее</button>' +
+                              '<button class="chip" type="button">Добавить пар</button></div></div>');
+                          }],
+                 focusState: 1, focus: [SPOT, '[data-task-id="cover"] .card'],
+                 timeline: [{ at: .04, to: '.task-tab[data-task="cover"]' },
+                            { at: .12, click: true, state: 1 },
+                            { at: .3, to: SPOT, dx: .46, dy: .77 },
+                            { at: .4, click: true, state: 2 }] },
+
+  // ----- Отдельные страницы -----
+  finDash:     { page: "financier.html", focus: [".task:not([hidden]) .grid--4", ".task:not([hidden]) .stack"],
+                 timeline: [{ at: .3, to: ".task:not([hidden]) .grid--4 .card:nth-child(2)", dx: .4, dy: .4 },
+                            { at: .78, to: ".task:not([hidden]) .insight .btn" }] },
+  imagesNotice: { page: "images.html", focus: [".next-step"],
+                 timeline: [{ at: .7, to: ".next-step .btn" }] },
+  assistantCare: { page: "assistant.html",
+                 focus: [".task:not([hidden]) .next-step"],
+                 timeline: [{ at: .7, to: ".task:not([hidden]) .next-step .btn--primary" }] },
+  oneChat:     { page: "designer.html", focus: [".chat"],
+                 timeline: [{ at: .55, to: ".chat__messages .message--user .message__bubble", dx: .3 }] },
+
+  // ----- Эльвира: чаты задач, выжимка, пересказ, вывод -----
+  taskChats:   { page: "marketer.html",
+                 states: [d => d.querySelector('.task-tab[data-task="veranda"]').click(),
+                          d => d.querySelector('.task-tab[data-task="plan"]').click()],
+                 focus: [".chat", ".task-tabs"],
+                 timeline: [{ at: .12, to: '.task-tab[data-task="veranda"]' },
+                            { at: .22, click: true, state: 1 },
+                            { at: .78, to: '.task-tab[data-task="plan"]' },
+                            { at: .88, click: true, state: 2 }] },
+  taskBrief:   { page: "marketer.html",
+                 states: [d => { d.querySelector(".chat__head:not([hidden]) .brief").open = true; }],
+                 focusState: 1, focus: [".chat__head:not([hidden])"],
+                 timeline: [{ at: .1, to: ".chat__head:not([hidden]) .brief__toggle", dx: .25 },
+                            { at: .2, click: true, state: 1 },
+                            { at: .55, to: ".chat__head:not([hidden]) .brief__decisions li:nth-child(2)", dx: .6 }] },
+  chatSummary: { page: "marketer.html",
+                 act: d => { d.querySelector(".chat__head:not([hidden]) .brief").open = true; },
+                 states: [d => { d.querySelector(".chat__head:not([hidden]) .brief").open = false; }],
+                 scroll: { state: 1, el: CHAT, toTop: true, at0: .1, at1: .26 },
+                 timeline: [{ at: .02, to: ".chat__head:not([hidden]) .brief__toggle", dx: .25 },
+                            { at: .07, click: true, state: 1 },
+                            { at: .34, to: CHAT + " .chat__divider .chat__summary", dx: .72, dy: .8 }] },
+  final:       { page: "marketer.html", act: chatTop },
+
+  // ----- Настройки -----
+  settingsPersona: { page: "settings.html", focus: [".persona"],
+                 timeline: [{ at: .3, to: ".persona .field__select" },
+                            { at: .62, to: ".persona .skill:nth-child(4)" },
+                            { at: .82, to: ".persona .skill--add" }] },
+  settingsInit: { page: "settings.html", focus: [".persona .initiative"],
+                 states: SLIDER.map(v => d => { const r = d.querySelector(RANGE); r.value = v; r.dispatchEvent(new Event("input")); }),
+                 timeline: [{ at: .08, to: "THUMB" }, { at: .14, drag: true }]
+                   .concat(SLIDER.map((v, i) => ({ at: slideAt(i), to: "THUMB", state: i + 1, drag: true })))
+                   .concat([{ at: .93, to: "THUMB" }]) }
 };
 
-const id = new URLSearchParams(location.search).get("s");
+const params = new URLSearchParams(location.search);
+const id = params.get("s");
+const stateK = Number(params.get("state") || 0);
+const off = params.has("off") ? Number(params.get("off")) : null;
 const sc = SCENES[id];
 const f = document.getElementById("f");
 f.src = "../" + sc.page + "?video=" + Date.now();
 
-const arrow = '<svg class="cursor" viewBox="0 0 24 24"><path d="M3 2l7 19 2.6-7.4L20 11z" fill="#111" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/></svg>';
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+function rectOf(d, sel) { const el = d.querySelector(sel); return el ? el.getBoundingClientRect() : null; }
+
+function targetPoint(d, item) {
+  if (item.to === "THUMB") {
+    const r = rectOf(d, RANGE); if (!r) return null;
+    const v = Number(d.querySelector(RANGE).value) / 100;
+    return [r.left + 8 + (r.width - 16) * v, r.top + r.height / 2 + 4];
+  }
+  const r = rectOf(d, item.to); if (!r) return null;
+  // На кнопках и вкладках курсор указывает в правый край, чтобы не закрывать текст
+  const small = r.width < 320 && r.height < 70;
+  return [r.left + r.width * (item.dx ?? (small ? .9 : .5)), r.top + r.height * (item.dy ?? (small ? .8 : .6))];
+}
+
+// Текущая прокрутка области сцены и куда её нужно докрутить
+function scrollInfo(d, w) {
+  const s = sc.scroll; if (!s) return null;
+  if (s.el === "window") {
+    const fixed = rectOf(d, ".chat") || rectOf(d, ".sidebar");
+    const max = Math.max(0, d.documentElement.scrollHeight - w.innerHeight);
+    const cur = w.scrollY;
+    const t = rectOf(d, s.toSel);
+    const to = Math.min(max, Math.max(0, Math.round(t.top + cur - 360)));
+    return { state: s.state, at0: s.at0, at1: s.at1, cur, to, region: [Math.round(fixed.right), 0, w.innerWidth, w.innerHeight] };
+  }
+  const el = d.querySelector(s.el), r = el.getBoundingClientRect();
+  return { state: s.state, at0: s.at0, at1: s.at1, cur: el.scrollTop, to: s.toTop ? 0 : el.scrollHeight - el.clientHeight,
+           region: [Math.round(r.left), Math.round(r.top), Math.round(r.right), Math.round(r.bottom)] };
+}
+
+function setScroll(d, w, v) {
+  if (sc.scroll.el === "window") w.scrollTo(0, v); else d.querySelector(sc.scroll.el).scrollTop = v;
+}
 
 f.onload = async () => {
   const d = f.contentDocument, w = f.contentWindow;
@@ -81,43 +190,32 @@ f.onload = async () => {
   const st = d.createElement("style");
   st.textContent = "*, *::before, *::after { transition: none !important; }";
   d.head.appendChild(st);
-  await new Promise(r => setTimeout(r, 400));
+  await sleep(400);
   if (sc.act) sc.act(d, w);
-  await new Promise(r => setTimeout(r, 300));
-  // Фокус в полях сдвигает страницу при съёмке — снимаем его и сбрасываем прокрутку
+  for (let k = 0; k < stateK; k++) sc.states[k](d, w);
+  await sleep(300);
+  // Фокус в полях сдвигает страницу при съёмке — снимаем его и сбрасываем прокрутку окна
   if (d.activeElement && d.activeElement.blur) d.activeElement.blur();
   window.scrollTo(0, 0); document.documentElement.scrollTop = 0; document.body.scrollTop = 0;
-  if (!sc.scrollTo) w.scrollTo(0, 0);
-  await new Promise(r => setTimeout(r, 100));
+  w.scrollTo(0, 0);
+  await sleep(100);
   // Фоновый Chrome иногда не перерисовывает часть кадра после действий — перерисовать целиком
   f.style.display = "none"; void f.offsetHeight; f.style.display = "";
-  await new Promise(r => setTimeout(r, 300));
-  if (sc.scrollTo) {
-    const el = d.querySelector(sc.scrollTo);
-    w.scrollTo(0, Math.max(0, el.getBoundingClientRect().top + w.scrollY - 360));
-    await new Promise(r => setTimeout(r, 200));
-  }
-  // Область фокуса — объединение прямоугольников элементов
+  await sleep(300);
+  const info = scrollInfo(d, w);
+  if (off !== null && sc.scroll) { setScroll(d, w, off); await sleep(250); }
+  // Область фокуса — объединение прямоугольников элементов (в текущем виде)
   let focus = null;
   (sc.focus || []).forEach(sel => {
-    const el = d.querySelector(sel); if (!el) return;
-    const r = el.getBoundingClientRect();
+    const r = rectOf(d, sel); if (!r) return;
     const b = [r.left, r.top, r.right, r.bottom];
     focus = focus ? [Math.min(focus[0], b[0]), Math.min(focus[1], b[1]), Math.max(focus[2], b[2]), Math.max(focus[3], b[3])] : b;
   });
-  // Подсветку рамкой убрали по решению Алексея: камера просто наезжает на текст (focus)
-  const ov = document.getElementById("overlay");
-  // Курсор и подсветка клика
-  if (sc.cursor) {
-    const el = d.querySelector(sc.cursor.sel);
-    if (el) {
-      const r = el.getBoundingClientRect();
-      const x = r.left + r.width * sc.cursor.dx, y = r.top + r.height * sc.cursor.dy;
-      if (sc.cursor.ring) ov.insertAdjacentHTML("beforeend", `<span class="ring" style="left:${x}px;top:${y}px"></span>`);
-      ov.insertAdjacentHTML("beforeend", arrow.replace('class="cursor"', `class="cursor" style="left:${x}px;top:${y}px"`));
-    }
-  }
-  document.getElementById("out").textContent = JSON.stringify({ id, focus });
+  const targets = {};
+  (sc.timeline || []).forEach((item, i) => { if (item.to) { const p = targetPoint(d, item); if (p) targets[i] = p.map(v => Math.round(v * 10) / 10); } });
+  const timeline = (sc.timeline || []).map(({ at, click, state, drag, to }) => ({ at, click: !!click, state: state ?? null, drag: !!drag, hasTarget: !!to }));
+  document.getElementById("out").textContent = JSON.stringify({
+    id, page: sc.page, focus, focusState: sc.focusState ?? null, states: 1 + (sc.states || []).length, targets, timeline, scroll: info });
 };
 </script>
 </body>
