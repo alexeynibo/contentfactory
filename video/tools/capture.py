@@ -34,6 +34,10 @@ def yandex_key():
             return line.split("API key:", 1)[1].strip()
     raise SystemExit("Нет ключа Yandex SpeechKit в credentials.md")
 
+def plain(text):
+    # без пауз-тегов и знаков ударения — для голосов, которые их не понимают
+    return re.sub(r"<break[^>]*/>", " ", text).replace("\u0301", "")
+
 def speak(text, base, m4a):
     if TTS == "elevenlabs":
         body = json.dumps({"text": text, "model_id": "eleven_multilingual_v2",
@@ -54,14 +58,14 @@ def speak(text, base, m4a):
         r = subprocess.run(["curl", "-s", "--max-time", "90", "-o", base + ".mp3", "-w", "%{http_code}",
                             "-X", "POST", "https://tts.api.cloud.yandex.net/speech/v1/tts:synthesize",
                             "-H", "Authorization: Api-Key " + yandex_key(),
-                            "--data-urlencode", "text=" + text, "-d", "lang=ru-RU", "-d", "voice=" + VOICE,
+                            "--data-urlencode", "text=" + plain(text), "-d", "lang=ru-RU", "-d", "voice=" + VOICE,
                             "-d", "format=mp3"], capture_output=True, text=True)
         if r.stdout != "200":
             raise SystemExit(f"SpeechKit ответил {r.stdout}: " + open(base + ".mp3", errors="ignore").read()[:200])
         src = base + ".mp3"
     else:
         src = base + ".aiff"
-        subprocess.run(["say", "-v", "Milena", "-r", "172", "-o", src, text], check=True)
+        subprocess.run(["say", "-v", "Milena", "-r", "172", "-o", src, plain(text)], check=True)
     subprocess.run(["afconvert", "-f", "m4af", "-d", "aac@44100", src, m4a], check=True)
 
 def fit(rect):
@@ -90,9 +94,11 @@ for sid, title, move, focus, text in SCENES:
     if move == "in":   a, b = full, target
     elif move == "out": a, b = target, full
     else:              a, b = full, [36, 22.5, 1368, 855]
-    m4a = f"{V}/audio/{sid}.m4a"
-    if not (REUSE_AUDIO and os.path.exists(m4a)):
+    m4a, txt = f"{V}/audio/{sid}.m4a", f"{V}/audio/{sid}.txt"
+    same = os.path.exists(m4a) and os.path.exists(txt) and open(txt, encoding="utf-8").read() == TTS + "|" + text
+    if not (REUSE_AUDIO and same):
         speak(text, f"{V}/audio/{sid}", m4a)
+        open(txt, "w", encoding="utf-8").write(TTS + "|" + text)
     dur = float(re.search(r"estimated duration: ([\d.]+)", subprocess.run(["afinfo", m4a], capture_output=True, text=True).stdout).group(1))
     out.append({"id": sid, "title": title, "image": png, "audio": m4a, "speech": round(dur, 2),
                 "duration": round(dur + 1.1, 2), "from": a, "to": b, "focusFound": bool(f)})

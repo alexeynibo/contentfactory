@@ -10,6 +10,8 @@
   .cursor { position: absolute; width: 26px; height: 26px; margin: -2px 0 0 -3px; filter: drop-shadow(0 2px 3px rgba(0,0,0,.35)); }
   .ring { position: absolute; width: 44px; height: 44px; margin: -22px 0 0 -22px; border-radius: 50%;
           background: rgba(33,143,253,.22); box-shadow: 0 0 0 3px rgba(33,143,253,.55); }
+  .hl { position: absolute; border: 3px solid #218FFD; border-radius: 12px;
+         box-shadow: 0 0 0 6px rgba(33,143,253,.18); }
   #out { display: none; }
 </style>
 </head>
@@ -23,14 +25,19 @@ const SCENES = {
   home:        { page: "index.html" },
   homeOffers:  { page: "index.html", focus: [".grid.grid--3"] },
   homeWork:    { page: "index.html", focus: [".rows"] },
+  offerHalloween: { page: "index.html", focus: [".proposal:nth-child(1)"], hl: [".proposal:nth-child(1) .proposal__text"] },
+  offerTax:    { page: "index.html", focus: [".proposal:nth-child(2)"], hl: [".proposal:nth-child(2) .proposal__text"] },
+  offerCheese: { page: "index.html", focus: [".proposal:nth-child(3)"], hl: [".proposal:nth-child(3) .proposal__text"] },
+  hints:       { page: "marketer.html", act: d => { d.querySelector('.chat__messages:not([hidden])').scrollTop = 0; },
+                 hl: [".chat__messages:not([hidden]) .chips--wrap .chip:last-child", ".chat__composer .chips:not([hidden])"] },
   mkt:         { page: "marketer.html" },
   mktSteps:    { page: "marketer.html", focus: [".task:not([hidden]) .steps"], cursor: { sel: '.task:not([hidden]) .step[data-step="plan"]', dx: .5, dy: .5 } },
   mktBack:     { page: "marketer.html", act: d => d.querySelector('.task:not([hidden]) .step[data-step="plan"]').click(),
                  focus: [".task:not([hidden]) .steps", ".task:not([hidden]) .step-note", '.step-panel[data-panel="plan"] .card'],
                  cursor: { sel: ".task:not([hidden]) .step-note .btn", dx: .5, dy: .6 } },
-  mktNext:     { page: "marketer.html", scrollTo: '.step-panel[data-panel="texts"] .next-step', focus: ['.step-panel[data-panel="texts"] .next-step'],
+  mktNext:     { page: "marketer.html", scrollTo: '.step-panel[data-panel="texts"] .next-step', focus: ['.step-panel[data-panel="texts"] .next-step'], hl: ['.step-panel[data-panel="texts"] .next-step__text'],
                  cursor: { sel: '.step-panel[data-panel="texts"] .next-step .btn', dx: .9, dy: .75, ring: true } },
-  dsgWork:     { page: "designer.html", focus: [".task:not([hidden]) .working"] },
+  dsgWork:     { page: "designer.html", focus: [".task:not([hidden]) .working"], hl: [".task:not([hidden]) .meanwhile"] },
   dsgSpot:     { page: "designer.html", act: (d, w) => {
                    d.querySelector('.task-tab[data-task="cover"]').click();
                    // Та же разметка, что создаёт js/workspace.js по клику, но без фокуса в поле
@@ -43,13 +50,19 @@ const SCENES = {
                  },
                  focus: ['[data-task-id="cover"] .spot', '[data-task-id="cover"] .card'],
                  cursor: { sel: '[data-task-id="cover"] .spot__marker:last-of-type', dx: .5, dy: .5, ring: true } },
-  finDash:     { page: "financier.html", focus: [".task:not([hidden]) .grid--4", ".task:not([hidden]) .stack"],
+  finDash:     { page: "financier.html", focus: [".task:not([hidden]) .grid--4", ".task:not([hidden]) .stack"], hl: [".task:not([hidden]) .insight"],
                  cursor: { sel: ".task:not([hidden]) .insight .btn", dx: .5, dy: .6 } },
+  imagesNotice: { page: "images.html", focus: [".next-step"], hl: [".next-step__text"] },
+  assistantCare: { page: "assistant.html", scrollTo: ".task:not([hidden]) .next-step", focus: [".task:not([hidden]) .next-step"], hl: [".task:not([hidden]) .next-step__text"] },
   oneChat:     { page: "designer.html", focus: [".chat"] },
   taskChats:   { page: "marketer.html", act: d => d.querySelector('.task-tab[data-task="veranda"]').click(),
                  focus: [".chat", ".task-tabs"], cursor: { sel: '.task-tab[data-task="veranda"]', dx: .94, dy: .75, ring: true } },
   taskBrief:   { page: "marketer.html", act: d => { d.querySelector('.chat__head:not([hidden]) .brief').open = true; },
                  focus: [".chat__head:not([hidden])"], cursor: { sel: ".chat__head:not([hidden]) .brief__toggle", dx: .3, dy: .5 } },
+  chatSummary: { page: "marketer.html", act: d => { d.querySelector('.chat__messages:not([hidden])').scrollTop = 0; },
+                 cursor: { sel: ".chat__messages:not([hidden]) .chat__divider .chat__summary", dx: .62, dy: .75 } },
+  settingsPersona: { page: "settings.html", focus: [".persona"], cursor: { sel: ".persona .skill--add", dx: .5, dy: .6 } },
+  settingsInit: { page: "settings.html", focus: [".persona .initiative"], cursor: { sel: ".persona input[type=range]", dx: .72, dy: .5 } },
   settings:    { page: "settings.html", focus: [".persona"], cursor: { sel: ".persona input[type=range]", dx: .72, dy: .5 } },
   final:       { page: "marketer.html" }
 };
@@ -92,8 +105,14 @@ f.onload = async () => {
     const b = [r.left, r.top, r.right, r.bottom];
     focus = focus ? [Math.min(focus[0], b[0]), Math.min(focus[1], b[1]), Math.max(focus[2], b[2]), Math.max(focus[3], b[3])] : b;
   });
-  // Курсор и подсветка клика
+  // Рамка вокруг текста, который зачитывает диктор
   const ov = document.getElementById("overlay");
+  (sc.hl || []).forEach(sel => {
+    const el = d.querySelector(sel); if (!el) return;
+    const r = el.getBoundingClientRect(), p = 4;
+    ov.insertAdjacentHTML("beforeend", `<span class="hl" style="left:${r.left - p}px;top:${r.top - p}px;width:${r.width + 2 * p}px;height:${r.height + 2 * p}px"></span>`);
+  });
+  // Курсор и подсветка клика
   if (sc.cursor) {
     const el = d.querySelector(sc.cursor.sel);
     if (el) {
