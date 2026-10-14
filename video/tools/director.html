@@ -105,13 +105,8 @@ f.onload = async () => {
     const b = [r.left, r.top, r.right, r.bottom];
     focus = focus ? [Math.min(focus[0], b[0]), Math.min(focus[1], b[1]), Math.max(focus[2], b[2]), Math.max(focus[3], b[3])] : b;
   });
-  // Рамка вокруг текста, который зачитывает диктор
+  // Подсветку рамкой убрали по решению Алексея: камера просто наезжает на текст (focus)
   const ov = document.getElementById("overlay");
-  (sc.hl || []).forEach(sel => {
-    const el = d.querySelector(sel); if (!el) return;
-    const r = el.getBoundingClientRect(), p = 4;
-    ov.insertAdjacentHTML("beforeend", `<span class="hl" style="left:${r.left - p}px;top:${r.top - p}px;width:${r.width + 2 * p}px;height:${r.height + 2 * p}px"></span>`);
-  });
   // Курсор и подсветка клика
   if (sc.cursor) {
     const el = d.querySelector(sc.cursor.sel);
