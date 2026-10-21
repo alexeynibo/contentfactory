@@ -114,8 +114,20 @@
     clients: ["Поняла, займусь. Черновик ответа покажу справа — отправим, когда одобрите.", "Хорошо, учту это в ответах гостям."],
     assistant: ["Понял, добавлю в план и напомню вовремя.", "Хорошо. Если для этого нужен кто-то из помощников, я сам его позову."]
   };
+  FALLBACK.hr = ["Поняла, займусь. Кандидатов покажу справа — с оценкой, насколько подходят.", "Хорошо. Если есть требования, которые я не учла, — напишите, поправлю отбор."];
   var FALLBACK_CHIPS = { marketer: [null, ["Для обоих", "Только ВКонтакте", "Только Telegram"]] };
   var fallbackIndex = 0;
+
+  // Кейс клиента (cases/<id>/data.js): свои ответы помощников вместо ответов кофейни
+  var CASE = window.CF_CASE;
+  var ROOT = window.CF_ROOT || "";
+  if (CASE) {
+    REPLIES = {};
+    Object.keys(CASE.replies || {}).forEach(function (id) {
+      REPLIES[id] = CASE.replies[id].map(function (r) { return { k: new RegExp(r.k, "i"), a: r.a, c: r.c, t: r.t }; });
+    });
+    FALLBACK_CHIPS = {};
+  }
 
   // Короткие «да» и «нет» в ответ на предложение помощника
   var YES = /^(давай|да\b|да,|начн|первый|второй|третий|так лучше|так и сделай|ок\b|хорошо)/;
@@ -125,14 +137,16 @@
     designer: "Принял, начинаю рисовать. Значок на аватаре подскажет, когда будет готово.",
     financier: "Хорошо, считаю. Результат будет справа через минуту.",
     clients: "Готово, делаю. Черновик покажу справа — отправим, когда одобрите.",
-    assistant: "Договорились, добавил в план и напомню вовремя."
+    assistant: "Договорились, добавил в план и напомню вовремя.",
+    hr: "Договорились, займусь. Напишу, как только будут результаты."
   };
   var DECLINE = {
     marketer: "Хорошо, оставим как есть. Если передумаете — я рядом.",
     designer: "Понял, оставляю как было.",
     financier: "Хорошо, не трогаю.",
     clients: "Хорошо, оставлю как есть.",
-    assistant: "Хорошо, не буду."
+    assistant: "Хорошо, не буду.",
+    hr: "Хорошо, оставлю как есть."
   };
 
   function pickReply(text) {
@@ -157,15 +171,22 @@
     designer: { name: "Лев", of: "Льва", page: "designer.html", she: false },
     financier: { name: "Ольга", of: "Ольги", page: "financier.html", she: true },
     assistant: { name: "Тимур", of: "Тимура", page: "assistant.html", she: false },
-    clients: { name: "Вера", of: "Веры", page: "clients.html", she: true }
+    clients: { name: "Вера", of: "Веры", page: "clients.html", she: true },
+    hr: { name: "Марина", of: "Марины", page: "hr.html", she: true }
   };
-  var NAME_RE = /(^|[^А-Яа-яЁё])(Эльвир(?:а|ы|е|у|ой)|Л(?:ев|ьва|ьву|ьвом|ьве)|Ольг(?:а|и|е|у|ой)|Тимур(?:а|у|ом|е)?|Вер(?:а|ы|е|у|ой))(?![А-Яа-яЁё])/g;
+  // В кейсе клиента ссылками становятся только его помощники
+  if (CASE) {
+    var inCase = CASE.team.map(function (t) { return t.id; });
+    Object.keys(TEAM).forEach(function (id) { if (inCase.indexOf(id) < 0) delete TEAM[id]; });
+  }
+  var NAME_RE = /(^|[^А-Яа-яЁё])(Эльвир(?:а|ы|е|у|ой)|Л(?:ев|ьва|ьву|ьвом|ьве)|Ольг(?:а|и|е|у|ой)|Тимур(?:а|у|ом|е)?|Вер(?:а|ы|е|у|ой)|Марин(?:а|ы|е|у|ой))(?![А-Яа-яЁё])/g;
 
   function whoIs(form) {
     if (/^Эльвир/.test(form)) return "marketer";
     if (/^Л(ев|ьв)/.test(form)) return "designer";
     if (/^Ольг/.test(form)) return "financier";
     if (/^Тимур/.test(form)) return "assistant";
+    if (/^Марин/.test(form)) return "hr";
     return "clients";
   }
 
@@ -195,13 +216,13 @@
         while ((m = NAME_RE.exec(text))) {
           var form = m[2], id = whoIs(form);
           var start = m.index + m[1].length;
-          if (id === page) continue; // себя помощник не упоминает ссылкой
+          if (id === page || !TEAM[id]) continue; // себя и чужих помощников ссылкой не делаем
           frag.appendChild(document.createTextNode(text.slice(last, start)));
           var a = document.createElement("a");
           a.className = "mention mention--" + id;
           a.href = TEAM[id].page + "?from=" + page + "&say=" + encodeURIComponent(sentenceWith(full, form));
           a.title = "Перейти в чат: " + TEAM[id].name;
-          a.innerHTML = '<span class="mention__avatar assistant--' + id + '"><img src="assets/avatars/' + id + '.png" alt=""></span>';
+          a.innerHTML = '<span class="mention__avatar assistant--' + id + '"><img src="' + ROOT + 'assets/avatars/' + id + '.png" alt=""></span>';
           a.appendChild(document.createTextNode(form));
           frag.appendChild(a);
           last = start + form.length;
@@ -400,7 +421,7 @@
       var box = chat && thread();
       if (!box) return;
       divider(box, "Новая задача.");
-      var m = addAssistant(box, { a: "Какую задачу начнём? Опишите своими словами или выберите вариант — заведу для неё отдельную вкладку.", c: (NEW_TASK[page] || []) });
+      var m = addAssistant(box, { a: "Какую задачу начнём? Опишите своими словами или выберите вариант — заведу для неё отдельную вкладку.", c: ((CASE && CASE.pages[page] && CASE.pages[page].newTask) || NEW_TASK[page] || []) });
       scrollDown(box);
       input && input.focus();
       return;

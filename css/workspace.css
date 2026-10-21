@@ -2110,3 +2110,205 @@ a.row:hover {
     max-width: none;
   }
 }
+
+/* ===== Кандидаты (рекрутер) ===== */
+.candidate__match {
+  flex: none;
+  padding: 6px 10px;
+  border-radius: var(--radius-round);
+  background: color-mix(in srgb, var(--color-success) 12%, white);
+  font: 700 13px/1 var(--font-main);
+  color: var(--color-success);
+}
+
+.candidate__list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 14px 0 0;
+  padding: 0;
+  list-style: none;
+  font: 400 13px/1.45 var(--font-main);
+}
+
+.candidate__list li {
+  position: relative;
+  padding-left: 18px;
+}
+
+.candidate__list li::before {
+  content: "+";
+  position: absolute;
+  left: 0;
+  font-weight: 700;
+  color: var(--color-success);
+}
+
+.candidate__list li.is-con::before {
+  content: "–";
+  color: var(--color-orange-text);
+}
+
+/* =========================================================
+   Стартовая страница: список клиентов (start.html)
+   ========================================================= */
+.start {
+  background: var(--color-surface);
+}
+
+.start__main {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 56px 40px 80px;
+  color: var(--color-ink);
+}
+
+.start__brand {
+  margin: 0 0 8px;
+  font: 700 13px/1 var(--font-main);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-cobalt);
+}
+
+.start__title {
+  margin: 0;
+  font: 700 34px/1.15 var(--font-main);
+}
+
+.start__lead {
+  max-width: 68ch;
+  margin: 12px 0 0;
+  font: 400 16px/1.5 var(--font-main);
+  color: var(--color-midgray);
+}
+
+.start__legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  margin: 24px 0 28px;
+  font: 400 13px/1.5 var(--font-main);
+  color: var(--color-midgray);
+}
+
+.start__legend span {
+  flex: 1 1 320px;
+  max-width: 60ch;
+}
+
+.start__legend b {
+  color: var(--color-ink);
+  font-weight: 600;
+}
+
+.cases {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 20px;
+}
+
+/* Карточка клиента: целиком ссылка в его интерфейс */
+.case-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-card);
+  background: var(--color-white);
+  color: inherit;
+  text-decoration: none;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+.case-card:hover {
+  border-color: var(--color-periwinkle);
+  box-shadow: 0 10px 30px rgba(34, 42, 57, 0.1);
+  transform: translateY(-2px);
+}
+
+.case-card__cover {
+  aspect-ratio: 16 / 7;
+  border-radius: 0;
+}
+
+.case-card__body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 20px 22px 22px;
+}
+
+.case-card__sphere {
+  margin: 0 0 6px;
+  font: 500 12px/1.3 var(--font-main);
+  color: var(--color-gray);
+}
+
+.case-card__name {
+  margin: 0;
+  font: 700 19px/1.3 var(--font-main);
+}
+
+.case-card__text {
+  margin: 8px 0 0;
+  font: 400 14px/1.5 var(--font-main);
+  color: var(--color-darkgray);
+}
+
+.case-card__facts {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 16px 0 0;
+  padding: 14px 0 0;
+  border-top: 1px solid var(--color-line);
+  list-style: none;
+  font: 400 13px/1.45 var(--font-main);
+}
+
+.case-card__facts li {
+  display: grid;
+  grid-template-columns: 56px minmax(0, 1fr);
+  gap: 10px;
+}
+
+.case-card__facts span {
+  color: var(--color-gray);
+}
+
+.case-card__facts b {
+  font-weight: 500;
+}
+
+.case-card__team {
+  display: flex;
+  align-items: center;
+  margin-top: auto;
+  padding-top: 18px;
+}
+
+.case-card__team .avatar {
+  width: 32px;
+  height: 32px;
+  box-shadow: 0 0 0 2px var(--color-white);
+}
+
+.case-card__team .avatar + .avatar {
+  margin-left: -6px;
+}
+
+.case-card__names {
+  margin-left: 10px;
+  font: 400 12px/1.35 var(--font-main);
+  color: var(--color-midgray);
+}
+
+@media (max-width: 700px) {
+  .start__main {
+    padding: 32px 16px 56px;
+  }
+  .cases {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

@@ -31,12 +31,15 @@
   --color-lightmoss: #B7D68C; /* светлый мох: центр градиента */
   --color-violet: #8E6CF0; /* фиолетовый: край градиента */
   --color-lightviolet: #C9B8F7; /* светло-фиолетовый: центр градиента */
+  --color-coral: #F2667A; /* коралловый: край градиента (рекрутер) */
+  --color-lightcoral: #FFC4BC; /* светло-коралловый: центр градиента */
 
   /* Цвета имён помощников в чате (из их градиентов, контраст ≥ 4,6:1 на #F2F2F2) */
   --color-green-text: #007954; /* дизайнер */
   --color-orange-text: #B24D00; /* финансист */
   --color-moss-text: #4F7631; /* личный помощник */
   --color-violet-text: #754CED; /* клиентский менеджер */
+  --color-coral-text: #C2334D; /* рекрутер */
 
   /* Рабочая зона */
   --color-line: #E6E8EE; /* тонкие линии и рамки карточек */
@@ -60,6 +63,7 @@
   --gradient-orange: radial-gradient(circle farthest-corner at top right, var(--color-lightorange), var(--color-orange));
   --gradient-moss: radial-gradient(circle farthest-corner at top right, var(--color-lightmoss), var(--color-moss));
   --gradient-violet: radial-gradient(circle farthest-corner at top right, var(--color-lightviolet), var(--color-violet));
+  --gradient-coral: radial-gradient(circle farthest-corner at top right, var(--color-lightcoral), var(--color-coral));
   /* Линейный: из левого верхнего угла в правый нижний */
   --gradient-user: linear-gradient(to bottom right, var(--color-azure), var(--color-royal));
 }

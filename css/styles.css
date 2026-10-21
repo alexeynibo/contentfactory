@@ -189,9 +189,12 @@ body {
   background: var(--gradient-moss);
 }
 
-.assistant--hr,
 .assistant--clients {
   background: var(--gradient-violet);
+}
+
+.assistant--hr {
+  background: var(--gradient-coral);
 }
 
 /* Временная заглушка вместо аватара: инициалы роли */
@@ -468,6 +471,10 @@ body {
 
 .message--clients .message__name {
   color: var(--color-violet-text);
+}
+
+.message--hr .message__name {
+  color: var(--color-coral-text);
 }
 
 /* Новый фрагмент переписки отделяется от предыдущего */
@@ -814,3 +821,4 @@ body {
 .mention--financier { color: var(--color-orange-text); }
 .mention--assistant { color: var(--color-moss-text); }
 .mention--clients { color: var(--color-violet-text); }
+.mention--hr { color: var(--color-coral-text); }

@@ -42,6 +42,22 @@
   var SETTINGS = { id: "settings", title: "Настройки", icon: "assets/icons/settings.svg", href: "settings.html" };
   var ACCOUNT  = { id: "account",  title: "Аккаунт",   initial: "N",                      href: "account.html" };
 
+  // ===== Кейс клиента (cases/<id>/): свои помощники и страницы в папке клиента =====
+  // Данные — в cases/<id>/data.js (window.CF_CASE), см. js/case.js
+  var CASE = window.CF_CASE;
+  if (CASE) {
+    var dir = "cases/" + CASE.id + "/";
+    NAV.forEach(function (item) { item.href = dir + item.href; });
+    var TITLES = { marketer: "Эльвира, маркетолог", designer: "Лев, дизайнер", financier: "Ольга, финансист",
+      assistant: "Тимур, личный помощник", clients: "Вера, клиентский менеджер", hr: "Марина, рекрутер" };
+    ASSISTANTS = CASE.team.map(function (t) {
+      return { id: t.id, title: TITLES[t.id], avatar: "assets/avatars/" + t.id + ".png", href: dir + t.id + ".html", badge: t.badge };
+    });
+    SETTINGS.href = dir + SETTINGS.href;
+    ACCOUNT.href = dir + ACCOUNT.href;
+    ACCOUNT.initial = CASE.owner.initial;
+  }
+
   // ---------------------------------------------------------
   // Ниже — техническая часть, для правки меню её трогать не нужно
   // ---------------------------------------------------------
