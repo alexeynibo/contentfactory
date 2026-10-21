@@ -1949,8 +1949,13 @@ a.row:hover {
     grid-row: 2;
   }
 
+  /* «Что дальше» в две строки: аватар прижат кверху с тем же отступом, что слева (20px),
+     кнопка — под текстом, вровень с ним (аватар 48 + промежуток 14 = 62px) */
   .next-step {
     flex-wrap: wrap;
+    align-items: flex-start;
+    row-gap: 12px;
+    padding: 20px;
   }
 
   .next-step__body {
@@ -2003,6 +2008,10 @@ a.row:hover {
     flex-wrap: wrap;
     max-width: 100%;
   }
+
+  .next-step__actions {
+    max-width: calc(100% - 62px);
+  }
 }
 
 /* Совсем узко: длинная подпись кнопки переносится, а не вылезает за край */
@@ -2017,9 +2026,6 @@ a.row:hover {
     line-height: 1.2;
   }
 
-  .next-step__actions {
-    margin-left: 0;
-  }
 }
 
 /* Этапы прокручиваются вбок без полосы прокрутки — как ряды чипсов */
