@@ -16,7 +16,7 @@
     <nav class="sidebar" aria-label="Главное меню"></nav>
 
     <main class="main">
-      <div class="workspace" style="max-width:760px">
+      <div class="workspace">
         <header class="page-head">
           <div>
             <h1 class="page-head__title">Аккаунт</h1>
@@ -24,62 +24,68 @@
           </div>
         </header>
 
-        <div class="card">
-          <h2 class="card__title">Вы</h2>
-          <div class="grid grid--2" style="margin-top:16px">
-            <label class="field"><span class="field__label">Как&nbsp;к&nbsp;вам обращаться</span><input class="field__input" type="text" value="Николай"></label>
-            <label class="field"><span class="field__label">Почта</span><input class="field__input" type="email" value="hello@zerno.example"></label>
-          </div>
-        </div>
-
-        <div class="card" style="margin-top:16px">
-          <h2 class="card__title">Компания</h2>
-          <div class="grid grid--2" style="margin-top:16px">
-            <label class="field"><span class="field__label">Название</span><input class="field__input" type="text" value="Кофейня «Зерно»"></label>
-            <label class="field"><span class="field__label">Сфера</span><input class="field__input" type="text" value="Кофейня, общепит"></label>
-          </div>
-          <p class="card__text muted" style="margin-top:12px;font-size:13px">Подробности о&nbsp;компании помощники берут из&nbsp;раздела <a class="btn btn--ghost" href="memory.html">Память</a>.</p>
-        </div>
-
-        <div class="card" style="margin-top:16px">
-          <div class="card__head" style="justify-content:space-between;margin:0">
-            <div>
-              <h2 class="card__title">Тариф «Команда»</h2>
-              <p class="card__meta" style="margin-top:4px">5&nbsp;помощников · 2&nbsp;990&nbsp;₽ в&nbsp;месяц · следующее списание 12&nbsp;ноября</p>
+        <!-- На широком экране — две колонки: данные слева, тариф справа -->
+        <div class="account">
+          <div class="stack" style="gap:16px">
+            <div class="card">
+              <h2 class="card__title">Вы</h2>
+              <div class="grid grid--2" style="margin-top:16px">
+                <label class="field"><span class="field__label">Как&nbsp;к&nbsp;вам обращаться</span><input class="field__input" type="text" value="Николай"></label>
+                <label class="field"><span class="field__label">Почта</span><input class="field__input" type="email" value="hello@zerno.example"></label>
+              </div>
             </div>
-            <a class="btn btn--secondary" href="pricing.html">Сменить тариф</a>
-          </div>
 
-          <!-- Расход лимитов — в понятных единицах, без токенов и кредитов -->
-          <div class="bars" style="margin-top:20px">
-            <div class="bar__row">
-              <span>Тексты и&nbsp;посты</span>
-              <span class="bar__track"><span class="bar__fill" style="width:67%"></span></span>
-              <span class="bar__value">134 из&nbsp;200</span>
-            </div>
-            <div class="bar__row">
-              <span>Картинки</span>
-              <span class="bar__track"><span class="bar__fill bar__fill--warn" style="width:82%"></span></span>
-              <span class="bar__value">98 из&nbsp;120</span>
-            </div>
-            <div class="bar__row">
-              <span>Короткие видео</span>
-              <span class="bar__track"><span class="bar__fill" style="width:20%"></span></span>
-              <span class="bar__value">1 из&nbsp;5</span>
+            <div class="card">
+              <h2 class="card__title">Компания</h2>
+              <div class="grid grid--2" style="margin-top:16px">
+                <label class="field"><span class="field__label">Название</span><input class="field__input" type="text" value="Кофейня «Зерно»"></label>
+                <label class="field"><span class="field__label">Сфера</span><input class="field__input" type="text" value="Кофейня, общепит"></label>
+              </div>
+              <p class="card__text muted" style="margin-top:12px;font-size:13px">Подробности о&nbsp;компании помощники берут из&nbsp;раздела <a class="btn btn--ghost" href="memory.html">Память</a>.</p>
             </div>
           </div>
-          <p class="card__text muted" style="margin-top:14px;font-size:13px">Не&nbsp;считаются: правки по&nbsp;точкам, до&nbsp;трёх перерисовок одной картинки и&nbsp;черновики, которые помощники подготовили сами, пока вы&nbsp;их не&nbsp;одобрили.</p>
+          <div class="stack" style="gap:16px">
+            <div class="card">
+              <div class="card__head" style="justify-content:space-between;margin:0">
+                <div>
+                  <h2 class="card__title">Тариф «Команда»</h2>
+                  <p class="card__meta" style="margin-top:4px">5&nbsp;помощников · 2&nbsp;990&nbsp;₽ в&nbsp;месяц · следующее списание 12&nbsp;ноября</p>
+                </div>
+                <a class="btn btn--secondary" href="pricing.html">Сменить тариф</a>
+              </div>
 
-          <!-- Мягкое предупреждение на 80%: помощник сам предлагает, как распределить остаток -->
-          <div class="next-step">
-            <span class="avatar avatar--48 assistant--designer"><img src="assets/avatars/designer.png" alt=""></span>
-            <div class="next-step__body">
-              <span class="next-step__label">Лев подсказывает</span>
-              <p class="next-step__text">До&nbsp;12&nbsp;ноября осталось 22&nbsp;картинки. Нарисую их&nbsp;для ключевых постов, а&nbsp;для&nbsp;остальных возьму ваши фото&nbsp;— так хватит до&nbsp;конца месяца.</p>
-            </div>
-            <div class="next-step__actions">
-              <button class="btn btn--primary" type="button">Так и&nbsp;сделай</button>
-              <button class="btn btn--secondary" type="button" data-pack="50 картинок">+50 за&nbsp;290&nbsp;₽</button>
+              <!-- Расход лимитов — в понятных единицах, без токенов и кредитов -->
+              <div class="bars" style="margin-top:20px">
+                <div class="bar__row">
+                  <span>Тексты и&nbsp;посты</span>
+                  <span class="bar__track"><span class="bar__fill" style="width:67%"></span></span>
+                  <span class="bar__value">134 из&nbsp;200</span>
+                </div>
+                <div class="bar__row">
+                  <span>Картинки</span>
+                  <span class="bar__track"><span class="bar__fill bar__fill--warn" style="width:82%"></span></span>
+                  <span class="bar__value">98 из&nbsp;120</span>
+                </div>
+                <div class="bar__row">
+                  <span>Короткие видео</span>
+                  <span class="bar__track"><span class="bar__fill" style="width:20%"></span></span>
+                  <span class="bar__value">1 из&nbsp;5</span>
+                </div>
+              </div>
+              <p class="card__text muted" style="margin-top:14px;font-size:13px">Не&nbsp;считаются: правки по&nbsp;точкам, до&nbsp;трёх перерисовок одной картинки и&nbsp;черновики, которые помощники подготовили сами, пока вы&nbsp;их не&nbsp;одобрили.</p>
+
+              <!-- Мягкое предупреждение на 80%: помощник сам предлагает, как распределить остаток -->
+              <div class="next-step">
+                <span class="avatar avatar--48 assistant--designer"><img src="assets/avatars/designer.png" alt=""></span>
+                <div class="next-step__body">
+                  <span class="next-step__label">Лев подсказывает</span>
+                  <p class="next-step__text">До&nbsp;12&nbsp;ноября осталось 22&nbsp;картинки. Нарисую их&nbsp;для ключевых постов, а&nbsp;для&nbsp;остальных возьму ваши фото&nbsp;— так хватит до&nbsp;конца месяца.</p>
+                </div>
+                <div class="next-step__actions">
+                  <button class="btn btn--primary" type="button">Так и&nbsp;сделай</button>
+                  <button class="btn btn--secondary" type="button" data-pack="50 картинок">+50 за&nbsp;290&nbsp;₽</button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
