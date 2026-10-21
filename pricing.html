@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Тарифы&nbsp;— ContentFactory</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/workspace.css">
+</head>
+<!-- Тарифы: открываются из Аккаунта («Сменить тариф»), в меню подсвечен Аккаунт -->
+<body data-page="account">
+  <div class="app">
+    <nav class="sidebar" aria-label="Главное меню"></nav>
+
+    <main class="main">
+      <div class="workspace">
+        <header class="page-head">
+          <div>
+            <h1 class="page-head__title">Тарифы</h1>
+            <p class="page-head__subtitle">Вы&nbsp;платите за&nbsp;команду помощников, а&nbsp;не&nbsp;за&nbsp;нейросети. Лимиты&nbsp;— в&nbsp;понятных постах и&nbsp;картинках.</p>
+          </div>
+          <div class="page-head__actions">
+            <div class="billing" role="group" aria-label="Период оплаты">
+              <button class="billing__option is-active" type="button" data-billing="month">Помесячно</button>
+              <button class="billing__option" type="button" data-billing="year">За&nbsp;год <span class="billing__save">−2 месяца</span></button>
+            </div>
+          </div>
+        </header>
+
+        <!-- С чем сравнивать: не с нейросетью, а с людьми, которых заменяет команда -->
+        <div class="value">
+          <div class="value__item">
+            <span class="value__label">SMM-специалист</span>
+            <span class="value__price">от&nbsp;15&nbsp;000&nbsp;₽ в&nbsp;месяц</span>
+          </div>
+          <div class="value__item">
+            <span class="value__label">Картинка у&nbsp;фрилансера</span>
+            <span class="value__price">500–1&nbsp;500&nbsp;₽ за&nbsp;штуку</span>
+          </div>
+          <div class="value__item">
+            <span class="value__label">Бухгалтер на&nbsp;аутсорсе</span>
+            <span class="value__price">от&nbsp;3&nbsp;000&nbsp;₽ в&nbsp;месяц</span>
+          </div>
+          <div class="value__item value__item--ours">
+            <span class="value__label">Вся команда в&nbsp;ContentFactory</span>
+            <span class="value__price"><span data-price-month="2&nbsp;990" data-price-year="2&nbsp;492">2&nbsp;990</span>&nbsp;₽ в&nbsp;месяц</span>
+          </div>
+        </div>
+
+        <div class="plans">
+          <!-- Знакомство -->
+          <section class="plan">
+            <h2 class="plan__name">Знакомство</h2>
+            <p class="plan__for">Посмотреть, как&nbsp;помощник сам предлагает, с&nbsp;чего начать</p>
+            <p class="plan__price"><b>0&nbsp;₽</b></p>
+            <p class="plan__note">Бесплатно навсегда</p>
+            <button class="btn btn--secondary plan__btn" type="button" data-plan="Знакомство">Перейти</button>
+            <ul class="plan__list">
+              <li>Тимур&nbsp;— личный помощник</li>
+              <li>15&nbsp;текстов и&nbsp;5&nbsp;картинок в&nbsp;месяц</li>
+              <li>Идеи и&nbsp;подсказки на&nbsp;главной</li>
+              <li>Один бизнес</li>
+            </ul>
+          </section>
+
+          <!-- Старт -->
+          <section class="plan">
+            <h2 class="plan__name">Старт</h2>
+            <p class="plan__for">Для тех, кому нужен в&nbsp;основном маркетинг</p>
+            <p class="plan__price"><b data-price-month="990" data-price-year="825">990</b>&nbsp;₽ <span>в&nbsp;месяц</span></p>
+            <p class="plan__note" data-note-month="Можно отменить в&nbsp;любой момент" data-note-year="9&nbsp;900&nbsp;₽ за&nbsp;год">Можно отменить в&nbsp;любой момент</p>
+            <button class="btn btn--secondary plan__btn" type="button" data-plan="Старт">Перейти</button>
+            <ul class="plan__list">
+              <li>2&nbsp;помощника на&nbsp;выбор</li>
+              <li>60&nbsp;текстов и&nbsp;30&nbsp;картинок в&nbsp;месяц</li>
+              <li>Публикация в&nbsp;один канал</li>
+              <li>Помощники подсказывают следующий шаг</li>
+            </ul>
+          </section>
+
+          <!-- Команда — текущий тариф -->
+          <section class="plan plan--current">
+            <span class="plan__badge">Ваш тариф</span>
+            <h2 class="plan__name">Команда</h2>
+            <p class="plan__for">Маркетинг, картинки, деньги и&nbsp;гости&nbsp;— всё в&nbsp;одном месте</p>
+            <p class="plan__price"><b data-price-month="2&nbsp;990" data-price-year="2&nbsp;492">2&nbsp;990</b>&nbsp;₽ <span>в&nbsp;месяц</span></p>
+            <p class="plan__note" data-note-month="Чаще всего выбирают" data-note-year="29&nbsp;900&nbsp;₽ за&nbsp;год">Чаще всего выбирают</p>
+            <button class="btn btn--secondary plan__btn" type="button" disabled>Подключён</button>
+            <ul class="plan__list">
+              <li>Все 5&nbsp;помощников</li>
+              <li>200&nbsp;текстов, 120&nbsp;картинок и&nbsp;5&nbsp;коротких видео</li>
+              <li>Публикация во&nbsp;ВКонтакте и&nbsp;Telegram</li>
+              <li>Ответы на&nbsp;отзывы в&nbsp;Яндекс&nbsp;Картах и&nbsp;2ГИС</li>
+              <li>Разбор выписки и&nbsp;налоги</li>
+              <li>Помощники сами замечают поводы и&nbsp;готовят черновики</li>
+              <li>До&nbsp;3&nbsp;сотрудников</li>
+            </ul>
+          </section>
+
+          <!-- Сеть -->
+          <section class="plan">
+            <h2 class="plan__name">Сеть</h2>
+            <p class="plan__for">Для&nbsp;нескольких точек и&nbsp;команды сотрудников</p>
+            <p class="plan__price"><b data-price-month="6&nbsp;990" data-price-year="5&nbsp;825">6&nbsp;990</b>&nbsp;₽ <span>в&nbsp;месяц</span></p>
+            <p class="plan__note" data-note-month="Можно отменить в&nbsp;любой момент" data-note-year="69&nbsp;900&nbsp;₽ за&nbsp;год">Можно отменить в&nbsp;любой момент</p>
+            <button class="btn btn--secondary plan__btn" type="button" data-plan="Сеть">Перейти</button>
+            <ul class="plan__list">
+              <li>Всё, что&nbsp;есть в&nbsp;«Команде»</li>
+              <li>600&nbsp;текстов, 400&nbsp;картинок и&nbsp;30&nbsp;видео</li>
+              <li>До&nbsp;5&nbsp;точек и&nbsp;10&nbsp;сотрудников</li>
+              <li>Свои роли помощников</li>
+              <li>Личный менеджер</li>
+            </ul>
+          </section>
+        </div>
+
+        <!-- Лимиты не должны пугать: инициатива и правки не тратят их -->
+        <h2 class="section-title">Честные лимиты</h2>
+        <div class="grid grid--3">
+          <div class="insight">
+            <div class="insight__body">
+              <b>Правки не&nbsp;тратят лимит</b>
+              <p class="insight__text">Правки по&nbsp;точкам и&nbsp;до&nbsp;трёх перерисовок входят в&nbsp;саму картинку.</p>
+            </div>
+          </div>
+          <div class="insight">
+            <div class="insight__body">
+              <b>Инициатива бесплатна</b>
+              <p class="insight__text">Черновики, которые помощники подготовили сами, не&nbsp;считаются, пока вы&nbsp;их не&nbsp;одобрили.</p>
+            </div>
+          </div>
+          <div class="insight">
+            <div class="insight__body">
+              <b>Работа не&nbsp;обрывается</b>
+              <p class="insight__text">Когда лимит подходит к&nbsp;концу, помощник предупредит заранее и&nbsp;предложит, как&nbsp;распределить остаток.</p>
+            </div>
+          </div>
+        </div>
+
+        <h2 class="section-title">Если нужно больше <span class="section-title__hint">пакеты не&nbsp;сгорают 3&nbsp;месяца</span></h2>
+        <div class="grid grid--3">
+          <div class="card pack">
+            <div>
+              <b class="pack__name">+50 картинок</b>
+              <span class="pack__price">290&nbsp;₽</span>
+            </div>
+            <button class="btn btn--secondary btn--small" type="button" data-pack="50 картинок">Докупить</button>
+          </div>
+          <div class="card pack">
+            <div>
+              <b class="pack__name">+100 текстов</b>
+              <span class="pack__price">190&nbsp;₽</span>
+            </div>
+            <button class="btn btn--secondary btn--small" type="button" data-pack="100 текстов">Докупить</button>
+          </div>
+          <div class="card pack">
+            <div>
+              <b class="pack__name">+10 коротких видео</b>
+              <span class="pack__price">490&nbsp;₽</span>
+            </div>
+            <button class="btn btn--secondary btn--small" type="button" data-pack="10 видео">Докупить</button>
+          </div>
+        </div>
+
+        <div class="next-step">
+          <span class="avatar avatar--48 assistant--assistant"><img src="assets/avatars/assistant.png" alt=""></span>
+          <div class="next-step__body">
+            <span class="next-step__label">Для сезонного бизнеса</span>
+            <p class="next-step__text">Подписку можно приостановить до&nbsp;2&nbsp;месяцев в&nbsp;году. Помощники всё запомнят, и&nbsp;вы&nbsp;продолжите с&nbsp;того&nbsp;же места.</p>
+          </div>
+          <div class="next-step__actions">
+            <button class="btn btn--secondary" type="button" data-pause>Приостановить</button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/sidebar.js"></script>
+  <script src="js/workspace.js"></script>
+  <script src="js/chat.js"></script>
+</body>
+</html>

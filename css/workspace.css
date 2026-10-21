@@ -1638,3 +1638,259 @@ a.row:hover {
   letter-spacing: 0.04em;
   color: #F6D9B5;
 }
+
+/* ===== Живые действия (js/chat.js) ===== */
+.next-step.is-dismissed,
+.card.is-dismissed {
+  opacity: 0;
+  transform: scale(0.97);
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+/* Поле «Чему научить?» в ряду навыков */
+.skill--input {
+  width: 150px;
+  color: var(--color-ink);
+  border-color: var(--color-cobalt);
+  outline: none;
+  cursor: text;
+}
+
+/* Картинка, загруженная вами, в галерее */
+.art--upload {
+  --art-a: var(--color-surface);
+  --art-b: var(--color-line);
+}
+
+/* ===== Тарифы (pricing.html) ===== */
+/* Переключатель «Помесячно / За год» */
+.billing {
+  display: inline-flex;
+  padding: 3px;
+  border-radius: var(--radius-round);
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+}
+
+.billing__option {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 30px;
+  padding: 0 14px;
+  border: 0;
+  border-radius: var(--radius-round);
+  background: none;
+  font: 600 13px/1 var(--font-main);
+  color: var(--color-midgray);
+  cursor: pointer;
+}
+
+.billing__option.is-active {
+  background: var(--color-white);
+  color: var(--color-ink);
+  box-shadow: 0 1px 3px rgba(34, 42, 57, 0.12);
+}
+
+.billing__save {
+  color: var(--color-success);
+}
+
+/* Сравнение с людьми, которых заменяет команда */
+.value {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin-bottom: 24px;
+  border-radius: var(--radius-card);
+  background: var(--color-surface);
+}
+
+.value__item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 16px 20px;
+}
+
+.value__item + .value__item {
+  border-left: 1px solid var(--color-line);
+}
+
+.value__label {
+  font: 400 12px/1.4 var(--font-main);
+  color: var(--color-midgray);
+}
+
+.value__price {
+  font: 600 14px/1.4 var(--font-main);
+  color: var(--color-ink);
+}
+
+.value__item--ours {
+  border-radius: 0 var(--radius-card) var(--radius-card) 0;
+  background: var(--color-cobalt-tint);
+}
+
+.value__item--ours .value__price {
+  color: var(--color-cobalt);
+}
+
+/* Карточки тарифов */
+.plans {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  align-items: start;
+}
+
+.plan {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 24px 20px;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-card);
+  background: var(--color-white);
+}
+
+.plan--current {
+  border: 2px solid var(--color-cobalt);
+  padding: 23px 19px; /* компенсирует толстую рамку — текст не прыгает */
+}
+
+.plan__badge {
+  position: absolute;
+  top: -12px;
+  left: 18px;
+  padding: 5px 10px;
+  border-radius: var(--radius-round);
+  background: var(--gradient-user);
+  font: 600 11px/1 var(--font-main);
+  color: var(--color-white);
+}
+
+.plan__name {
+  margin: 0;
+  font: 700 18px/1.3 var(--font-main);
+}
+
+.plan__for {
+  min-height: 40px;
+  margin: 6px 0 16px;
+  font: 400 13px/1.5 var(--font-main);
+  color: var(--color-midgray);
+}
+
+.plan__price {
+  margin: 0;
+  font: 600 16px/1 var(--font-main);
+}
+
+.plan__price b {
+  font: 700 32px/1 var(--font-main);
+  letter-spacing: -0.02em;
+}
+
+.plan__price span {
+  font: 400 13px/1 var(--font-main);
+  color: var(--color-midgray);
+}
+
+.plan__note {
+  margin: 8px 0 16px;
+  font: 400 12px/1.4 var(--font-main);
+  color: var(--color-gray);
+}
+
+.plan--current .plan__note {
+  color: var(--color-cobalt);
+}
+
+.plan__btn {
+  width: 100%;
+}
+
+.plan__btn:disabled {
+  border-color: transparent;
+  background: var(--color-cobalt-tint);
+  color: var(--color-cobalt);
+  cursor: default;
+}
+
+.plan__list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 20px 0 0;
+  padding: 0;
+  list-style: none;
+  font: 400 13px/1.45 var(--font-main);
+  color: var(--color-ink);
+}
+
+/* Галочка — маленький круг с отметкой */
+.plan__list li {
+  position: relative;
+  padding-left: 24px;
+}
+
+.plan__list li::before {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 0;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--color-cobalt-tint) center / 10px no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M2 5.2l2 2 4-4.4' fill='none' stroke='%233166B6' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+/* Пакеты сверх тарифа */
+.pack {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.pack__name {
+  display: block;
+  font: 600 14px/1.4 var(--font-main);
+}
+
+.pack__price {
+  font: 400 13px/1.4 var(--font-main);
+  color: var(--color-midgray);
+}
+
+/* Строчка расхода лимита (Изображения) */
+.usage-note {
+  margin: 8px 0 0;
+  font: 400 12px/1.4 var(--font-main);
+  color: var(--color-gray);
+}
+
+.usage-note a {
+  color: var(--color-cobalt);
+  text-decoration: none;
+}
+
+.usage-note a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 1100px) {
+  .plans,
+  .value {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .value__item + .value__item { border-left: 0; }
+  .value__item--ours { border-radius: 0 0 var(--radius-card) 0; }
+}
+
+/* Заголовок внутри подсказки (Тарифы → «Честные лимиты») */
+.insight__body > b {
+  display: block;
+  margin-bottom: 4px;
+  font: 700 14px/1.4 var(--font-main);
+}

@@ -11,6 +11,8 @@
    5. Инициативность:  input[data-initiative] меняет подпись уровня.
    6. «Позже»:         [data-dismiss] убирает плитку-предложение.
    7. Выбор:           .choice / .variant / .skill переключают выделение.
+   8. Вопросы:         .question .chip — ответ в один клик.
+   9. Тарифы:          [data-billing] переключает цены, [data-plan], [data-pack], [data-pause].
    Подключение: <script src="js/workspace.js"></script> в конце body.
    ========================================================= */
 
@@ -268,6 +270,41 @@
     question.querySelector(".chips").outerHTML =
       '<span class="pill pill--ok">Ответ: ' + answer.replace(/</g, "&lt;") + "</span>";
     toast("Запомнили. Помощники учтут это в следующих задачах.");
+  });
+
+  // ---------- 9. Тарифы ----------
+  // Переключатель «Помесячно / За год»: цены и подписи берутся из data-price-* и data-note-*
+  document.addEventListener("click", function (event) {
+    var opt = event.target.closest("[data-billing]");
+    if (opt) {
+      var period = opt.getAttribute("data-billing");
+      document.querySelectorAll("[data-billing]").forEach(function (o) {
+        o.classList.toggle("is-active", o === opt);
+      });
+      document.querySelectorAll("[data-price-" + period + "]").forEach(function (el) {
+        el.innerHTML = el.getAttribute("data-price-" + period);
+      });
+      document.querySelectorAll("[data-note-" + period + "]").forEach(function (el) {
+        el.innerHTML = el.getAttribute("data-note-" + period);
+      });
+      return;
+    }
+
+    var plan = event.target.closest("[data-plan]");
+    if (plan) {
+      toast("Тариф «" + plan.getAttribute("data-plan") + "» начнёт действовать 12 ноября, до этого остаётся «Команда».");
+      return;
+    }
+
+    var pack = event.target.closest("[data-pack]");
+    if (pack) {
+      toast("Добавили " + pack.getAttribute("data-pack") + ". Пакет не сгорит 3 месяца.");
+      return;
+    }
+
+    if (event.target.closest("[data-pause]")) {
+      toast("Подписка на паузе с 12 ноября. Вернуться можно в любой день.");
+    }
   });
 
   // ---------- Всплывающее сообщение ----------
