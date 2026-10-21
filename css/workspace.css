@@ -2323,3 +2323,58 @@ a.row:hover {
 .case-card__team:has([data-role="hr"]:hover) .avatar:not(.assistant--hr) {
   opacity: 0.3;
 }
+
+/* Шапка стартовой: текст слева, подсказка о возврате — справа */
+.start__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px 40px;
+}
+
+.start__hint {
+  display: flex;
+  flex: none;
+  align-items: flex-start;
+  gap: 12px;
+  max-width: 300px;
+  padding: 14px 16px;
+  border-radius: var(--radius-card);
+  background: var(--color-white);
+}
+
+/* Тот же кружок профиля, что внизу меню */
+.start__hint-icon {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--color-darknavy);
+  font: 600 14px/1 var(--font-main);
+  color: var(--color-white);
+}
+
+.start__hint p {
+  margin: 0;
+  font: 400 13px/1.45 var(--font-main);
+  color: var(--color-midgray);
+}
+
+.start__hint b {
+  display: block;
+  margin-bottom: 2px;
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+@media (max-width: 900px) {
+  .start__head {
+    flex-direction: column;
+  }
+  .start__hint {
+    max-width: none;
+  }
+}
