@@ -3,8 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Сегодня&nbsp;— ContentFactory</title>
-  <!-- Шрифт Inter с Google Fonts: все толщины 100–900, прямой и курсив -->
+  <title>Клиенты&nbsp;— ContentFactory</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap">
@@ -12,135 +11,129 @@
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/workspace.css">
 </head>
-<body data-page="home">
-  <div class="app">
-    <!-- Главное меню: содержимое рисует js/sidebar.js (одно на все страницы) -->
-    <nav class="sidebar" aria-label="Главное меню"></nav>
+<!-- Стартовая страница прототипа (index.html): список клиентов. По клику — интерфейс, собранный под клиента.
+     Вернуться сюда можно кнопкой «Выйти из профиля» на странице аккаунта любого клиента. -->
+<body class="start">
+  <main class="start__main">
+    <header class="start__head">
+      <p class="start__brand">ContentFactory</p>
+      <h1 class="start__title">Клиенты</h1>
+      <p class="start__lead">Команда ИИ-помощников для малого бизнеса. Один продукт&nbsp;— пять разных бизнесов: под&nbsp;каждого подобраны помощники, тариф и&nbsp;способ общения в&nbsp;чате. Выберите клиента, чтобы открыть его интерфейс.</p>
+    </header>
 
-    <!-- Главная без чата: сводка от всех помощников -->
-    <main class="main">
-      <div class="workspace">
-        <header class="page-head">
-          <div>
-            <h1 class="page-head__title">Добрый день!</h1>
-            <p class="page-head__subtitle">Понедельник, 12 октября. Пока вас не&nbsp;было, помощники кое-что&nbsp;подготовили.</p>
-          </div>
-        </header>
+    <div class="start__legend">
+      <span><b>Чат на&nbsp;каждую задачу</b>&nbsp;— у&nbsp;задачи своя переписка и&nbsp;«Кратко о&nbsp;задаче». Удобно, когда задач много.</span>
+      <span><b>Общий чат</b>&nbsp;— одна лента на&nbsp;все задачи помощника, как&nbsp;в&nbsp;мессенджере. Удобно, когда всё ведёт один человек.</span>
+    </div>
 
-        <!-- Инициативные предложения -->
-        <h2 class="section-title">Помощники предлагают <span class="section-title__hint">можно отложить&nbsp;— напомним завтра</span></h2>
-        <div class="grid grid--3">
-          <div class="proposal">
-            <div class="proposal__who">
-              <span class="avatar assistant--marketer"><img src="assets/avatars/marketer.png" alt=""></span>
-              <span><b>Эльвира</b>маркетолог</span>
-            </div>
-            <p class="proposal__text">Через 2&nbsp;недели Хэллоуин. Сделаем «тыквенную неделю»?</p>
-            <p class="proposal__why">В&nbsp;прошлом году посты про&nbsp;тыквенный раф собрали в&nbsp;3&nbsp;раза больше лайков, чем обычно.</p>
-            <div class="proposal__actions">
-              <a class="btn btn--primary btn--small" href="marketer.html">Давай</a>
-              <button class="btn btn--secondary btn--small" type="button" data-dismiss>Позже</button>
-            </div>
-          </div>
-
-          <div class="proposal">
-            <div class="proposal__who">
-              <span class="avatar assistant--financier"><img src="assets/avatars/financier.png" alt=""></span>
-              <span><b>Ольга</b>финансист</span>
-            </div>
-            <p class="proposal__text">До&nbsp;28 октября нужно заплатить налог за&nbsp;3&nbsp;квартал. Посчитать сумму?</p>
-            <p class="proposal__why">Займёт минуту: выписка за&nbsp;сентябрь уже загружена.</p>
-            <div class="proposal__actions">
-              <a class="btn btn--primary btn--small" href="financier.html">Посчитать</a>
-              <button class="btn btn--secondary btn--small" type="button" data-dismiss>Позже</button>
-            </div>
-          </div>
-
-          <div class="proposal">
-            <div class="proposal__who">
-              <span class="avatar assistant--clients"><img src="assets/avatars/clients.png" alt=""></span>
-              <span><b>Вера</b>клиентский менеджер</span>
-            </div>
-            <p class="proposal__text">Трое гостей за&nbsp;неделю похвалили сырники. Порадуем постоянных акцией?</p>
-            <p class="proposal__why">Такие акции возвращают в&nbsp;среднем каждого пятого гостя, который давно не&nbsp;заходил.</p>
-            <div class="proposal__actions">
-              <a class="btn btn--primary btn--small" href="clients.html">Придумать</a>
-              <button class="btn btn--secondary btn--small" type="button" data-dismiss>Позже</button>
-            </div>
+    <div class="cases">
+      <!-- Кофейня -->
+      <a class="case-card" href="home.html">
+        <span class="art case-card__cover" style="--art-img:url(&quot;../assets/images/latte.jpg&quot;)"></span>
+        <div class="case-card__body">
+          <p class="case-card__sphere">Общепит</p>
+          <h2 class="case-card__name">Кофейня «Зерно»</h2>
+          <p class="case-card__text">Кофейня на&nbsp;30&nbsp;мест со&nbsp;своей обжаркой и&nbsp;верандой. Владелец&nbsp;— Николай, сам стоит за&nbsp;баром. Нужно больше гостей в&nbsp;будни, посты без&nbsp;маркетолога и&nbsp;понятные деньги.</p>
+          <ul class="case-card__facts">
+            <li><span>Тариф</span><b>«Команда» · 2&nbsp;990&nbsp;₽</b></li>
+            <li><span>Чат</span><b>Общий: Николай сам стоит за&nbsp;баром и&nbsp;пишет помощникам между заказами</b></li>
+          </ul>
+          <div class="case-card__team">
+            <span class="avatar assistant--marketer" title="Маркетолог"><img src="assets/avatars/marketer.png" alt=""></span>
+            <span class="avatar assistant--designer" title="Дизайнер"><img src="assets/avatars/designer.png" alt=""></span>
+            <span class="avatar assistant--financier" title="Финансист"><img src="assets/avatars/financier.png" alt=""></span>
+            <span class="avatar assistant--assistant" title="Личный помощник"><img src="assets/avatars/assistant.png" alt=""></span>
+            <span class="avatar assistant--clients" title="Клиентский менеджер"><img src="assets/avatars/clients.png" alt=""></span>
+            <span class="case-card__names">Маркетолог, дизайнер, финансист, личный помощник, клиентский менеджер</span>
           </div>
         </div>
+      </a>
 
-        <!-- Задачи в работе у всех помощников -->
-        <h2 class="section-title">В&nbsp;работе <span class="section-title__hint">ждут вас: 2</span></h2>
-        <div class="rows rows--cols">
-          <a class="row" href="clients.html">
-            <span class="avatar assistant--clients"><img src="assets/avatars/clients.png" alt=""></span>
-            <div class="row__body"><p class="row__title">Ответы на&nbsp;отзывы</p><p class="row__sub">Вера · Ответы готовы, осталось отправить</p></div>
-            <div class="row__side"><span class="progress"><span class="progress__bar" style="width:50%"></span></span><span class="pill pill--wait">Ждёт вас</span></div>
-          </a>
-          <a class="row" href="marketer.html#plan">
-            <span class="avatar assistant--marketer"><img src="assets/avatars/marketer.png" alt=""></span>
-            <div class="row__body"><p class="row__title">Контент-план на&nbsp;ноябрь</p><p class="row__sub">Эльвира · Тексты: 2 поста ждут вашего ответа</p></div>
-            <div class="row__side"><span class="progress"><span class="progress__bar" style="width:66%"></span></span><span class="pill pill--wait">Ждёт вас</span></div>
-          </a>
-          <a class="row" href="designer.html">
-            <span class="avatar assistant--designer"><img src="assets/avatars/designer.png" alt=""></span>
-            <div class="row__body"><p class="row__title">Креативы для&nbsp;веранды</p><p class="row__sub">Лев · Рисует варианты, готово 2 из&nbsp;4</p></div>
-            <div class="row__side"><span class="progress progress--live"><span class="progress__bar" style="width:55%"></span></span><span class="pill pill--work"><span class="spinner"></span>Рисует</span></div>
-          </a>
-          <a class="row" href="financier.html">
-            <span class="avatar assistant--financier"><img src="assets/avatars/financier.png" alt=""></span>
-            <div class="row__body"><p class="row__title">Куда уходят деньги: сентябрь</p><p class="row__sub">Ольга · Итоги готовы, 3 новых совета</p></div>
-            <div class="row__side"><span class="progress"><span class="progress__bar" style="width:75%"></span></span><span class="pill pill--new">3 новых</span></div>
-          </a>
+      <!-- Фитнес -->
+      <a class="case-card" href="cases/pulse/index.html">
+        <span class="art case-card__cover" style="--art-img:url(&quot;../assets/images/pulse/gym.jpg&quot;)"></span>
+        <div class="case-card__body">
+          <p class="case-card__sphere">Фитнес · Екатеринбург</p>
+          <h2 class="case-card__name">Сеть фитнес-студий «Пульс»</h2>
+          <p class="case-card__text">3&nbsp;студии, 1&nbsp;800 клиентов и&nbsp;24 тренера. Владелец&nbsp;— Андрей. Главное&nbsp;— удержать клиентов после пробной, найти тренеров на&nbsp;замену и&nbsp;понять, какая студия тянет сеть вниз.</p>
+          <ul class="case-card__facts">
+            <li><span>Тариф</span><b>«Сеть» · 6&nbsp;990&nbsp;₽</b></li>
+            <li><span>Чат</span><b>На&nbsp;каждую задачу: у&nbsp;сети много параллельных задач и&nbsp;три управляющих</b></li>
+          </ul>
+          <div class="case-card__team">
+            <span class="avatar assistant--marketer" title="Маркетолог"><img src="assets/avatars/marketer.png" alt=""></span>
+            <span class="avatar assistant--designer" title="Дизайнер"><img src="assets/avatars/designer.png" alt=""></span>
+            <span class="avatar assistant--clients" title="Клиентский менеджер"><img src="assets/avatars/clients.png" alt=""></span>
+            <span class="avatar assistant--financier" title="Финансист"><img src="assets/avatars/financier.png" alt=""></span>
+            <span class="avatar assistant--hr" title="Рекрутер"><img src="assets/avatars/hr.png" alt=""></span>
+            <span class="case-card__names">Маркетолог, дизайнер, клиентский менеджер, финансист, рекрутер</span>
+          </div>
         </div>
+      </a>
 
-        <!-- Быстрые старты для тех, кто не знает, с чего начать -->
-        <h2 class="section-title">С&nbsp;чего начать <span class="section-title__hint">популярное у&nbsp;кофеен</span></h2>
-        <div class="grid grid--3">
-          <a class="scenario" href="marketer.html">
-            <span class="avatar assistant--marketer"><img src="assets/avatars/marketer.png" alt=""></span>
-            <p class="scenario__title">Контент-план на&nbsp;месяц</p>
-            <p class="scenario__text">Темы, даты и&nbsp;тексты постов&nbsp;— Эльвира задаст пару вопросов и&nbsp;сделает остальное.</p>
-            <span class="scenario__time">около 10 минут</span>
-          </a>
-          <a class="scenario" href="designer.html">
-            <span class="avatar assistant--designer"><img src="assets/avatars/designer.png" alt=""></span>
-            <p class="scenario__title">Картинка для&nbsp;поста</p>
-            <p class="scenario__text">Опишите идею словами или&nbsp;выберите готовый стиль&nbsp;— Лев нарисует 4 варианта.</p>
-            <span class="scenario__time">около 2 минут</span>
-          </a>
-          <a class="scenario" href="clients.html">
-            <span class="avatar assistant--clients"><img src="assets/avatars/clients.png" alt=""></span>
-            <p class="scenario__title">Ответить на&nbsp;отзывы</p>
-            <p class="scenario__text">Вера соберёт отзывы с&nbsp;Яндекс Карт и&nbsp;2ГИС и&nbsp;подготовит вежливые ответы.</p>
-            <span class="scenario__time">около минуты</span>
-          </a>
-          <a class="scenario" href="financier.html">
-            <span class="avatar assistant--financier"><img src="assets/avatars/financier.png" alt=""></span>
-            <p class="scenario__title">Куда уходят деньги</p>
-            <p class="scenario__text">Загрузите выписку из&nbsp;банка&nbsp;— Ольга разложит расходы и&nbsp;подскажет, где сэкономить.</p>
-            <span class="scenario__time">около 3 минут</span>
-          </a>
-          <a class="scenario" href="marketer.html">
-            <span class="avatar assistant--marketer"><img src="assets/avatars/marketer.png" alt=""></span>
-            <p class="scenario__title">Пост к&nbsp;празднику</p>
-            <p class="scenario__text">Эльвира подскажет ближайшие поводы и&nbsp;напишет текст, Лев сделает картинку.</p>
-            <span class="scenario__time">около 5 минут</span>
-          </a>
-          <a class="scenario" href="assistant.html">
-            <span class="avatar assistant--assistant"><img src="assets/avatars/assistant.png" alt=""></span>
-            <p class="scenario__title">Разобрать мой день</p>
-            <p class="scenario__text">Тимур соберёт дела от&nbsp;всех помощников и&nbsp;расставит их&nbsp;по&nbsp;важности.</p>
-            <span class="scenario__time">около минуты</span>
-          </a>
+      <!-- Стоматология -->
+      <a class="case-card" href="cases/smile/index.html">
+        <span class="art case-card__cover" style="--art-img:url(&quot;../assets/images/smile/clinic.jpg&quot;)"></span>
+        <div class="case-card__body">
+          <p class="case-card__sphere">Медицина · Казань</p>
+          <h2 class="case-card__name">Стоматология «Улыбка»</h2>
+          <p class="case-card__text">6&nbsp;кресел и&nbsp;9&nbsp;врачей. Главный врач и&nbsp;владелец&nbsp;— Ирина Сергеевна. Важны напоминания о&nbsp;профосмотре, загрузка дорогих кресел и&nbsp;реклама строго по&nbsp;закону о&nbsp;медуслугах.</p>
+          <ul class="case-card__facts">
+            <li><span>Тариф</span><b>«Команда» · 2&nbsp;990&nbsp;₽</b></li>
+            <li><span>Чат</span><b>На&nbsp;каждую задачу: у&nbsp;каждой задачи свои решения, которые важно не&nbsp;потерять</b></li>
+          </ul>
+          <div class="case-card__team">
+            <span class="avatar assistant--clients" title="Клиентский менеджер"><img src="assets/avatars/clients.png" alt=""></span>
+            <span class="avatar assistant--marketer" title="Маркетолог"><img src="assets/avatars/marketer.png" alt=""></span>
+            <span class="avatar assistant--financier" title="Финансист"><img src="assets/avatars/financier.png" alt=""></span>
+            <span class="avatar assistant--assistant" title="Личный помощник"><img src="assets/avatars/assistant.png" alt=""></span>
+            <span class="case-card__names">Клиентский менеджер, маркетолог, финансист, личный помощник</span>
+          </div>
         </div>
-      </div>
-    </main>
-  </div>
+      </a>
 
-  <script src="js/sidebar.js"></script>
-  <script src="js/workspace.js"></script>
-  <script src="js/chat.js"></script>
+      <!-- Отель -->
+      <a class="case-card" href="cases/bereg/index.html">
+        <span class="art case-card__cover" style="--art-img:url(&quot;../assets/images/bereg/lake.jpg&quot;)"></span>
+        <div class="case-card__body">
+          <p class="case-card__sphere">Гостиницы · Карелия</p>
+          <h2 class="case-card__name">Бутик-отель «Северный берег»</h2>
+          <p class="case-card__text">24 номера, ресторан и&nbsp;баня на&nbsp;берегу Ладоги. Управляющий&nbsp;— Олег. Сильная сезонность: летом и&nbsp;на&nbsp;Новый год всё занято, в&nbsp;ноябре пусто. Отзывы на&nbsp;площадках решают продажи.</p>
+          <ul class="case-card__facts">
+            <li><span>Тариф</span><b>«Команда» · 2&nbsp;990&nbsp;₽</b></li>
+            <li><span>Чат</span><b>Общий: управляющий пишет помощникам между делами, как&nbsp;в&nbsp;мессенджере</b></li>
+          </ul>
+          <div class="case-card__team">
+            <span class="avatar assistant--clients" title="Клиентский менеджер"><img src="assets/avatars/clients.png" alt=""></span>
+            <span class="avatar assistant--marketer" title="Маркетолог"><img src="assets/avatars/marketer.png" alt=""></span>
+            <span class="avatar assistant--designer" title="Дизайнер"><img src="assets/avatars/designer.png" alt=""></span>
+            <span class="avatar assistant--financier" title="Финансист"><img src="assets/avatars/financier.png" alt=""></span>
+            <span class="case-card__names">Клиентский менеджер, маркетолог, дизайнер, финансист</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Косметика -->
+      <a class="case-card" href="cases/travy/index.html">
+        <span class="art case-card__cover" style="--art-img:url(&quot;../assets/images/travy/soaps.jpg&quot;)"></span>
+        <div class="case-card__body">
+          <p class="case-card__sphere">Маркетплейсы · Алтай</p>
+          <h2 class="case-card__name">Косметика «Травы»</h2>
+          <p class="case-card__text">60 товаров на&nbsp;Wildberries и&nbsp;Ozon, своя мастерская. Основательница&nbsp;— Светлана, ведёт всё с&nbsp;телефона. Главное&nbsp;— карточки, которые находят в&nbsp;поиске, ответы покупателям и&nbsp;прибыль с&nbsp;каждой продажи.</p>
+          <ul class="case-card__facts">
+            <li><span>Тариф</span><b>«Сеть» · 6&nbsp;990&nbsp;₽</b></li>
+            <li><span>Чат</span><b>Общий: всё ведёт один человек, ей проще одна лента на&nbsp;помощника</b></li>
+          </ul>
+          <div class="case-card__team">
+            <span class="avatar assistant--designer" title="Дизайнер"><img src="assets/avatars/designer.png" alt=""></span>
+            <span class="avatar assistant--marketer" title="Маркетолог"><img src="assets/avatars/marketer.png" alt=""></span>
+            <span class="avatar assistant--clients" title="Клиентский менеджер"><img src="assets/avatars/clients.png" alt=""></span>
+            <span class="avatar assistant--financier" title="Финансист"><img src="assets/avatars/financier.png" alt=""></span>
+            <span class="case-card__names">Дизайнер, маркетолог, клиентский менеджер, финансист</span>
+          </div>
+        </div>
+      </a>
+    </div>
+  </main>
 </body>
 </html>

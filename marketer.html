@@ -17,77 +17,60 @@
     <!-- Главное меню: содержимое рисует js/sidebar.js (одно на все страницы) -->
     <nav class="sidebar" aria-label="Главное меню"></nav>
 
-    <!-- Чат с маркетологом. Одна задача — один чат: у каждой задачи своя
-         шапка, выжимка «Кратко о задаче», переписка и подсказки (data-thread).
-         Переключаются вкладками задач в рабочей зоне (js/workspace.js) -->
+    <!-- Чат с маркетологом: общий — одна лента на все задачи.
+         Вкладки задач в рабочей зоне переключают только рабочую зону (js/workspace.js) -->
     <aside class="chat" aria-label="Чат с маркетологом">
 
-      <!-- ===== Шапки чатов ===== -->
-      <header class="chat__head" data-thread="plan">
-        <span class="chat__task-label">Чат задачи</span>
-        <h2 class="chat__task-title">Контент-план на&nbsp;ноябрь</h2>
-        <p class="chat__task-meta">Этап 4 из&nbsp;6 · Тексты постов</p>
-        <details class="brief">
-          <summary class="brief__toggle">Кратко о&nbsp;задаче <span class="brief__count">4 решения</span></summary>
-          <div class="brief__body">
-            <div class="brief__row">
-              <span class="brief__label">Цель</span>
-              <p class="brief__text">Больше гостей в&nbsp;будни и&nbsp;чтобы кофейню узнали в&nbsp;районе</p>
-            </div>
-            <div class="brief__row">
-              <span class="brief__label">Что&nbsp;решили</span>
-              <ul class="brief__decisions">
-                <li><time>14:47</time>Публикуем во&nbsp;ВКонтакте и&nbsp;Telegram</li>
-                <li><time>14:52</time>3 поста в&nbsp;неделю и&nbsp;сторис по&nbsp;выходным</li>
-                <li><time>15:05</time>План из&nbsp;12 постов одобрен</li>
-                <li><time>15:12</time>Посты «Новое меню» и&nbsp;«4 ноября» одобрены</li>
-              </ul>
-            </div>
-            <div class="brief__row">
-              <span class="brief__label">Сейчас</span>
-              <p class="brief__text">Эльвира дописывает 4 поста и&nbsp;ждёт вашего ответа по&nbsp;двум</p>
-            </div>
+      <!-- ===== Общая лента: все задачи Эльвиры в одной переписке, по времени ===== -->
+      <div class="chat__messages">
+        <div class="chat__divider">
+          <time class="chat__time" datetime="18:20">Вчера в&nbsp;18:20</time>
+          <p class="chat__summary">Открытие веранды: повод и&nbsp;сроки.</p>
+        </div>
+
+        <div class="message message--user">
+          <div class="message__bubble">
+            <p class="message__text">В&nbsp;субботу 14 ноября открываем тёплую веранду. Хочу, чтобы о&nbsp;ней узнали заранее.</p>
+            <time class="message__time" datetime="18:20">18:20</time>
           </div>
-        </details>
-      </header>
+        </div>
 
-      <header class="chat__head" data-thread="veranda" hidden>
-        <span class="chat__task-label">Чат задачи</span>
-        <h2 class="chat__task-title">Посты к&nbsp;открытию веранды</h2>
-        <p class="chat__task-meta">Этап 2 из&nbsp;5 · Выбор идеи</p>
-        <details class="brief">
-          <summary class="brief__toggle">Кратко о&nbsp;задаче <span class="brief__count">2 решения</span></summary>
-          <div class="brief__body">
-            <div class="brief__row">
-              <span class="brief__label">Цель</span>
-              <p class="brief__text">Чтобы веранда была полной уже в&nbsp;первые выходные</p>
-            </div>
-            <div class="brief__row">
-              <span class="brief__label">Что&nbsp;решили</span>
-              <ul class="brief__decisions">
-                <li><time>вчера</time>Открытие в&nbsp;субботу, 14 ноября</li>
-                <li><time>9:40</time>Бюджет на&nbsp;продвижение до&nbsp;30 000 ₽&nbsp;— от&nbsp;Тимура</li>
-              </ul>
-            </div>
-            <div class="brief__row">
-              <span class="brief__label">Сейчас</span>
-              <p class="brief__text">Ждём, какую из&nbsp;трёх идей вы&nbsp;выберете</p>
-            </div>
+        <div class="message message--marketer">
+          <div class="message__avatar assistant assistant--marketer">
+            <img src="assets/avatars/marketer.png" width="40" height="40" alt="">
           </div>
-        </details>
-      </header>
+          <div class="message__body">
+            <p class="message__author"><span class="message__name">Эльвира</span>&nbsp;— Маркетолог</p>
+            <p class="message__text">Отличный повод! Предложила три идеи для&nbsp;серии постов&nbsp;— они справа. Какая ближе?</p>
+            <div class="chips chips--wrap">
+              <button class="chip" type="button">Самое тёплое место во&nbsp;дворе</button>
+              <button class="chip" type="button">Плед и&nbsp;раф</button>
+              <button class="chip" type="button">Назовите веранду</button>
+              <button class="chip" type="button">Предложи ещё</button>
+            </div>
+            <time class="message__time" datetime="18:22">18:22</time>
+          </div>
+        </div>
 
-      <header class="chat__head" data-thread="new" hidden>
-        <span class="chat__task-label">Новый чат</span>
-        <h2 class="chat__task-title">Новая задача</h2>
-        <p class="chat__task-meta">Опишите задачу своими словами или&nbsp;выберите вариант</p>
-      </header>
+        <div class="chat__divider">
+          <time class="chat__time" datetime="09:40">Сегодня в&nbsp;9:40</time>
+          <p class="chat__summary">Веранда стала частью общего проекта.</p>
+        </div>
 
-      <!-- ===== Переписка: контент-план ===== -->
-      <div class="chat__messages" data-thread="plan">
+        <div class="message message--marketer">
+          <div class="message__avatar assistant assistant--marketer">
+            <img src="assets/avatars/marketer.png" width="40" height="40" alt="">
+          </div>
+          <div class="message__body">
+            <p class="message__author"><span class="message__name">Эльвира</span>&nbsp;— Маркетолог</p>
+            <p class="message__text">Тимур собрал открытие веранды в&nbsp;общий проект: Лев уже рисует картинки, а&nbsp;бюджет&nbsp;— до&nbsp;30 000 ₽. Осталось выбрать идею, и&nbsp;я&nbsp;сразу сяду за&nbsp;тексты.</p>
+            <time class="message__time" datetime="09:40">9:40</time>
+          </div>
+        </div>
+
         <div class="chat__divider">
           <time class="chat__time" datetime="14:43">Сегодня в&nbsp;14:43</time>
-          <p class="chat__summary">Начало задачи: цели и&nbsp;каналы.</p>
+          <p class="chat__summary">Контент-план на&nbsp;ноябрь: цели и&nbsp;каналы.</p>
         </div>
 
         <div class="message message--marketer">
@@ -120,14 +103,14 @@
           </div>
           <div class="message__body">
             <p class="message__author"><span class="message__name">Эльвира</span>&nbsp;— Маркетолог</p>
-            <p class="message__text">Записала цель в&nbsp;«Кратко о&nbsp;задаче» наверху&nbsp;— туда же&nbsp;буду складывать всё, о&nbsp;чём договоримся. Предлагаю 3 поста в&nbsp;неделю во&nbsp;ВКонтакте и&nbsp;Telegram и&nbsp;сторис по&nbsp;выходным. План уже справа.</p>
+            <p class="message__text">Записала цель. Предлагаю 3 поста в&nbsp;неделю во&nbsp;ВКонтакте и&nbsp;Telegram и&nbsp;сторис по&nbsp;выходным. План уже справа.</p>
             <time class="message__time" datetime="14:52">14:52</time>
           </div>
         </div>
 
         <div class="chat__divider">
           <time class="chat__time" datetime="15:10">Сегодня в&nbsp;15:10</time>
-          <p class="chat__summary">Тексты постов.</p>
+          <p class="chat__summary">Контент-план: тексты постов.</p>
         </div>
 
         <div class="message message--marketer">
@@ -142,74 +125,7 @@
         </div>
       </div>
 
-      <!-- ===== Переписка: веранда ===== -->
-      <div class="chat__messages" data-thread="veranda" hidden>
-        <div class="chat__divider">
-          <time class="chat__time" datetime="18:20">Вчера в&nbsp;18:20</time>
-          <p class="chat__summary">Начало задачи: повод и&nbsp;сроки.</p>
-        </div>
-
-        <div class="message message--user">
-          <div class="message__bubble">
-            <p class="message__text">В&nbsp;субботу 14 ноября открываем тёплую веранду. Хочу, чтобы о&nbsp;ней узнали заранее.</p>
-            <time class="message__time" datetime="18:20">18:20</time>
-          </div>
-        </div>
-
-        <div class="message message--marketer">
-          <div class="message__avatar assistant assistant--marketer">
-            <img src="assets/avatars/marketer.png" width="40" height="40" alt="">
-          </div>
-          <div class="message__body">
-            <p class="message__author"><span class="message__name">Эльвира</span>&nbsp;— Маркетолог</p>
-            <p class="message__text">Отличный повод! Предложила три идеи для&nbsp;серии постов&nbsp;— они справа. Какая ближе?</p>
-            <div class="chips chips--wrap">
-              <button class="chip" type="button">Самое тёплое место во&nbsp;дворе</button>
-              <button class="chip" type="button">Плед и&nbsp;раф</button>
-              <button class="chip" type="button">Назовите веранду</button>
-              <button class="chip" type="button">Предложи ещё</button>
-            </div>
-            <time class="message__time" datetime="18:22">18:22</time>
-          </div>
-        </div>
-
-        <div class="chat__divider">
-          <time class="chat__time" datetime="09:40">Сегодня в&nbsp;9:40</time>
-          <p class="chat__summary">Задача стала частью общего проекта.</p>
-        </div>
-
-        <div class="message message--marketer">
-          <div class="message__avatar assistant assistant--marketer">
-            <img src="assets/avatars/marketer.png" width="40" height="40" alt="">
-          </div>
-          <div class="message__body">
-            <p class="message__author"><span class="message__name">Эльвира</span>&nbsp;— Маркетолог</p>
-            <p class="message__text">Тимур собрал открытие веранды в&nbsp;общий проект: Лев уже рисует картинки, а&nbsp;бюджет&nbsp;— до&nbsp;30 000 ₽. Осталось выбрать идею, и&nbsp;я&nbsp;сразу сяду за&nbsp;тексты.</p>
-            <time class="message__time" datetime="09:40">9:40</time>
-          </div>
-        </div>
-      </div>
-
-      <!-- ===== Переписка: новая задача ===== -->
-      <div class="chat__messages" data-thread="new" hidden>
-        <div class="message message--marketer">
-          <div class="message__avatar assistant assistant--marketer">
-            <img src="assets/avatars/marketer.png" width="40" height="40" alt="">
-          </div>
-          <div class="message__body">
-            <p class="message__author"><span class="message__name">Эльвира</span>&nbsp;— Маркетолог</p>
-            <p class="message__text">Для&nbsp;каждой задачи у&nbsp;нас отдельный чат, чтобы ничего не&nbsp;перепуталось. Что&nbsp;сделаем на&nbsp;этот раз? Напишите своими словами или&nbsp;выберите вариант.</p>
-            <div class="chips chips--wrap">
-              <button class="chip" type="button">Пост к&nbsp;празднику</button>
-              <button class="chip" type="button">Акция на&nbsp;тихий день</button>
-              <button class="chip" type="button">Анализ конкурентов</button>
-              <button class="chip" type="button">Не&nbsp;знаю&nbsp;— предложи сама</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ===== Поле ввода: общее, подсказки — свои у каждой задачи ===== -->
+      <!-- ===== Поле ввода и подсказки ===== -->
       <div class="chat__composer">
         <div class="chat__field">
           <button class="chat__attach" type="button" title="Добавить файл" aria-label="Добавить файл">
@@ -223,26 +139,13 @@
           </button>
         </div>
 
-        <div class="chips" aria-label="Подсказки" data-thread="plan">
+        <div class="chips" aria-label="Подсказки">
           <button class="chip" type="button">Сделай тексты короче</button>
           <button class="chip" type="button">Больше про&nbsp;веранду</button>
           <button class="chip" type="button">Тон повеселее</button>
           <button class="chip" type="button">Добавь призыв зайти</button>
           <button class="chip" type="button">Допиши оставшиеся 4</button>
           <button class="chip" type="button">Перейти к&nbsp;картинкам</button>
-        </div>
-        <div class="chips" aria-label="Подсказки" data-thread="veranda" hidden>
-          <button class="chip" type="button">Беру первую идею</button>
-          <button class="chip" type="button">Смешай первую и&nbsp;вторую</button>
-          <button class="chip" type="button">Что&nbsp;выберут гости?</button>
-          <button class="chip" type="button">Предложи ещё</button>
-        </div>
-        <div class="chips" aria-label="Подсказки" data-thread="new" hidden>
-          <button class="chip" type="button">Пост к&nbsp;празднику</button>
-          <button class="chip" type="button">Акция на&nbsp;вторник</button>
-          <button class="chip" type="button">Ответ на&nbsp;комментарий</button>
-          <button class="chip" type="button">Портрет аудитории</button>
-          <button class="chip" type="button">Слоган</button>
         </div>
       </div>
     </aside>

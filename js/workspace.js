@@ -317,7 +317,7 @@
 
     // Выход из профиля — на стартовую страницу со списком клиентов
     if (event.target.closest("[data-logout]")) {
-      location.href = (window.CF_ROOT || "") + "start.html";
+      location.href = (window.CF_ROOT || "") + "index.html";
       return;
     }
 

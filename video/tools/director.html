@@ -35,16 +35,16 @@ const chatTop = d => { d.querySelector(CHAT).scrollTop = 0; };
 
 const SCENES = {
   // ----- Главная -----
-  home:        { page: "index.html" },
-  homeOffers:  { page: "index.html", focus: [".grid.grid--3"],
+  home:        { page: "home.html" },
+  homeOffers:  { page: "home.html", focus: [".grid.grid--3"],
                  timeline: [{ at: .72, to: ".proposal:nth-child(1) [data-dismiss]" }] },
-  offerHalloween: { page: "index.html", focus: [".proposal:nth-child(1)"],
+  offerHalloween: { page: "home.html", focus: [".proposal:nth-child(1)"],
                  timeline: [{ at: .45, to: ".proposal:nth-child(1) .btn--primary" }] },
-  offerTax:    { page: "index.html", focus: [".proposal:nth-child(2)"],
+  offerTax:    { page: "home.html", focus: [".proposal:nth-child(2)"],
                  timeline: [{ at: .5, to: ".proposal:nth-child(2) .btn--primary" }] },
-  offerCheese: { page: "index.html", focus: [".proposal:nth-child(3)"],
+  offerCheese: { page: "home.html", focus: [".proposal:nth-child(3)"],
                  timeline: [{ at: .5, to: ".proposal:nth-child(3) .btn--primary" }] },
-  homeWork:    { page: "index.html", focus: [".rows"],
+  homeWork:    { page: "home.html", focus: [".rows"],
                  timeline: [{ at: .45, to: ".rows .row:nth-child(3)", dx: .3 }] },
 
   // ----- Эльвира: чат прокручивается вверх, затем этапы, возврат, «Что дальше» -----

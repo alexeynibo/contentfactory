@@ -356,6 +356,9 @@
 
   linkMentions();
 
+  // Чат открывается на последнем сообщении, как в мессенджере
+  if (chat) chat.querySelectorAll(".chat__messages:not([hidden])").forEach(function (b) { b.scrollTop = b.scrollHeight; });
+
   // Пришли по ссылке-упоминанию из чата другого помощника: он передал задачу,
   // этот помощник сразу отвечает в чате и предлагает начать
   var params = new URLSearchParams(location.search);

@@ -17,7 +17,7 @@
   // ===== Навигация: иконки сверху вниз =====
   // id — имя раздела (его пишем в data-page), icon — файл в assets/icons/
   var NAV = [
-    { id: "home",      title: "Главная",     icon: "assets/icons/home.svg",      href: "index.html" },
+    { id: "home",      title: "Главная",     icon: "assets/icons/home.svg",      href: "home.html" },
     { id: "images",    title: "Изображения", icon: "assets/icons/images.svg",    href: "images.html" },
     { id: "text",      title: "Тексты",      icon: "assets/icons/text.svg",      href: "texts.html" },
     { id: "analytics", title: "Аналитика",   icon: "assets/icons/analytics.svg", href: "analytics.html" },
@@ -47,7 +47,7 @@
   var CASE = window.CF_CASE;
   if (CASE) {
     var dir = "cases/" + CASE.id + "/";
-    NAV.forEach(function (item) { item.href = dir + item.href; });
+    NAV.forEach(function (item) { item.href = dir + (item.id === "home" ? "index.html" : item.href); });
     var TITLES = { marketer: "Эльвира, маркетолог", designer: "Лев, дизайнер", financier: "Ольга, финансист",
       assistant: "Тимур, личный помощник", clients: "Вера, клиентский менеджер", hr: "Марина, рекрутер" };
     ASSISTANTS = CASE.team.map(function (t) {
