@@ -33,6 +33,11 @@
       el.hidden = el.getAttribute("data-thread") !== id;
     });
 
+    // Скрытая задача не знала своей ширины — показать нужный этап заново
+    var shown = document.querySelector('.task[data-task-id="' + id + '"]');
+    var viewing = shown && shown.querySelector(".step.is-viewing");
+    if (viewing) showStep(shown, viewing.getAttribute("data-step"));
+
     // Открыли чат — новое сообщение прочитано
     var dot = tab.querySelector(".task-tab__dot");
     if (dot) dot.remove();
@@ -75,6 +80,14 @@
     task.querySelectorAll(".step-panel[data-panel]").forEach(function (panel) {
       panel.hidden = panel.getAttribute("data-panel") !== stepId;
     });
+
+    // На узком экране этапы прокручиваются вбок — выбранный держим в поле зрения
+    var steps = task.querySelector(".steps");
+    var viewing = task.querySelector('.step[data-step="' + stepId + '"]');
+    if (steps && viewing && steps.scrollWidth > steps.clientWidth) {
+      var item = viewing.closest(".steps__item") || viewing;
+      steps.scrollLeft = item.offsetLeft - steps.offsetLeft - (steps.clientWidth - item.offsetWidth) / 2;
+    }
 
     // Плашка «Вы смотрите пройденный этап»
     var note = task.querySelector(".step-note");

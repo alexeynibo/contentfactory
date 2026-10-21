@@ -439,6 +439,8 @@ a.chip {
 .grid--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .grid--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .grid--4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+/* Две неравные колонки: широкая слева (доля — в --split) */
+.grid--split { grid-template-columns: minmax(0, var(--split, 1.4fr)) minmax(0, 1fr); }
 
 .stack {
   display: flex;
@@ -1879,18 +1881,152 @@ a.row:hover {
   text-decoration: underline;
 }
 
-@media (max-width: 1100px) {
-  .plans,
-  .value {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-  .value__item + .value__item { border-left: 0; }
-  .value__item--ours { border-radius: 0 0 var(--radius-card) 0; }
-}
 
 /* Заголовок внутри подсказки (Тарифы → «Честные лимиты») */
 .insight__body > b {
   display: block;
   margin-bottom: 4px;
   font: 700 14px/1.4 var(--font-main);
+}
+
+/* =========================================================
+   Узкие экраны
+   Рабочая зона подстраивается под свою ширину (контейнерные запросы):
+   правила ниже срабатывают от ширины .main, а не всего окна, —
+   поэтому одинаково работают и на страницах с чатом, и без него.
+   Шрифты и размеры элементов не меняются: перестраиваются только колонки.
+   ========================================================= */
+.main {
+  container: main / inline-size;
+}
+
+/* Окно поуже — меньше поля рабочей зоны */
+@media (max-width: 1100px) {
+  .main {
+    padding: 28px 24px 48px;
+  }
+}
+
+/* До 760px рабочей зоны: четыре колонки → две */
+@container main (max-width: 760px) {
+  .grid--4,
+  .plans,
+  .value {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .value__item + .value__item { border-left: 0; }
+  .value__item--ours { border-radius: 0 0 var(--radius-card) 0; }
+
+  /* Этапы задачи не сжимаются, а прокручиваются вбок */
+  .steps__item {
+    flex: none;
+  }
+}
+
+/* До 680px: три и две колонки → одна, блоки с кнопками — в две строки */
+@container main (max-width: 680px) {
+  .grid--3,
+  .grid--2,
+  .grid--split,
+  .meanwhile__list,
+  .facts,
+  .review {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .page-head {
+    flex-wrap: wrap;
+  }
+
+  /* Пост: дата и статус сверху, текст — на всю ширину */
+  .post {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .post > div:not(.post__date):not(.post__side) {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+
+  .next-step {
+    flex-wrap: wrap;
+  }
+
+  .next-step__body {
+    flex-basis: calc(100% - 62px);
+  }
+
+  .next-step__actions {
+    margin-left: 62px;
+  }
+
+  .bar__row {
+    grid-template-columns: 110px minmax(0, 1fr) 80px;
+  }
+
+  /* Календарь: дни не сжимаются меньше читаемого, неделя прокручивается вбок */
+  .calendar {
+    grid-template-columns: repeat(7, minmax(84px, 1fr));
+    overflow-x: auto;
+  }
+
+  .table {
+    display: block;
+    overflow-x: auto;
+  }
+
+  .row .progress {
+    width: 64px;
+  }
+}
+
+/* До 480px: две колонки → одна */
+@container main (max-width: 480px) {
+  .grid--4,
+  .plans,
+  .value {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .value__item--ours { border-radius: 0 0 var(--radius-card) var(--radius-card); }
+
+  /* В списке дел остаётся статус, полоска прогресса прячется — названию нужнее место */
+  .row .progress {
+    display: none;
+  }
+
+  .page-head__actions,
+  .next-step__actions,
+  .card__actions {
+    flex: 0 1 auto;
+    flex-wrap: wrap;
+    max-width: 100%;
+  }
+}
+
+/* Совсем узко: длинная подпись кнопки переносится, а не вылезает за край */
+@container main (max-width: 340px) {
+  .btn {
+    height: auto;
+    min-height: 28px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    white-space: normal;
+    text-align: center;
+    line-height: 1.2;
+  }
+
+  .next-step__actions {
+    margin-left: 0;
+  }
+}
+
+/* Этапы прокручиваются вбок без полосы прокрутки — как ряды чипсов */
+.steps {
+  scrollbar-width: none;
+}
+
+.steps::-webkit-scrollbar {
+  display: none;
 }

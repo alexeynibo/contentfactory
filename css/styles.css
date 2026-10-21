@@ -13,6 +13,15 @@
   --page-bg: #ffffff;
 }
 
+/* Узкие экраны: колонка чата уже, но не больше чем на 30% (350 → 300 → 245) */
+@media (max-width: 1280px) {
+  :root { --chat-width: 300px; }
+}
+
+@media (max-width: 1024px) {
+  :root { --chat-width: 245px; }
+}
+
 /* ===== Базовый сброс ===== */
 *,
 *::before,
