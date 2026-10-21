@@ -483,18 +483,27 @@ a.chip {
 }
 
 /* ===== «Что дальше» — следующий шаг от персонажа ===== */
+/* Блок перестраивается по своей ширине (контейнерный запрос ниже), а не по ширине окна:
+   так он одинаково ведёт себя и в рабочей зоне, и в узкой колонке (Аккаунт) */
 .next-step {
+  container-type: inline-size;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 14px;
+  gap: 12px 14px;
   margin-top: 20px;
-  padding: 16px 20px;
+  padding: 20px; /* отступ аватара сверху = отступу слева */
   border-radius: var(--radius-card);
   background: var(--color-cobalt-tint);
 }
 
+/* Аватар всегда прижат кверху: отступ сверху = отступу слева (20px) */
+.next-step > .avatar {
+  align-self: flex-start;
+}
+
 .next-step__body {
-  flex: 1;
+  flex: 1 1 0;
   min-width: 0;
 }
 
@@ -517,6 +526,21 @@ a.chip {
   display: flex;
   flex: none;
   gap: 8px;
+}
+
+/* Узкий блок: аватар прижат кверху, кнопки — под текстом, вровень с ним
+   (аватар 48 + промежуток 14 = 62px) */
+@container (max-width: 720px) {
+  .next-step__body {
+    flex-basis: calc(100% - 62px);
+  }
+
+  .next-step__actions {
+    flex: 0 1 auto;
+    flex-wrap: wrap;
+    max-width: calc(100% - 62px);
+    margin-left: 62px;
+  }
 }
 
 /* ===== Инициативная плитка (предложение персонажа) ===== */
@@ -1949,23 +1973,6 @@ a.row:hover {
     grid-row: 2;
   }
 
-  /* «Что дальше» в две строки: аватар прижат кверху с тем же отступом, что слева (20px),
-     кнопка — под текстом, вровень с ним (аватар 48 + промежуток 14 = 62px) */
-  .next-step {
-    flex-wrap: wrap;
-    align-items: flex-start;
-    row-gap: 12px;
-    padding: 20px;
-  }
-
-  .next-step__body {
-    flex-basis: calc(100% - 62px);
-  }
-
-  .next-step__actions {
-    margin-left: 62px;
-  }
-
   .bar__row {
     grid-template-columns: 110px minmax(0, 1fr) 80px;
   }
@@ -2002,16 +2009,12 @@ a.row:hover {
   }
 
   .page-head__actions,
-  .next-step__actions,
   .card__actions {
     flex: 0 1 auto;
     flex-wrap: wrap;
     max-width: 100%;
   }
 
-  .next-step__actions {
-    max-width: calc(100% - 62px);
-  }
 }
 
 /* Совсем узко: длинная подпись кнопки переносится, а не вылезает за край */
