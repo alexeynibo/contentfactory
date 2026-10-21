@@ -149,6 +149,70 @@
     return { a: list[n], c: (FALLBACK_CHIPS[page] || [])[n], t: "Продолжаем разговор." };
   }
 
+  // ---------- Упоминания других помощников ----------
+  // Имя (в любом падеже) становится ссылкой с маленькой аватаркой. По ссылке —
+  // страница упомянутого помощника, где он сразу берёт задачу в чате.
+  var TEAM = {
+    marketer: { name: "Эльвира", of: "Эльвиры", page: "marketer.html", she: true },
+    designer: { name: "Лев", of: "Льва", page: "designer.html", she: false },
+    financier: { name: "Ольга", of: "Ольги", page: "financier.html", she: true },
+    assistant: { name: "Тимур", of: "Тимура", page: "assistant.html", she: false },
+    clients: { name: "Вера", of: "Веры", page: "clients.html", she: true }
+  };
+  var NAME_RE = /(^|[^А-Яа-яЁё])(Эльвир(?:а|ы|е|у|ой)|Л(?:ев|ьва|ьву|ьвом|ьве)|Ольг(?:а|и|е|у|ой)|Тимур(?:а|у|ом|е)?|Вер(?:а|ы|е|у|ой))(?![А-Яа-яЁё])/g;
+
+  function whoIs(form) {
+    if (/^Эльвир/.test(form)) return "marketer";
+    if (/^Л(ев|ьв)/.test(form)) return "designer";
+    if (/^Ольг/.test(form)) return "financier";
+    if (/^Тимур/.test(form)) return "assistant";
+    return "clients";
+  }
+
+  // Предложение, в котором упомянут помощник, — его и передаём
+  function sentenceWith(text, form) {
+    var parts = text.split(/(?<=[.!?…])\s+/);
+    var found = parts.filter(function (s) { return s.indexOf(form) > -1; })[0] || text;
+    found = found.trim();
+    return found.length > 160 ? found.slice(0, 160).replace(/\s+\S*$/, "") + "…" : found;
+  }
+
+  function linkMentions(scope) {
+    (scope || document).querySelectorAll(".chat .message:not(.message--user) .message__text").forEach(function (p) {
+      var full = p.textContent;
+      var walker = document.createTreeWalker(p, NodeFilter.SHOW_TEXT);
+      var nodes = [];
+      while (walker.nextNode()) {
+        if (!walker.currentNode.parentElement.closest(".mention")) nodes.push(walker.currentNode);
+      }
+      nodes.forEach(function (node) {
+        var text = node.textContent;
+        NAME_RE.lastIndex = 0;
+        if (!NAME_RE.test(text)) return;
+        NAME_RE.lastIndex = 0;
+        var frag = document.createDocumentFragment();
+        var last = 0, m;
+        while ((m = NAME_RE.exec(text))) {
+          var form = m[2], id = whoIs(form);
+          var start = m.index + m[1].length;
+          if (id === page) continue; // себя помощник не упоминает ссылкой
+          frag.appendChild(document.createTextNode(text.slice(last, start)));
+          var a = document.createElement("a");
+          a.className = "mention mention--" + id;
+          a.href = TEAM[id].page + "?from=" + page + "&say=" + encodeURIComponent(sentenceWith(full, form));
+          a.title = "Перейти в чат: " + TEAM[id].name;
+          a.innerHTML = '<span class="mention__avatar assistant--' + id + '"><img src="assets/avatars/' + id + '.png" alt=""></span>';
+          a.appendChild(document.createTextNode(form));
+          frag.appendChild(a);
+          last = start + form.length;
+        }
+        if (!last) return;
+        frag.appendChild(document.createTextNode(text.slice(last)));
+        node.replaceWith(frag);
+      });
+    });
+  }
+
   // ---------- 1. Чат ----------
   var chat = document.querySelector(".chat");
   var input = chat && chat.querySelector(".chat__input");
@@ -207,6 +271,7 @@
       '<time class="message__time">' + now() + "</time></div>";
     m.querySelector(".message__text").textContent = typo(reply.a);
     box.appendChild(m);
+    linkMentions(box);
     if (window.cfSnapChips) window.cfSnapChips();
     return m;
   }
@@ -266,6 +331,29 @@
         send("Файл: " + file.name, { reply: { t: "Новый файл.", a: "Получила файл «" + file.name + "». Что с ним сделать?", c: ["Разбери и запомни", "Сделай по нему пост", "Просто сохрани"] } });
       });
     });
+  }
+
+  linkMentions();
+
+  // Пришли по ссылке-упоминанию из чата другого помощника: он передал задачу,
+  // этот помощник сразу отвечает в чате и предлагает начать
+  var params = new URLSearchParams(location.search);
+  var from = TEAM[params.get("from")], said = params.get("say");
+  if (chat && from && said && thread()) {
+    history.replaceState(null, "", location.pathname + location.hash);
+    var box0 = thread();
+    divider(box0, "Задача от " + from.of + ".");
+    scrollDown(box0);
+    var dots0 = typing(box0);
+    scrollDown(box0);
+    setTimeout(function () {
+      if (dots0) dots0.remove();
+      addAssistant(box0, {
+        a: from.name + (from.she ? " передала" : " передал") + " мне: «" + said.replace(/[.!?…]+$/, "") + "». Берусь?",
+        c: ["Да, начинай", "Расскажи подробнее", "Пока не надо"]
+      });
+      scrollDown(box0);
+    }, 1100);
   }
 
   // ---------- 2. Варианты ответа внутри сообщений — отправляются сразу ----------
