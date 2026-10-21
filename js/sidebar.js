@@ -35,7 +35,7 @@
     { id: "designer",  title: "Лев, дизайнер",                 avatar: "assets/avatars/designer.png",  href: "designer.html",  badge: "progress" },
     { id: "financier", title: "Ольга, финансист",              avatar: "assets/avatars/financier.png", href: "financier.html", badge: 3 },
     { id: "assistant", title: "Тимур, личный помощник",        avatar: "assets/avatars/assistant.png", href: "assistant.html" },
-    { id: "clients",   title: "Вера, клиентский менеджер",     initial: "В",                           href: "clients.html",   badge: 2 }
+    { id: "clients",   title: "Вера, клиентский менеджер",     avatar: "assets/avatars/clients.png",   href: "clients.html",   badge: 2 }
   ];
 
   // ===== Низ меню =====
