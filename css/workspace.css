@@ -2300,3 +2300,26 @@ a.row:hover {
     grid-template-columns: minmax(0, 1fr);
   }
 }
+
+/* Наведение на специальность: её аватар остаётся, остальные уходят в полупрозрачность */
+.case-card__team .avatar {
+  transition: opacity 0.15s ease;
+}
+
+.case-card__role {
+  cursor: default;
+  transition: color 0.15s ease;
+}
+
+.case-card__role:hover {
+  color: var(--color-ink);
+}
+
+.case-card__team:has([data-role="marketer"]:hover) .avatar:not(.assistant--marketer),
+.case-card__team:has([data-role="designer"]:hover) .avatar:not(.assistant--designer),
+.case-card__team:has([data-role="financier"]:hover) .avatar:not(.assistant--financier),
+.case-card__team:has([data-role="assistant"]:hover) .avatar:not(.assistant--assistant),
+.case-card__team:has([data-role="clients"]:hover) .avatar:not(.assistant--clients),
+.case-card__team:has([data-role="hr"]:hover) .avatar:not(.assistant--hr) {
+  opacity: 0.3;
+}
