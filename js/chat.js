@@ -388,7 +388,7 @@
     return title ? title.textContent.trim().replace(/\s+/g, " ") : "";
   }
 
-  var SKIP = ".task-tab:not(.task-tab--new), [data-go-step], [data-dismiss], [data-open-task], [onclick], .filter, .choice, .variant, .skill:not(.skill--add), .question .chip, .spot *, .chat *, [data-fill], [data-plan], [data-billing], [data-pack], [data-pause]";
+  var SKIP = ".task-tab:not(.task-tab--new), [data-go-step], [data-dismiss], [data-open-task], [onclick], .filter, .choice, .variant, .skill:not(.skill--add), .question .chip, .spot *, .chat *, [data-fill], [data-logout], [data-plan], [data-billing], [data-pack], [data-pause]";
 
   document.addEventListener("click", function (event) {
     var el = event.target.closest("main button");
