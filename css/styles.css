@@ -255,7 +255,6 @@ body {
 .chat__head {
   flex: none;
   padding: 16px var(--message-pad-right) 12px var(--message-pad-left);
-  border-bottom: 1px solid #E4E4E4;
 }
 
 .chat__task-label {
